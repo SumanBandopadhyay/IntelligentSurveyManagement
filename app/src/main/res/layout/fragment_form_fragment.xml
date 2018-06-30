@@ -28,7 +28,7 @@
 
             <fragment
                 android:id="@+id/frame_right"
-                class="com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.RightFragment"
+                class="com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.SiteInformationFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"></fragment>
 
@@ -48,7 +48,7 @@
 
             <fragment
                 android:id="@+id/frame_left"
-                class="com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.ListItemFragment"
+                class="com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.LeftFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"></fragment>
 

@@ -13,15 +13,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.example.suman.intelligentsurveymanagement.R;
-import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.DummyContent;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.LeftPanelContent;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.EvaluatingWorkFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.FormFragment;
-import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.ListItemFragment;
-import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.RightFragment;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.LeftFragment;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.SiteInformationFragment;
 
 public class DigitalFormActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ListItemFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, LeftFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +92,7 @@ public class DigitalFormActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.main_frame, FormFragment.newInstance("test", "test2"));
-            //transaction.replace(R.id.main_frame, ListItemFragment.newInstance(1));
+            //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
             transaction.addToBackStack(FormFragment.TAG);
             transaction.commit();
         } else if (id == R.id.nav_gallery) {
@@ -111,10 +113,25 @@ public class DigitalFormActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-        RightFragment rightFragment = RightFragment.newInstance(item.content, item.details);
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_right, rightFragment);
-        transaction.commit();
+    public void onListFragmentInteraction(LeftPanelContent.DummyItem item) {
+        switch (item.id) {
+            case R.layout.fragment_site_information:
+                SiteInformationFragment siteInformationFragment = SiteInformationFragment.newInstance("", "");
+                FrameLayout fl = (FrameLayout) findViewById(R.id.right_panel);
+                fl.removeAllViews();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.right_panel, siteInformationFragment);
+                transaction.commit();
+                break;
+            case R.layout.fragment_evaluating_work:
+                EvaluatingWorkFragment evaluatingWorkFragment = EvaluatingWorkFragment.newInstance("", "");
+                fl = (FrameLayout) findViewById(R.id.right_panel);
+                fl.removeAllViews();
+                transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.right_panel, evaluatingWorkFragment);
+                transaction.commit();
+                break;
+        }
+
     }
 }

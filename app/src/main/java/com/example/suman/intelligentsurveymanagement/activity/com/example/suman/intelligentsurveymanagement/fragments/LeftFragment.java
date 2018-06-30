@@ -12,15 +12,15 @@ import android.view.ViewGroup;
 
 import com.example.suman.intelligentsurveymanagement.R;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.adapters.MyListItemRecyclerViewAdapter;
-import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.DummyContent;
-import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.DummyContent.DummyItem;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.LeftPanelContent;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.LeftPanelContent.DummyItem;
 
 /**
  * A fragment representing a list of Items.
  * <p/>
  * interface.
  */
-public class ListItemFragment extends Fragment {
+public class LeftFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -32,13 +32,13 @@ public class ListItemFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ListItemFragment() {
+    public LeftFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ListItemFragment newInstance(int columnCount) {
-        ListItemFragment fragment = new ListItemFragment();
+    public static LeftFragment newInstance(int columnCount) {
+        LeftFragment fragment = new LeftFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -68,7 +68,7 @@ public class ListItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyListItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyListItemRecyclerViewAdapter(LeftPanelContent.ITEMS, mListener));
         }
         return view;
     }

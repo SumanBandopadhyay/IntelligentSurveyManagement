@@ -1,5 +1,7 @@
 package com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy;
 
+import com.example.suman.intelligentsurveymanagement.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.Map;
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
-public class DummyContent {
+public class LeftPanelContent {
 
     /**
      * An array of sample (dummy) items.
@@ -21,15 +23,19 @@ public class DummyContent {
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static final Map<Integer, DummyItem> ITEM_MAP = new HashMap<Integer, DummyItem>();
 
     private static final int COUNT = 25;
 
     static {
         // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
-        }
+//        for (int i = 1; i <= COUNT; i++) {
+//            addItem(createDummyItem(i));
+//        }
+        DummyItem dummyItem = new DummyItem(R.layout.fragment_site_information, "Site Information Detail");
+        addItem(dummyItem);
+        dummyItem = new DummyItem(R.layout.fragment_evaluating_work, "Evaluating your Work Area");
+        addItem(dummyItem);
     }
 
     private static void addItem(DummyItem item) {
@@ -37,9 +43,14 @@ public class DummyContent {
         ITEM_MAP.put(item.id, item);
     }
 
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
-    }
+//    private static DummyItem createDummyItem(int position) {
+//        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+//    }
+
+//    private static DummyItem createDummyItem() {
+//        DummyItem dummyItem = new DummyItem(R.layout.fragment_site_information, "Site Information Detail");
+//        return dummyItem;
+//    }
 
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
@@ -54,14 +65,12 @@ public class DummyContent {
      * A dummy item representing a piece of content.
      */
     public static class DummyItem {
-        public final String id;
+        public final int id;
         public final String content;
-        public final String details;
 
-        public DummyItem(String id, String content, String details) {
+        public DummyItem(int id, String content) {
             this.id = id;
             this.content = content;
-            this.details = details;
         }
 
         @Override
