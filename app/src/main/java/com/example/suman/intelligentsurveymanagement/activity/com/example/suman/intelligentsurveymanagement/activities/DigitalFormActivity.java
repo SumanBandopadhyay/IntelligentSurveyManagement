@@ -17,10 +17,12 @@ import android.widget.FrameLayout;
 
 import com.example.suman.intelligentsurveymanagement.R;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.LeftPanelContent;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.CustomerSignOffFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.EvaluatingWorkFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.FormFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.LeftFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.SiteInformationFragment;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.WorkStepsAndHazardsFragment;
 
 public class DigitalFormActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, LeftFragment.OnListFragmentInteractionListener {
@@ -129,6 +131,22 @@ public class DigitalFormActivity extends AppCompatActivity
                 fl.removeAllViews();
                 transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.right_panel, evaluatingWorkFragment);
+                transaction.commit();
+                break;
+            case R.layout.fragment_work_steps_and_hazards:
+                WorkStepsAndHazardsFragment workStepsAndHazardsFragment = WorkStepsAndHazardsFragment.newInstance("", "");
+                fl = (FrameLayout) findViewById(R.id.right_panel);
+                fl.removeAllViews();
+                transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.right_panel, workStepsAndHazardsFragment);
+                transaction.commit();
+                break;
+            case R.layout.fragment_customer_sign_off:
+                CustomerSignOffFragment customerSignOffFragment = CustomerSignOffFragment.newInstance("", "");
+                fl = (FrameLayout) findViewById(R.id.right_panel);
+                fl.removeAllViews();
+                transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.right_panel, customerSignOffFragment);
                 transaction.commit();
                 break;
         }

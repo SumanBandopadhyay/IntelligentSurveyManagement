@@ -36,6 +36,10 @@ public class LeftPanelContent {
         addItem(dummyItem);
         dummyItem = new DummyItem(R.layout.fragment_evaluating_work, "Evaluating your Work Area");
         addItem(dummyItem);
+        dummyItem = new DummyItem(R.layout.fragment_work_steps_and_hazards, "Work Steps and Hazards");
+        addItem(dummyItem);
+        dummyItem = new DummyItem(R.layout.fragment_customer_sign_off, "Customer Sign Off");
+        addItem(dummyItem);
     }
 
     private static void addItem(DummyItem item) {
