@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.QuickContactBadge;
@@ -38,10 +40,10 @@ public class WorkStepsAndHazardsFragment extends Fragment {
     private static final String DATA = "data";
     private Button btnCaptureImage;
     private Button btnEditImage;
-    private Button btnQRScan;
+//    private Button btnQRScan;
     private SignaturePad imageEditPad;
-    private Button btnCaptureVid;
-    private VideoView vidCapturedVid;
+//    private Button btnCaptureVid;
+//    private VideoView vidCapturedVid;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -98,18 +100,18 @@ public class WorkStepsAndHazardsFragment extends Fragment {
         btnCaptureImage = (Button) view.findViewById(R.id.btn_capture_image);
         btnEditImage = (Button) view.findViewById(R.id.btn_edit_image);
         imageEditPad = (SignaturePad) view.findViewById(R.id.image_edit_pad);
-        btnCaptureVid = (Button) view.findViewById(R.id.btn_capture_video);
-        vidCapturedVid = (VideoView) view.findViewById(R.id.vid_captured_vid);
-        btnQRScan = (Button) view.findViewById(R.id.btn_qr_scan);
+//        btnCaptureVid = (Button) view.findViewById(R.id.btn_capture_video);
+//        vidCapturedVid = (VideoView) view.findViewById(R.id.vid_captured_vid);
+//        btnQRScan = (Button) view.findViewById(R.id.btn_qr_scan);
         imageEditPad.setEnabled(false);
         //vidCapturedVid.setZOrderOnTop(true);
-        MediaController mediaController = new MediaController(getContext());
-        mediaController.setAnchorView(vidCapturedVid);
-        mediaController.setMediaPlayer(vidCapturedVid);
-        vidCapturedVid.setMediaController(mediaController);
-        vidCapturedVid.setBackgroundColor(Color.TRANSPARENT);
-        //vidCapturedVid.requestFocus();
-        vidCapturedVid.setZOrderMediaOverlay(false);
+//        MediaController mediaController = new MediaController(getContext());
+//        mediaController.setAnchorView(vidCapturedVid);
+//        mediaController.setMediaPlayer(vidCapturedVid);
+//        vidCapturedVid.setMediaController(mediaController);
+//        vidCapturedVid.setBackgroundColor(Color.TRANSPARENT);
+//        //vidCapturedVid.requestFocus();
+//        vidCapturedVid.setZOrderMediaOverlay(false);
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,18 +124,18 @@ public class WorkStepsAndHazardsFragment extends Fragment {
                 imageEditPad.setEnabled(true);
             }
         });
-        btnCaptureVid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dispatchTakeVideoIntent();
-            }
-        });
-        btnQRScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                scanQR();
-            }
-        });
+//        btnCaptureVid.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dispatchTakeVideoIntent();
+//            }
+//        });
+//        btnQRScan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                scanQR();
+//            }
+//        });
         return view;
     }
 
@@ -171,11 +173,14 @@ public class WorkStepsAndHazardsFragment extends Fragment {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get(WorkStepsAndHazardsFragment.DATA);
+            //imageEditPad.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, 400));
             imageEditPad.setSignatureBitmap(imageBitmap);
+//            Bitmap mutableBitmap = imageBitmap.copy(Bitmap.Config.ARGB_8888, true);
+//            imageEditPad.draw(new Canvas(mutableBitmap));
         } else if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri videoUri = data.getData();
-            vidCapturedVid.setVideoURI(videoUri);
-            vidCapturedVid.start();
+//            vidCapturedVid.setVideoURI(videoUri);
+//            vidCapturedVid.start();
         }
     }
 

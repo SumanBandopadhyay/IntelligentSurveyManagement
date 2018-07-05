@@ -49,39 +49,39 @@
                 android:textSize="20dp"
                 android:textStyle="bold"/>
 
-            <Button
-                android:id="@+id/btn_capture_video"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Capture Video" />
+            <!--<Button-->
+                <!--android:id="@+id/btn_capture_video"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Capture Video" />-->
 
-            <VideoView
-                android:id="@+id/vid_captured_vid"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"/>
+            <!--<VideoView-->
+                <!--android:id="@+id/vid_captured_vid"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="400dp"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginTop="16dp"/>-->
 
-            <Button android:id="@+id/btn_qr_scan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="SCAN" />
+            <!--<Button android:id="@+id/btn_qr_scan"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:text="SCAN" />-->
 
-            <TextView
-                android:id="@+id/scan_format"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textIsSelectable="true"
-                android:layout_centerHorizontal="true"/>
+            <!--<TextView-->
+                <!--android:id="@+id/scan_format"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textIsSelectable="true"-->
+                <!--android:layout_centerHorizontal="true"/>-->
 
-            <TextView
-                android:id="@+id/scan_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textIsSelectable="true"
-                android:layout_centerHorizontal="true"/>
+            <!--<TextView-->
+                <!--android:id="@+id/scan_content"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textIsSelectable="true"-->
+                <!--android:layout_centerHorizontal="true"/>-->
 
         </LinearLayout>
     </ScrollView>
