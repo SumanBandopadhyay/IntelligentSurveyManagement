@@ -19,7 +19,7 @@
             android:id="@+id/right_panel"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="#9fabc7"
+            android:background="@drawable/gradient_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/left_panel"
@@ -34,11 +34,13 @@
 
         </FrameLayout>
 
+
+
         <FrameLayout
             android:id="@+id/left_panel"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="0dp"
-            android:background="#8fe9ae"
+            android:background="@drawable/gradient_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/right_panel"
             app:layout_constraintHorizontal_bias="0.3"

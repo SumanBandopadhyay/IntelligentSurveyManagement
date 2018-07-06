@@ -25,29 +25,52 @@
                 android:textSize="20dp"
                 android:textStyle="bold"/>
 
-            <Button
-                android:id="@+id/btn_capture_image"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Capture Image" />
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_capture_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Capture Image"
+                    android:layout_weight="1"
+                    style="@style/AppTheme.PopupOverlay"/>
+
+                <Button
+                    android:id="@+id/btn_edit_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Image"
+                    android:layout_weight="1"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_menu_camera"/>
+
+                <!--ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_camera"/-->
+
+            </LinearLayout>
+
 
             <com.github.gcacace.signaturepad.views.SignaturePad
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="200dp"
                 android:id="@+id/image_edit_pad"/>
 
-            <Button
-                android:id="@+id/btn_edit_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Edit Image" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Upload any reference Video : "
-                android:textSize="20dp"
-                android:textStyle="bold"/>
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Upload any reference Video : "-->
+                <!--android:textSize="20dp"-->
+                <!--android:textStyle="bold"/>-->
 
             <!--<Button-->
                 <!--android:id="@+id/btn_capture_video"-->

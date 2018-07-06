@@ -7,12 +7,17 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.AttributeSet;
+import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +31,9 @@ import android.widget.VideoView;
 
 import com.example.suman.intelligentsurveymanagement.R;
 import com.github.gcacace.signaturepad.views.SignaturePad;
-import com.google.zxing.integration.android.IntentIntegrator;
+//import com.google.zxing.integration.android.IntentIntegrator;
+
+import org.xmlpull.v1.XmlPullParser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +47,7 @@ public class WorkStepsAndHazardsFragment extends Fragment {
     private static final String DATA = "data";
     private Button btnCaptureImage;
     private Button btnEditImage;
+
 //    private Button btnQRScan;
     private SignaturePad imageEditPad;
 //    private Button btnCaptureVid;
@@ -104,6 +112,7 @@ public class WorkStepsAndHazardsFragment extends Fragment {
 //        vidCapturedVid = (VideoView) view.findViewById(R.id.vid_captured_vid);
 //        btnQRScan = (Button) view.findViewById(R.id.btn_qr_scan);
         imageEditPad.setEnabled(false);
+        imageEditPad.setPenColor(Color.RED);
         //vidCapturedVid.setZOrderOnTop(true);
 //        MediaController mediaController = new MediaController(getContext());
 //        mediaController.setAnchorView(vidCapturedVid);
@@ -173,8 +182,11 @@ public class WorkStepsAndHazardsFragment extends Fragment {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get(WorkStepsAndHazardsFragment.DATA);
-            //imageEditPad.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, 400));
-            imageEditPad.setSignatureBitmap(imageBitmap);
+//            imageEditPad.setLayoutParams(new FrameLayout.LayoutParams(imageBitmap.getWidth(), imageBitmap.getHeight()));
+//            imageEditPad.setSignatureBitmap(imageBitmap);
+//            Toast.makeText(getContext(), "Width : " + imageBitmap.getWidth() + ", Height : " + imageBitmap.getHeight(), Toast.LENGTH_LONG).show();
+            Drawable drawable = new BitmapDrawable(imageBitmap);
+            imageEditPad.setBackground(drawable);
 //            Bitmap mutableBitmap = imageBitmap.copy(Bitmap.Config.ARGB_8888, true);
 //            imageEditPad.draw(new Canvas(mutableBitmap));
         } else if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
@@ -192,12 +204,12 @@ public class WorkStepsAndHazardsFragment extends Fragment {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    IntentIntegrator integrator = new IntentIntegrator(getActivity());
+                    //IntentIntegrator integrator = new IntentIntegrator(getActivity());
                     //integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
                     //integrator.setPrompt("Scan a QR Code");
                     //integrator.setResultDisplayDuration(0);
                     //integrator.setCameraId(3);  // Use a specific camera of the device
-                    integrator.initiateScan();
+                    //integrator.initiateScan();
                 } else {
                     Toast.makeText(getContext(), "Camera permission denied. Cannot scan QR.", Toast.LENGTH_LONG).show();
                 }

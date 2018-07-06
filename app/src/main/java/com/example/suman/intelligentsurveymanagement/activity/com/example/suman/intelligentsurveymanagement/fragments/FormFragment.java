@@ -11,7 +11,6 @@ import com.example.suman.intelligentsurveymanagement.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FormFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link FormFragment#newInstance} factory method to
  * create an instance of this fragment.
