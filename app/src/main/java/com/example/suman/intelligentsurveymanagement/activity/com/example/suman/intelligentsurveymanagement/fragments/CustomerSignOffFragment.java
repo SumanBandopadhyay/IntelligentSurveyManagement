@@ -5,7 +5,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.suman.intelligentsurveymanagement.R;
 import com.github.gcacace.signaturepad.views.SignaturePad;
@@ -31,6 +33,7 @@ public class CustomerSignOffFragment extends Fragment {
 
     private EditText edtCustomerName;
     private SignaturePad signaturePad;
+    private Button btnSubmitData;
 
     public CustomerSignOffFragment() {
         // Required empty public constructor
@@ -69,6 +72,14 @@ public class CustomerSignOffFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_customer_sign_off, container, false);
         edtCustomerName = (EditText) view.findViewById(R.id.edt_customer_name);
         signaturePad = (SignaturePad) view.findViewById(R.id.signature_pad);
+        btnSubmitData = (Button) view.findViewById(R.id.btn_submit);
+
+        btnSubmitData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(),"Data submitted successfully !",Toast.LENGTH_LONG).show();
+            }
+        });
         return view;
     }
 

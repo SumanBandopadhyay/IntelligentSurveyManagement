@@ -47,6 +47,7 @@ public class WorkStepsAndHazardsFragment extends Fragment {
     private static final String DATA = "data";
     private Button btnCaptureImage;
     private Button btnEditImage;
+    //private Button btnSaveData;
 
 //    private Button btnQRScan;
     private SignaturePad imageEditPad;
@@ -107,6 +108,7 @@ public class WorkStepsAndHazardsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_work_steps_and_hazards, container, false);
         btnCaptureImage = (Button) view.findViewById(R.id.btn_capture_image);
         btnEditImage = (Button) view.findViewById(R.id.btn_edit_image);
+        //btnSaveData = (Button) view.findViewById(R.id.btn_save_data);
         imageEditPad = (SignaturePad) view.findViewById(R.id.image_edit_pad);
 //        btnCaptureVid = (Button) view.findViewById(R.id.btn_capture_video);
 //        vidCapturedVid = (VideoView) view.findViewById(R.id.vid_captured_vid);
@@ -125,6 +127,8 @@ public class WorkStepsAndHazardsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 dispatchTakePictureIntent();
+                btnEditImage.setEnabled(true);
+                //btnSaveData.setEnabled(true);
             }
         });
         btnEditImage.setOnClickListener(new View.OnClickListener() {
@@ -179,7 +183,9 @@ public class WorkStepsAndHazardsFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get(WorkStepsAndHazardsFragment.DATA);
 //            imageEditPad.setLayoutParams(new FrameLayout.LayoutParams(imageBitmap.getWidth(), imageBitmap.getHeight()));

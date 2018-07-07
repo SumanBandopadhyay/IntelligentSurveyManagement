@@ -5,27 +5,74 @@
     android:layout_height="match_parent"
     tools:context=".activity.com.example.suman.intelligentsurveymanagement.fragments.CustomerSignOffFragment">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Customer Name" />
+            android:layout_height="match_parent"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingBottom="16dp">
 
-        <EditText
-            android:id="@+id/edt_customer_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Customer Name"
+                android:textSize="16dp"
+                android:textStyle="bold"/>
 
-        <com.github.gcacace.signaturepad.views.SignaturePad
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:id="@+id/signature_pad"/>
+            <EditText
+                android:id="@+id/edt_customer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"/>
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Customer Signature"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"/>
+
+            <View
+                android:id="@+id/view_seperator1"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="#DD2476"
+                android:paddingLeft="12dp"/>
+
+            <com.github.gcacace.signaturepad.views.SignaturePad
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/signature_pad"/>
+
+            <View
+                android:id="@+id/view_seperator2"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="#DD2476"
+                android:paddingRight="12dp"/>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit Data"
+                android:backgroundTint="#DD2476" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

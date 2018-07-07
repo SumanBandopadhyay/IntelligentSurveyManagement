@@ -12,59 +12,272 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingBottom="16dp">
 
             <TextView
                 android:text="@string/have_you_walked_your_area"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:padding="10dp">
 
                 <Button
                     android:id="@+id/btn_walked_yes"
                     android:text="Yes"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint = "#56ab2f"/>
 
                 <Button
                     android:id="@+id/btn_walked_no"
                     android:text="No"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#BD3F32"/>
 
             </LinearLayout>
 
             <TextView
                 android:text="@string/are_you_working_around_live_system"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:padding="10dp">
 
                 <Button
                     android:id="@+id/btn_live_system_yes"
                     android:text="Yes"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#56ab2f"/>
 
                 <Button
                     android:id="@+id/btn_live_system_no"
                     android:text="No"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#BD3F32"/>
 
             </LinearLayout>
+
+            <TextView
+                android:text="Are you trained for this task?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:padding="10dp">
+
+                <Button
+                    android:text="Yes"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#56ab2f"/>
+
+                <Button
+                    android:text="No"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#BD3F32"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:text="Is an MSDS necessary for this task?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:padding="10dp">
+
+                <Button
+                    android:text="Yes"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#56ab2f"/>
+
+                <Button
+                    android:text="No"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#BD3F32"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:text="Is air-monitoring required?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:padding="10dp">
+
+                <Button
+                    android:text="Yes"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#56ab2f"/>
+
+                <Button
+                    android:text="No"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#BD3F32"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:text="Are work permits required for this task?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:padding="10dp">
+
+                <Button
+                    android:text="Yes"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#56ab2f"/>
+
+                <Button
+                    android:text="No"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#BD3F32"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:text="Are you familiar with evacuation routes?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:padding="10dp">
+
+                <Button
+                    android:text="Yes"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#56ab2f"/>
+
+                <Button
+                    android:text="No"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#BD3F32"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:text="Do you have the PPE needed for this task?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:padding="10dp">
+
+                <Button
+                    android:text="Yes"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#56ab2f"/>
+
+                <Button
+                    android:text="No"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:backgroundTint="#BD3F32"/>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

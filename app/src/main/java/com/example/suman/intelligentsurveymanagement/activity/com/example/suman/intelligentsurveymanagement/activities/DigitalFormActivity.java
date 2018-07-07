@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 import com.example.suman.intelligentsurveymanagement.R;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.LeftPanelContent;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.CustomerSignOffFragment;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.EquipmentDetailsFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.EvaluatingWorkFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.FormFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.LeftFragment;
@@ -139,6 +140,14 @@ public class DigitalFormActivity extends AppCompatActivity
                 fl.removeAllViews();
                 transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.right_panel, workStepsAndHazardsFragment);
+                transaction.commit();
+                break;
+            case R.layout.fragment_equipment_details:
+                EquipmentDetailsFragment equipmentDetailsFragment = EquipmentDetailsFragment.newInstance("", "");
+                fl = (FrameLayout) findViewById(R.id.right_panel);
+                fl.removeAllViews();
+                transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.right_panel, equipmentDetailsFragment);
                 transaction.commit();
                 break;
             case R.layout.fragment_customer_sign_off:

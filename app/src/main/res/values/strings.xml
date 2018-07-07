@@ -14,7 +14,7 @@
     <string name="job">Project / Job</string>
     <string name="description">Description</string>
     <string name="edt_description">Maintenance management in an area that has given very little attention in public institutions. If the number of detoriating buildings is anything to go by, the current state of buildings or built faciities is a symptom of an inherent problem with management of maintenance works in these institutions</string>
-    <string name="have_you_walked_your_area">Have You walked your area?</string>
+    <string name="have_you_walked_your_area">Have you walked your area?</string>
     <string name="are_you_working_around_live_system">Are you working around live system?</string>
 
 </resources>

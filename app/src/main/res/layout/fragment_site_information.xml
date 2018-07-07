@@ -23,11 +23,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="16dp"/>
 
             <EditText
                 android:id="@+id/edt_date_time"
-                android:hint="30/06/2018 07:45 PM"
+                android:hint="07/07/2018 08:32 AM"
                 android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,11 +41,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="16dp"/>
 
             <EditText
                 android:id="@+id/edt_inspector"
-                android:hint="Rohan Josh"
+                android:hint="Samir Mandal"
                 android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,12 +53,20 @@
                 android:paddingLeft="12dp"
                 android:padding="12dp"/>
 
+            <!--EditText
+                android:id="@+id/edt_inspector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:paddingLeft="12dp"
+                android:padding="12dp"/-->
+
             <TextView
                 android:text="@string/client_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="16dp"/>
 
             <EditText
                 android:id="@+id/edt_client_name"
@@ -75,21 +83,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="16dp"/>
 
             <EditText
                 android:id="@+id/edt_job"
-                android:hint="Mintainance of Buildings and Institution"
+                android:hint="Maintenance of Buildings and Institution"
                 android:enabled="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:paddingLeft="12dp"
+                android:padding="12dp"/>
 
             <TextView
                 android:text="@string/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="20dp"/>
+                android:textSize="16dp"/>
 
             <EditText
                 android:id="@+id/edt_description"
@@ -98,7 +109,17 @@
                 android:scrollbars="vertical"
                 android:enabled="false"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:paddingLeft="12dp"
+                android:padding="12dp"/>
+
+            <TextView
+                android:text="Job Location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mapview"
@@ -113,13 +134,13 @@
                 android:id="@+id/txt_lat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.0"/>
+                android:text=" "/>
 
             <TextView
                 android:id="@+id/txt_lon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.0"/>
+                android:text=""/>
 
         </LinearLayout>
 

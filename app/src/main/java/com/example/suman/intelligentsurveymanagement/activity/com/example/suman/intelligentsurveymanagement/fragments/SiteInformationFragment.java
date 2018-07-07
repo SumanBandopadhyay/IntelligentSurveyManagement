@@ -109,7 +109,7 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
         } else {
-            Toast.makeText(getContext(), "You need have granted permission", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getContext(), "You have granted permission", Toast.LENGTH_SHORT).show();
             gps = new GPSTracker(getContext(), getActivity());
 
             // Check if GPS enabled
@@ -119,7 +119,7 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
                 double longitude = gps.getLongitude();
 
                 // \n is for new line
-                Toast.makeText(getActivity().getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity().getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
             } else {
                 // Can't get location.
                 // GPS or network is not enabled.
@@ -153,7 +153,7 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
                         longitude = gps.getLongitude();
 
                         // \n is for new line
-                        Toast.makeText(getActivity().getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getActivity().getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
                     } else {
                         // Can't get location.
                         // GPS or network is not enabled.
@@ -199,8 +199,8 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
 //        });
         String lat = latitude + "";
         String lon = longitude + "";
-        txtLat.setText(lat);
-        txtLon.setText(lon);
+        //txtLat.setText(lat);
+        //txtLon.setText(lon);
         return view;
     }
 
@@ -237,8 +237,8 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
 
         String lat = location.getLatitude() + " ";
         String lon = location.getLongitude() + " ";
-        txtLon.setText(lon);
-        txtLat.setText(lat);
+        //txtLon.setText(lon);
+        //txtLat.setText(lat);
         //Toast.makeText(getContext(), "Lat : " + location.getLatitude() + ", Long : " + location.getLongitude(), Toast.LENGTH_LONG).show();
     }
 
@@ -265,7 +265,7 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
             latitude = location.getLatitude();
             longitude = location.getLongitude();
 
-            Toast.makeText(getContext(), latitude + " WORKS " + longitude + "", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getContext(), latitude + " WORKS " + longitude + "", Toast.LENGTH_LONG).show();
 
             mapView.getMapAsync(new OnMapReadyCallback() {
                 @Override
@@ -282,8 +282,8 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
 
             String lat = latitude + "";
             String lon = longitude + "";
-            txtLat.setText(lat);
-            txtLon.setText(lon);
+           // txtLat.setText(lat);
+            //txtLon.setText(lon);
 
         }
     }
