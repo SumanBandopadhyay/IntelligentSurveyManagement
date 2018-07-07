@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class EquipmentDetailsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = "EquipmentDetails";
 
     TextView txtScanFormat;
     TextView txtScanContent;
@@ -76,6 +78,7 @@ public class EquipmentDetailsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        Log.e(EquipmentDetailsFragment.TAG, "View created");
     }
 
     @Override
@@ -133,17 +136,18 @@ public class EquipmentDetailsFragment extends Fragment {
     }*/
 
     public void scanQR(View view){
-        IntentIntegrator integrator = new IntentIntegrator(getActivity());
-        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-        integrator.setPrompt("Scan a QR Code");
-        integrator.setResultDisplayDuration(0);
-        integrator.setCameraId(0);  // Use a specific camera of the device
-        integrator.initiateScan();
+//        IntentIntegrator integrator = new IntentIntegrator(getActivity());
+//        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+//        integrator.setPrompt("Scan a QR Code");
+//        integrator.setResultDisplayDuration(0);
+//        integrator.setCameraId(0);  // Use a specific camera of the device
+        IntentIntegrator.forSupportFragment(EquipmentDetailsFragment.this).setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES).initiateScan();
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
-        Toast.makeText(getContext(),"Entry callback", Toast.LENGTH_LONG).show();
+        Log.e(EquipmentDetailsFragment.TAG, "On Activity Result call");
         //retrieve scan result
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         //txtScanFormat.setVisibility(View.VISIBLE);

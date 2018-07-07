@@ -36,10 +36,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
     implementation 'com.github.gcacace:signature-pad:1.2.1'
 
-   /* implementation 'com.journeyapps:zxing-android-embedded:3.4.0@aar'
-    implementation 'com.journeyapps:zxing-android-legacy:2.0.1@aar'
-    implementation 'com.journeyapps:zxing-android-integration:2.0.1@aar'
-    implementation 'com.google.zxing:core:3.3.0'*/
+    implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
+//    implementation 'com.journeyapps:zxing-android-legacy:2.0.1@aar'
+//    implementation 'com.journeyapps:zxing-android-integration:2.0.1@aar'
+//    implementation 'com.google.zxing:core:3.3.0'
 
     implementation 'android.arch.persistence.room:runtime:1.1.1'
     implementation 'android.arch.persistence.room:rxjava2:1.1.1'
@@ -53,11 +53,11 @@ dependencies {
 
 
     //implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.journeyapps:zxing-android-embedded:2.0.1@aar'
-
-    implementation 'com.journeyapps:zxing-android-legacy:2.0.1@aar'
-
-    implementation 'com.journeyapps:zxing-android-integration:2.0.1@aar'
-
-    implementation 'com.google.zxing:core:3.0.1'
+//    implementation 'com.journeyapps:zxing-android-embedded:2.0.1@aar'
+//
+//    implementation 'com.journeyapps:zxing-android-legacy:2.0.1@aar'
+//
+//    implementation 'com.journeyapps:zxing-android-integration:2.0.1@aar'
+//
+//    implementation 'com.google.zxing:core:3.0.1'
 }

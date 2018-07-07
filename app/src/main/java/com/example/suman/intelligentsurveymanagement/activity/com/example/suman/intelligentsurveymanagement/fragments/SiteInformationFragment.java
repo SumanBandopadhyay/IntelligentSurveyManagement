@@ -2,6 +2,8 @@ package com.example.suman.intelligentsurveymanagement.activity.com.example.suman
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.suman.intelligentsurveymanagement.R;
@@ -32,6 +35,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 
 public class SiteInformationFragment extends Fragment implements com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     // TODO: Rename parameter arguments, choose names that match
@@ -48,7 +55,7 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
 //    private GPSTracker gps;
 
     // TAG
-    public static final String TAG = "SiteInformationFragment";
+    public static final String TAG = "SiteInformation";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -58,6 +65,7 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
 
     private MapView mapView;
     private GoogleMap googleMap;
+    private TextView txtAddress;
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
@@ -183,6 +191,7 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
         View view = inflater.inflate(R.layout.fragment_site_information, container, false);
 //        txtLat = (TextView) view.findViewById(R.id.txt_lat);
 //        txtLon = (TextView) view.findViewById(R.id.txt_lon);
+        txtAddress = (TextView) view.findViewById(R.id.txt_address);
         mapView = (MapView) view.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
@@ -283,6 +292,18 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
                                         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                                     }
                                 });
+
+                                Geocoder geocoder;
+                                geocoder = new Geocoder(getContext(), Locale.getDefault());
+
+                                try {
+                                    List<Address> addresses;
+                                    addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                                    String address = addresses.get(0).getAddressLine(0);
+                                    txtAddress.setText(address);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                     });
