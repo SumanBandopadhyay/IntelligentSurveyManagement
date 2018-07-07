@@ -8,18 +8,18 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.suman.intelligentsurveymanagement.R;
-import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.services.GPSTracker;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,8 +29,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import static android.content.Context.LOCATION_SERVICE;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 
 public class SiteInformationFragment extends Fragment implements com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -39,13 +39,13 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    TextView txtLat;
-    TextView txtLon;
+//    TextView txtLat;
+//    TextView txtLon;
 
     private double latitude;
     private double longitude;
 
-    private GPSTracker gps;
+//    private GPSTracker gps;
 
     // TAG
     public static final String TAG = "SiteInformationFragment";
@@ -61,6 +61,8 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
+    private LocationCallback mLocationCallback;
+    private FusedLocationProviderClient mFusedLocationClient;
 
 
     public SiteInformationFragment() {
@@ -105,28 +107,43 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
                 .setInterval(10 * 1000)        // 10 seconds, in milliseconds
                 .setFastestInterval(1 * 1000); // 1 second, in milliseconds
 
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-
-        } else {
-          //  Toast.makeText(getContext(), "You have granted permission", Toast.LENGTH_SHORT).show();
-            gps = new GPSTracker(getContext(), getActivity());
-
-            // Check if GPS enabled
-            if (gps.canGetLocation()) {
-
-                double latitude = gps.getLatitude();
-                double longitude = gps.getLongitude();
-
-                // \n is for new line
-                //Toast.makeText(getActivity().getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-            } else {
-                // Can't get location.
-                // GPS or network is not enabled.
-                // Ask user to enable GPS/network in settings.
-                gps.showSettingsAlert();
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    // Update UI with location data
+                    // ...
+                }
             }
-        }
+
+            ;
+        };
+
+//        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+//
+//        } else {
+//          //  Toast.makeText(getContext(), "You have granted permission", Toast.LENGTH_SHORT).show();
+//            gps = new GPSTracker(getContext(), getActivity());
+//
+//            // Check if GPS enabled
+//            if (gps.canGetLocation()) {
+//
+//                double latitude = gps.getLatitude();
+//                double longitude = gps.getLongitude();
+//
+//                // \n is for new line
+//                //Toast.makeText(getActivity().getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+//            } else {
+//                // Can't get location.
+//                // GPS or network is not enabled.
+//                // Ask user to enable GPS/network in settings.
+//                gps.showSettingsAlert();
+//            }
+//        }
 
     }
 
@@ -144,22 +161,7 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
 
                     // contacts-related task you need to do.
 
-                    gps = new GPSTracker(getContext(), getActivity());
-
-                    // Check if GPS enabled
-                    if (gps.canGetLocation()) {
-
-                        latitude = gps.getLatitude();
-                        longitude = gps.getLongitude();
-
-                        // \n is for new line
-                        //Toast.makeText(getActivity().getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-                    } else {
-                        // Can't get location.
-                        // GPS or network is not enabled.
-                        // Ask user to enable GPS/network in settings.
-                        gps.showSettingsAlert();
-                    }
+                    Toast.makeText(getContext(), "Location permission granted", Toast.LENGTH_LONG).show();
 
                 } else {
 
@@ -179,8 +181,8 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_site_information, container, false);
-        txtLat = (TextView) view.findViewById(R.id.txt_lat);
-        txtLon = (TextView) view.findViewById(R.id.txt_lon);
+//        txtLat = (TextView) view.findViewById(R.id.txt_lat);
+//        txtLon = (TextView) view.findViewById(R.id.txt_lon);
         mapView = (MapView) view.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
@@ -197,8 +199,8 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
 //                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 //            }
 //        });
-        String lat = latitude + "";
-        String lon = longitude + "";
+//        String lat = latitude + "";
+//        String lon = longitude + "";
         //txtLat.setText(lat);
         //txtLon.setText(lon);
         return view;
@@ -218,6 +220,11 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
         if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
+        stopLocationUpdates();
+    }
+
+    private void stopLocationUpdates() {
+        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
     }
 
 //    @Override
@@ -232,11 +239,12 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
         mapView.onLowMemory();
     }
 
+
     @Override
     public void onLocationChanged(Location location) {
 
-        String lat = location.getLatitude() + " ";
-        String lon = location.getLongitude() + " ";
+//        String lat = location.getLatitude() + " ";
+//        String lon = location.getLongitude() + " ";
         //txtLon.setText(lon);
         //txtLat.setText(lat);
         //Toast.makeText(getContext(), "Lat : " + location.getLatitude() + ", Long : " + location.getLongitude(), Toast.LENGTH_LONG).show();
@@ -246,46 +254,77 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
-        }
-        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-
-        if (location == null) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-
         } else {
-            //If everything went fine lets get latitude and longitude
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
+            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+            Task<Location> location = mFusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            if (location == null) {
+                                startLocationUpdates();
+                            } else {
+                                //If everything went fine lets get latitude and longitude
+                                latitude = location.getLatitude();
+                                longitude = location.getLongitude();
 
-            //Toast.makeText(getContext(), latitude + " WORKS " + longitude + "", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getContext(), latitude + " WORKS " + longitude + "", Toast.LENGTH_LONG).show();
 
-            mapView.getMapAsync(new OnMapReadyCallback() {
-                @Override
-                public void onMapReady(GoogleMap map) {
-                    googleMap = map;
+                                mapView.getMapAsync(new OnMapReadyCallback() {
+                                    @Override
+                                    public void onMapReady(GoogleMap map) {
+                                        googleMap = map;
 
-                    LatLng loc = new LatLng(latitude, longitude);
-                    googleMap.addMarker(new MarkerOptions().position(loc).title("Current Location"));
+                                        LatLng loc = new LatLng(latitude, longitude);
+                                        googleMap.addMarker(new MarkerOptions().position(loc).title("Current Location"));
 
-                    CameraPosition cameraPosition = new CameraPosition.Builder().target(loc).zoom(12).build();
-                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                }
-            });
+                                        CameraPosition cameraPosition = new CameraPosition.Builder().target(loc).zoom(12).build();
+                                        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                                    }
+                                });
+                            }
+                        }
+                    });
 
-            String lat = latitude + "";
-            String lon = longitude + "";
-           // txtLat.setText(lat);
+//            if (location == null) {
+//                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+//
+//            } else {
+//                //If everything went fine lets get latitude and longitude
+//                latitude = location.getLatitude();
+//                longitude = location.getLongitude();
+//
+//                //Toast.makeText(getContext(), latitude + " WORKS " + longitude + "", Toast.LENGTH_LONG).show();
+//
+//                mapView.getMapAsync(new OnMapReadyCallback() {
+//                    @Override
+//                    public void onMapReady(GoogleMap map) {
+//                        googleMap = map;
+//
+//                        LatLng loc = new LatLng(latitude, longitude);
+//                        googleMap.addMarker(new MarkerOptions().position(loc).title("Current Location"));
+//
+//                        CameraPosition cameraPosition = new CameraPosition.Builder().target(loc).zoom(12).build();
+//                        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+//                    }
+//                });
+//            }
+
+//            String lat = latitude + "";
+//            String lon = longitude + "";
+            // txtLat.setText(lat);
             //txtLon.setText(lon);
 
         }
+    }
+
+    private void startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+        mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
     }
 
     @Override
