@@ -17,7 +17,7 @@
             android:paddingRight="16dp"
             android:paddingBottom="16dp"
             android:orientation="vertical">
-            
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,19 +83,6 @@
                 <!--android:textSize="20dp"-->
                 <!--android:textStyle="bold"/>-->
 
-            <!--<Button-->
-                <!--android:id="@+id/btn_capture_video"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Capture Video" />-->
-
-            <!--<VideoView-->
-                <!--android:id="@+id/vid_captured_vid"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="400dp"-->
-                <!--android:layout_marginLeft="16dp"-->
-                <!--android:layout_marginRight="16dp"-->
-                <!--android:layout_marginTop="16dp"/>-->
 
             <!--<Button android:id="@+id/btn_qr_scan"-->
                 <!--android:layout_width="wrap_content"-->
@@ -116,6 +103,32 @@
                 <!--android:layout_height="wrap_content"-->
                 <!--android:textIsSelectable="true"-->
                 <!--android:layout_centerHorizontal="true"/>-->
+
+            <!--TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload any reference Video : "
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
+
+            <Button
+                android:id="@+id/btn_capture_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Capture Video"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#DD2476"/>
+
+            <VideoView
+                android:id="@+id/vid_captured_vid"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#DD2476"/-->
+
 
         </LinearLayout>
     </ScrollView>

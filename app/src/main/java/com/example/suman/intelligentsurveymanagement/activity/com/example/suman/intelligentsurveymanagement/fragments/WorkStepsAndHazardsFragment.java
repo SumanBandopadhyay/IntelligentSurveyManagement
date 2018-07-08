@@ -52,8 +52,8 @@ public class WorkStepsAndHazardsFragment extends Fragment {
 
 //    private Button btnQRScan;
     private SignaturePad imageEditPad;
-//    private Button btnCaptureVid;
-//    private VideoView vidCapturedVid;
+    private Button btnCaptureVid;
+    private VideoView vidCapturedVid;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -113,19 +113,23 @@ public class WorkStepsAndHazardsFragment extends Fragment {
         btnEditImage = (Button) view.findViewById(R.id.btn_edit_image);
         //btnSaveData = (Button) view.findViewById(R.id.btn_save_data);
         imageEditPad = (SignaturePad) view.findViewById(R.id.image_edit_pad);
-//        btnCaptureVid = (Button) view.findViewById(R.id.btn_capture_video);
-//        vidCapturedVid = (VideoView) view.findViewById(R.id.vid_captured_vid);
+
+        //btnCaptureVid = (Button) view.findViewById(R.id.btn_capture_video);
+        //vidCapturedVid = (VideoView) view.findViewById(R.id.vid_captured_vid);
+
 //        btnQRScan = (Button) view.findViewById(R.id.btn_qr_scan);
         imageEditPad.setEnabled(false);
         imageEditPad.setPenColor(Color.RED);
-        //vidCapturedVid.setZOrderOnTop(true);
-//        MediaController mediaController = new MediaController(getContext());
-//        mediaController.setAnchorView(vidCapturedVid);
-//        mediaController.setMediaPlayer(vidCapturedVid);
-//        vidCapturedVid.setMediaController(mediaController);
-//        vidCapturedVid.setBackgroundColor(Color.TRANSPARENT);
-//        //vidCapturedVid.requestFocus();
-//        vidCapturedVid.setZOrderMediaOverlay(false);
+
+        /*vidCapturedVid.setZOrderOnTop(true);
+        MediaController mediaController = new MediaController(getContext());
+        mediaController.setAnchorView(vidCapturedVid);
+        mediaController.setMediaPlayer(vidCapturedVid);
+        vidCapturedVid.setMediaController(mediaController);
+        vidCapturedVid.setBackgroundColor(Color.TRANSPARENT);*/
+
+        //vidCapturedVid.requestFocus();
+        //vidCapturedVid.setZOrderMediaOverlay(false);
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,12 +144,12 @@ public class WorkStepsAndHazardsFragment extends Fragment {
                 imageEditPad.setEnabled(true);
             }
         });
-//        btnCaptureVid.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dispatchTakeVideoIntent();
-//            }
-//        });
+       /* btnCaptureVid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dispatchTakeVideoIntent();
+            }
+        });*/
 //        btnQRScan.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -201,8 +205,8 @@ public class WorkStepsAndHazardsFragment extends Fragment {
 //            imageEditPad.draw(new Canvas(mutableBitmap));
         } else if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri videoUri = data.getData();
-//            vidCapturedVid.setVideoURI(videoUri);
-//            vidCapturedVid.start();
+            vidCapturedVid.setVideoURI(videoUri);
+            vidCapturedVid.start();
         }
     }
 
