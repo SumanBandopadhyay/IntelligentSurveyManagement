@@ -21,6 +21,7 @@ import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.EquipmentDetailsFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.EvaluatingWorkFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.FormFragment;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.HomeFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.LeftFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.SiteInformationFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.WorkStepsAndHazardsFragment;
@@ -99,7 +100,11 @@ public class DigitalFormActivity extends AppCompatActivity
             transaction.addToBackStack(FormFragment.TAG);
             transaction.commit();
         } else if (id == R.id.nav_home) {
-
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.main_frame, HomeFragment.newInstance("test", "test2"));
+            //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
+            transaction.addToBackStack(HomeFragment.TAG);
+            transaction.commit();
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_help) {
