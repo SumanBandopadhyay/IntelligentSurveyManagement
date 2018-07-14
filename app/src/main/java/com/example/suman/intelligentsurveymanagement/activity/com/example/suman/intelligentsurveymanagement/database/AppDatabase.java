@@ -9,6 +9,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dao.FormDao;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.entity.Form;
 
 @Database(entities = {Form.class}, version = AppDatabase.DB_VERSION)
@@ -19,6 +20,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "formdb";
 
     private static AppDatabase INSTANCE;
+
+    public abstract FormDao formDao();
 
     private final MutableLiveData<Boolean> IS_DATABASE_CREATED = new MutableLiveData<>();
 

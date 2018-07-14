@@ -1,10 +1,7 @@
 package com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,22 +13,39 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.example.suman.intelligentsurveymanagement.R;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.database.AppDatabase;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.LeftPanelContent;
-import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.SentJobsContent;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.entity.Form;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.executor.AppExecutors;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.CustomerSignOffFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.EquipmentDetailsFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.EvaluatingWorkFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.FormFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.HomeFragment;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.InboxJobsFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.LeftFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.SentJobsFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.SiteInformationFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.WorkStepsAndHazardsFragment;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.utils.DatabaseInitializer;
+
+import java.util.List;
 
 public class DigitalFormActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         LeftFragment.OnListFragmentInteractionListener,
-        SentJobsFragment.OnListFragmentInteractionListener {
+        SentJobsFragment.OnListFragmentInteractionListener,
+        InboxJobsFragment.OnListFragmentInteractionListener {
+
+    public static List<Form> ALLFORMS;
+    public static List<Form> SENTFORMS;
+    public static List<Form> INBOXFORMS;
+    public static Form SELECTEDFORM;
+
+    public static AppDatabase appDatabase;
+    private AppExecutors appExecutors;
+
+    private static final String TAG = "DigitalForm";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +53,13 @@ public class DigitalFormActivity extends AppCompatActivity
         setContentView(R.layout.activity_digital_form);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        appExecutors = new AppExecutors();
+
+        // DatabaseInitializer.populateAsync(appDatabase, new AppExecutors(), getApplicationContext());
+        DatabaseInitializer.getAllJobs(appDatabase, appExecutors, getApplicationContext());
+        DatabaseInitializer.getSentJobs(appDatabase, appExecutors, getApplicationContext());
+        DatabaseInitializer.getInboxJobs(appDatabase, appExecutors, getApplicationContext());
 
        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +191,13 @@ public class DigitalFormActivity extends AppCompatActivity
 
     // SentJobsFragment listener method
     @Override
-    public void onListFragmentInteraction(SentJobsContent.SentJobsItem item) {
-
+    public void onListFragmentInteraction(Form item) {
+        SELECTEDFORM = item;
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_frame, FormFragment.newInstance("test", "test2"));
+        //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
+        transaction.addToBackStack(FormFragment.TAG);
+        transaction.commit();
     }
+
 }

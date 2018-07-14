@@ -11,12 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.suman.intelligentsurveymanagement.R;
-import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.adapters.MySentJobsFragmentRecyclerViewAdapter;
-import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.SentJobsContent;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.adapters.MyInboxFormRecyclerViewAdapter;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.InboxJobsContent;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.entity.Form;
-
-import java.io.Serializable;
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -24,7 +21,7 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class SentJobsFragment extends Fragment {
+public class InboxJobsFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -32,19 +29,17 @@ public class SentJobsFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
-    public static final String TAG = "SentJobs";
-
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public SentJobsFragment() {
+    public InboxJobsFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static SentJobsFragment newInstance() {
-        SentJobsFragment fragment = new SentJobsFragment();
+    public static InboxJobsFragment newInstance() {
+        InboxJobsFragment fragment = new InboxJobsFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -63,7 +58,7 @@ public class SentJobsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sentjobsfragment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_inboxform_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -74,7 +69,7 @@ public class SentJobsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MySentJobsFragmentRecyclerViewAdapter(SentJobsContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyInboxFormRecyclerViewAdapter(InboxJobsContent.ITEMS, mListener));
         }
         return view;
     }

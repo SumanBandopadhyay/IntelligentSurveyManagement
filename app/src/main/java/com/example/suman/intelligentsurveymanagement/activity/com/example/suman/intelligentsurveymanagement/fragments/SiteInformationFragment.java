@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.suman.intelligentsurveymanagement.R;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.activities.DigitalFormActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -66,6 +67,7 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
     private MapView mapView;
     private GoogleMap googleMap;
     private TextView txtAddress;
+    private TextView txtFormId;
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
@@ -192,6 +194,8 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
 //        txtLat = (TextView) view.findViewById(R.id.txt_lat);
 //        txtLon = (TextView) view.findViewById(R.id.txt_lon);
         txtAddress = (TextView) view.findViewById(R.id.txt_address);
+        txtFormId = (TextView) view.findViewById(R.id.form_id);
+        txtFormId.setText(Integer.toString(DigitalFormActivity.SELECTEDFORM.getFormid()));
         mapView = (MapView) view.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         mapView.onResume();

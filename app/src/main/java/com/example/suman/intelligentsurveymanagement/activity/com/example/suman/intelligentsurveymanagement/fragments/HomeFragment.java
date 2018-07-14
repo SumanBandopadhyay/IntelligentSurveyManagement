@@ -1,8 +1,6 @@
 package com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments;
 
-import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -10,9 +8,14 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.Button;
 
 import com.example.suman.intelligentsurveymanagement.R;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.database.AppDatabase;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.executor.AppExecutors;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.utils.DatabaseInitializer;
+
+import java.io.Serializable;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,6 +91,17 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.main_frame, SentJobsFragment.newInstance());
+                //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
+                transaction.addToBackStack(SentJobsFragment.TAG);
+                transaction.commit();
+            }
+        });
+
+        inboxCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.main_frame, InboxJobsFragment.newInstance());
                 //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
                 transaction.addToBackStack(SentJobsFragment.TAG);
                 transaction.commit();

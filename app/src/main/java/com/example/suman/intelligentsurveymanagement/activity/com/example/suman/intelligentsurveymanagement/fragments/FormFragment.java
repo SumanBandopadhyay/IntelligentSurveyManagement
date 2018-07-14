@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.suman.intelligentsurveymanagement.R;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.entity.Form;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +25,8 @@ public class FormFragment extends Fragment {
 
     // Tag
     public static final String TAG = "FormFragment";
+
+    private Form form;
 
     // TODO: Rename and change types of parameters
     private String mParam1;

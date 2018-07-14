@@ -16,6 +16,15 @@ public interface FormDao {
     @Query("SELECT * FROM forms")
     List<Form> getAllForms();
 
+    @Query("SELECT * FROM forms where form_status = 'sent'")
+    List<Form> getSentForms();
+
+    @Query("SELECT * FROM forms where form_status = 'inbox'")
+    List<Form> getInboxForms();
+
+    @Query("SELECT * FROM forms WHERE form_id = :id")
+    Form getFormById(int id);
+
     @Insert
     void insertForm(Form form);
 

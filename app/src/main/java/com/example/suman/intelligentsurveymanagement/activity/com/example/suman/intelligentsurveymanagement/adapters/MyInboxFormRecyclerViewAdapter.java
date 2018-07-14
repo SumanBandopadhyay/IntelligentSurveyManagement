@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.suman.intelligentsurveymanagement.R;
-import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.SentJobsFragment.OnListFragmentInteractionListener;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.entity.Form;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.InboxJobsFragment.OnListFragmentInteractionListener;
 
 import java.util.List;
 
@@ -17,12 +17,12 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MySentJobsFragmentRecyclerViewAdapter extends RecyclerView.Adapter<MySentJobsFragmentRecyclerViewAdapter.ViewHolder> {
+public class MyInboxFormRecyclerViewAdapter extends RecyclerView.Adapter<MyInboxFormRecyclerViewAdapter.ViewHolder> {
 
     private final List<Form> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MySentJobsFragmentRecyclerViewAdapter(List<Form> items, OnListFragmentInteractionListener listener) {
+    public MyInboxFormRecyclerViewAdapter(List<Form> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -30,7 +30,7 @@ public class MySentJobsFragmentRecyclerViewAdapter extends RecyclerView.Adapter<
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_sentjobsfragment, parent, false);
+                .inflate(R.layout.fragment_inboxform, parent, false);
         return new ViewHolder(view);
     }
 
@@ -66,8 +66,8 @@ public class MySentJobsFragmentRecyclerViewAdapter extends RecyclerView.Adapter<
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.sent_item_number);
-            mContentView = (TextView) view.findViewById(R.id.sent_content);
+            mIdView = (TextView) view.findViewById(R.id.item_number);
+            mContentView = (TextView) view.findViewById(R.id.content);
         }
 
         @Override

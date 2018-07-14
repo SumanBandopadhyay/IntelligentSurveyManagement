@@ -65,6 +65,16 @@ public class Form {
     @ColumnInfo (name = "customer_sign")
     private String customerSignature;
 
+    @ColumnInfo (name = "form_status")
+    private String formStatus;
+
+    public String getFormStatus() {
+        return formStatus;
+    }
+
+    public void setFormStatus(String formStatus) {
+        this.formStatus = formStatus;
+    }
 
     public int getFormid() {
         return formid;
