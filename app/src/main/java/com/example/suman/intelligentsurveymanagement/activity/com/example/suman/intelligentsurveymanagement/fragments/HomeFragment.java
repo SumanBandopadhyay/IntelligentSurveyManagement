@@ -4,9 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.example.suman.intelligentsurveymanagement.R;
 
@@ -29,6 +32,11 @@ public class HomeFragment extends Fragment {
 
     // Tag
     public static final String TAG = "HomeFragment";
+
+    // Cards
+    private CardView inboxCardView;
+    private CardView sentCardView;
+    private CardView draftCardView;
 
     //private OnFragmentInteractionListener mListener;
 
@@ -67,7 +75,23 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        sentCardView = (CardView) view.findViewById(R.id.sent_card);
+        inboxCardView = (CardView) view.findViewById(R.id.inbox_card);
+        draftCardView = (CardView) view.findViewById(R.id.draft_card);
+
+        sentCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.main_frame, SentJobsFragment.newInstance());
+                //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
+                transaction.addToBackStack(SentJobsFragment.TAG);
+                transaction.commit();
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

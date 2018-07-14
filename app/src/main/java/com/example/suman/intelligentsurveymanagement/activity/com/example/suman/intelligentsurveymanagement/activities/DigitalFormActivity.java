@@ -17,17 +17,21 @@ import android.widget.FrameLayout;
 
 import com.example.suman.intelligentsurveymanagement.R;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.LeftPanelContent;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.dummy.SentJobsContent;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.CustomerSignOffFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.EquipmentDetailsFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.EvaluatingWorkFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.FormFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.HomeFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.LeftFragment;
+import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.SentJobsFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.SiteInformationFragment;
 import com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.WorkStepsAndHazardsFragment;
 
 public class DigitalFormActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, LeftFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        LeftFragment.OnListFragmentInteractionListener,
+        SentJobsFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +120,7 @@ public class DigitalFormActivity extends AppCompatActivity
         return true;
     }
 
+    // LeftPanelFragment listener method
     @Override
     public void onListFragmentInteraction(LeftPanelContent.DummyItem item) {
         switch (item.id) {
@@ -160,6 +165,12 @@ public class DigitalFormActivity extends AppCompatActivity
                 transaction.commit();
                 break;
         }
+
+    }
+
+    // SentJobsFragment listener method
+    @Override
+    public void onListFragmentInteraction(SentJobsContent.SentJobsItem item) {
 
     }
 }
