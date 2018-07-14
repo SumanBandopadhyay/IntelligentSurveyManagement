@@ -64,11 +64,11 @@ public class FormFragment extends Fragment {
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
