@@ -17,5 +17,6 @@
     <string name="have_you_walked_your_area">Have you walked your area?</string>
     <string name="are_you_working_around_live_system">Are you working around live system?</string>
     <string name="form_id">Form ID</string>
+    <string name="firstTimeAppLaunch">first_time</string>
 
 </resources>

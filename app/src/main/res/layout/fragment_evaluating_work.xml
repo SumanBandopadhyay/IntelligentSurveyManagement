@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.com.example.suman.intelligentsurveymanagement.fragments.EvaluatingWorkFragment">
+    tools:context="intelligentsurveymanagement.fragments.EvaluatingWorkFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -38,8 +38,7 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint = "#56ab2f"/>
+                    android:textSize="14dp" />
 
                 <Button
                     android:id="@+id/btn_walked_no"
@@ -47,8 +46,7 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#BD3F32"/>
+                    android:textSize="14dp" />
 
             </LinearLayout>
 
@@ -72,8 +70,7 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#56ab2f"/>
+                    android:textSize="14dp" />
 
                 <Button
                     android:id="@+id/btn_live_system_no"
@@ -81,8 +78,7 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#BD3F32"/>
+                    android:textSize="14dp" />
 
             </LinearLayout>
 
@@ -101,20 +97,20 @@
                 android:padding="10dp">
 
                 <Button
+                    android:id="@+id/btn_trained_yes"
                     android:text="Yes"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#56ab2f"/>
+                    android:textSize="14dp" />
 
                 <Button
+                    android:id="@+id/btn_trained_no"
                     android:text="No"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#BD3F32"/>
+                    android:textSize="14dp" />
 
             </LinearLayout>
 
@@ -137,16 +133,14 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#56ab2f"/>
+                    android:textSize="14dp" />
 
                 <Button
                     android:text="No"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#BD3F32"/>
+                    android:textSize="14dp" />
 
             </LinearLayout>
 
@@ -169,16 +163,14 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#56ab2f"/>
+                    android:textSize="14dp" />
 
                 <Button
                     android:text="No"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#BD3F32"/>
+                    android:textSize="14dp" />
 
             </LinearLayout>
 
@@ -201,16 +193,14 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#56ab2f"/>
+                    android:textSize="14dp" />
 
                 <Button
                     android:text="No"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#BD3F32"/>
+                    android:textSize="14dp" />
 
             </LinearLayout>
 
@@ -233,16 +223,14 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#56ab2f"/>
+                    android:textSize="14dp" />
 
                 <Button
                     android:text="No"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#BD3F32"/>
+                    android:textSize="14dp" />
 
             </LinearLayout>
 
@@ -265,16 +253,14 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#56ab2f"/>
+                    android:textSize="14dp" />
 
                 <Button
                     android:text="No"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:backgroundTint="#BD3F32"/>
+                    android:textSize="14dp" />
 
             </LinearLayout>
 

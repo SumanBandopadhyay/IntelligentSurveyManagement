@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".activity.com.example.suman.intelligentsurveymanagement.fragments.SentJobsFragment"
+    tools:context="intelligentsurveymanagement.fragments.SentJobsFragment"
     tools:listitem="@layout/fragment_sentjobsfragment" />

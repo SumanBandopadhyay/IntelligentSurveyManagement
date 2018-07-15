@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.com.example.suman.intelligentsurveymanagement.fragments.FormFragment">
+    tools:context="intelligentsurveymanagement.fragments.FormFragment">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
 
             <!--<fragment-->
                 <!--android:id="@+id/frame_right"-->
-                <!--class="com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.SiteInformationFragment"-->
+                <!--class="intelligentsurveymanagement.fragments.SiteInformationFragment"-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="match_parent"></fragment>-->
 
@@ -50,7 +50,7 @@
 
             <fragment
                 android:id="@+id/frame_left"
-                class="com.example.suman.intelligentsurveymanagement.activity.com.example.suman.intelligentsurveymanagement.fragments.LeftFragment"
+                class="intelligentsurveymanagement.fragments.LeftFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"></fragment>
 
