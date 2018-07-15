@@ -38,6 +38,8 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
     private Button btnLiveSystemNo;
     private Button btnTrainedYes;
     private Button btnTrainedNo;
+    private Button btnMSDSYes;
+    private Button btnMSDSNo;
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -131,6 +133,11 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
             case R.id.btn_walked_yes:
                 btnWalkedYes.setSelected(true);
                 btnWalkedYes.setBackgroundColor(Color.GREEN);
+                break;
+
+            case R.id.btn_walked_no:
+                btnWalkedNo.setSelected(true);
+                btnWalkedNo.setBackgroundColor(Color.GREEN);
                 break;
         }
     }
