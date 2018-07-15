@@ -15,6 +15,9 @@ import com.example.suman.intelligentsurveymanagement.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import intelligentsurveymanagement.activities.DigitalFormActivity;
+import intelligentsurveymanagement.utils.DatabaseInitializer;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -81,6 +84,9 @@ public class EquipmentDetailsFragment extends Fragment {
         txtScanContent = (TextView) view.findViewById(R.id.txt_scan_content);
         txtScanFormat = (TextView) view.findViewById(R.id.txt_scan_format);
         btnScanQRCode = (Button) view.findViewById(R.id.btn_scan_qr);
+
+        txtScanContent.setText(DigitalFormActivity.SELECTEDFORM.getScanContent());
+        txtScanFormat.setText(DigitalFormActivity.SELECTEDFORM.getScanFormat());
 
         btnScanQRCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,6 +157,10 @@ public class EquipmentDetailsFragment extends Fragment {
             Toast.makeText(getContext(),"Content : "+content, Toast.LENGTH_LONG).show();
             txtScanFormat.setText(format);
             txtScanContent.setText(content);
+
+            DigitalFormActivity.SELECTEDFORM.setScanContent(content);
+            DigitalFormActivity.SELECTEDFORM.setScanFormat(format);
+            DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
 
         }else{
             Toast toast = Toast.makeText(getContext(),"No scan data received!", Toast.LENGTH_SHORT);
