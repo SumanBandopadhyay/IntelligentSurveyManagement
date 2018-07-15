@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,7 +74,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
     private TextView txtAddress;
     private TextView txtFormId;
     private EditText edtDateTime;
-    private ImageView imgDatePicker;
+    private ImageButton imgDatePicker;
     private EditText edtInspector;
     private TextView txtClientName;
     private TextView txtJob;
@@ -143,8 +144,6 @@ public class SiteInformationFragment extends Fragment implements LocationListene
 
             ;
         };
-
-        imgDatePicker.setOnClickListener(this);
     }
 
     @Override
@@ -191,6 +190,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
         MapsInitializer.initialize(getActivity().getApplicationContext());
 
         btnSave.setOnClickListener(this);
+        imgDatePicker.setOnClickListener(this);
 
         return view;
     }
@@ -210,7 +210,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
         txtFormId = (TextView) view.findViewById(R.id.job_id);
         mapView = (MapView) view.findViewById(R.id.mapview);
         edtDateTime = (EditText) view.findViewById(R.id.edt_date_time);
-        imgDatePicker = (ImageView) view.findViewById(R.id.img_date_picker);
+        imgDatePicker = (ImageButton) view.findViewById(R.id.btn_date_picker);
         edtInspector = (EditText) view.findViewById(R.id.edt_inspector);
         txtClientName = (TextView) view.findViewById(R.id.txt_client_name);
         txtJob = (TextView) view.findViewById(R.id.txt_job);
@@ -335,36 +335,41 @@ public class SiteInformationFragment extends Fragment implements LocationListene
     @Override
     public void onClick(View view) {
 
-        if(view == imgDatePicker){
-            // Get Current Date
-            final Calendar c = Calendar.getInstance();
-            mYear = c.get(Calendar.YEAR);
-            mMonth = c.get(Calendar.MONTH);
-            mDay = c.get(Calendar.DAY_OF_MONTH);
+        switch (view.getId()) {
+            case R.id.btn_site_information_save:
+                DigitalFormActivity.SELECTEDFORM.setClientName(txtClientName.getText().toString());
+                DigitalFormActivity.SELECTEDFORM.setDateTime(edtDateTime.getText().toString());
+                DigitalFormActivity.SELECTEDFORM.setInspector(edtInspector.getText().toString());
+                DigitalFormActivity.SELECTEDFORM.setProject(txtJob.getText().toString());
+                DigitalFormActivity.SELECTEDFORM.setJobDescription(edtDescription.getText().toString());
+                DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
+                DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
+                DigitalFormActivity.initializeLists(getActivity());
+                Toast.makeText(getContext(), "Saved", Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.btn_date_picker:
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-//            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-//                    new DatePickerDialog.OnDateSetListener() {
-//
-//                        @Override
-//                        public void onDateSet(DatePicker view, int year,
-//                                              int monthOfYear, int dayOfMonth) {
-//
-//                            edtDateTime.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-//
-//                        }
-//                    }, mYear, mMonth, mDay);
-//            datePickerDialog.show();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+
+                                edtDateTime.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+                break;
         }
-        DigitalFormActivity.SELECTEDFORM.setClientName(txtClientName.getText().toString());
-        DigitalFormActivity.SELECTEDFORM.setDateTime(edtDateTime.getText().toString());
-        DigitalFormActivity.SELECTEDFORM.setInspector(edtInspector.getText().toString());
-        DigitalFormActivity.SELECTEDFORM.setProject(txtJob.getText().toString());
-        DigitalFormActivity.SELECTEDFORM.setJobDescription(edtDescription.getText().toString());
-        DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
-        DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
-        DigitalFormActivity.initializeLists(getActivity());
-        Toast.makeText(getContext(), "Saved", Toast.LENGTH_LONG).show();
+
     }
 
 //    // TODO: Rename method, update argument and hook method into UI event
