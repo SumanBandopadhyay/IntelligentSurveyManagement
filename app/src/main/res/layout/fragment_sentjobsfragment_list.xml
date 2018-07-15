@@ -10,4 +10,5 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="intelligentsurveymanagement.fragments.SentJobsFragment"
-    tools:listitem="@layout/fragment_sentjobsfragment" />
+    tools:listitem="@layout/fragment_sentjobsfragment"
+    android:background="@color/lightgray"/>

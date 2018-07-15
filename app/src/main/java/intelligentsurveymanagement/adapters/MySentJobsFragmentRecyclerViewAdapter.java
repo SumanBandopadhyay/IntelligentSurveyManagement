@@ -37,8 +37,9 @@ public class MySentJobsFragmentRecyclerViewAdapter extends RecyclerView.Adapter<
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(Integer.toString(mValues.get(position).getFormid()));
-        holder.mContentView.setText(mValues.get(position).getFormStatus());
+        holder.txtSentJobId.setText(Integer.toString(mValues.get(position).getFormid()));
+        holder.txtSentJobTitle.setText(mValues.get(position).getProject());
+        holder.txtSentClientName.setText(mValues.get(position).getClientName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,20 +60,22 @@ public class MySentJobsFragmentRecyclerViewAdapter extends RecyclerView.Adapter<
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView txtSentJobId;
+        public final TextView txtSentJobTitle;
+        public final TextView txtSentClientName;
         public Form mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.sent_item_number);
-            mContentView = (TextView) view.findViewById(R.id.sent_content);
+            txtSentJobId = (TextView) view.findViewById(R.id.txt_sent_job_id);
+            txtSentJobTitle = (TextView) view.findViewById(R.id.txt_sent_job_title);
+            txtSentClientName = (TextView) view.findViewById(R.id.txt_sent_client_name);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + txtSentJobTitle.getText() + "'";
         }
     }
 }

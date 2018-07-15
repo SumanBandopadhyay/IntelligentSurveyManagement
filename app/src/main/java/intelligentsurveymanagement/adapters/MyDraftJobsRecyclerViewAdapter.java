@@ -38,8 +38,9 @@ public class MyDraftJobsRecyclerViewAdapter extends RecyclerView.Adapter<MyDraft
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(Integer.toString(mValues.get(position).getFormid()));
-        holder.mContentView.setText(mValues.get(position).getFormStatus());
+        holder.txtDraftJobId.setText(Integer.toString(mValues.get(position).getFormid()));
+        holder.txtDraftJobTitle.setText(mValues.get(position).getProject());
+        holder.txtDraftClientName.setText(mValues.get(position).getClientName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,20 +61,22 @@ public class MyDraftJobsRecyclerViewAdapter extends RecyclerView.Adapter<MyDraft
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView txtDraftJobId;
+        public final TextView txtDraftJobTitle;
+        public final TextView txtDraftClientName;
         public Form mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            txtDraftJobId = (TextView) view.findViewById(R.id.txt_draft_job_id);
+            txtDraftJobTitle = (TextView) view.findViewById(R.id.txt_draft_job_title);
+            txtDraftClientName = (TextView) view.findViewById(R.id.txt_draft_client_name);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + txtDraftJobTitle.getText() + "'";
         }
     }
 }
