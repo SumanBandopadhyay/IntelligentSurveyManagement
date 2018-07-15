@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.suman.intelligentsurveymanagement.R;
 
 import intelligentsurveymanagement.activities.DigitalFormActivity;
+import intelligentsurveymanagement.utils.DatabaseInitializer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +44,7 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
     private Button btnMSDSNo;
     private Button btnAirMonitoringYes;
     private Button btnAirMonitoringNo;
+    private Button btnSave;
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -94,6 +97,7 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
         btnLiveSystemNo.setOnClickListener(this);
         btnMSDSYes.setOnClickListener(this);
         btnMSDSNo.setOnClickListener(this);
+        btnSave.setOnClickListener(this);
 
         // Inflate the layout for this fragment
         return view;
@@ -101,45 +105,46 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
 
     private void loadDBData() {
 
-        // if ()
-        if (DigitalFormActivity.SELECTEDFORM.isWalked()) {
-            btnWalkedYes.setSelected(true);
-            btnWalkedYes.setBackgroundColor(Color.GREEN);
-            btnWalkedNo.setSelected(false);
-            btnWalkedNo.setBackgroundColor(Color.WHITE);
-        } else {
-            btnWalkedYes.setSelected(false);
-            btnWalkedYes.setBackgroundColor(Color.WHITE);
-            btnWalkedNo.setSelected(true);
-            btnWalkedNo.setBackgroundColor(Color.RED);
-        }
+        if (!DigitalFormActivity.SELECTEDFORM.getFormStatus().equals(DigitalFormActivity.INBOX)) {
+            if (DigitalFormActivity.SELECTEDFORM.isWalked()) {
+                btnWalkedYes.setSelected(true);
+                btnWalkedYes.setBackgroundColor(Color.GREEN);
+            } else {
+                btnWalkedNo.setSelected(true);
+                btnWalkedNo.setBackgroundColor(Color.RED);
+            }
 
-        if (DigitalFormActivity.SELECTEDFORM.isLiveSystem()) {
-            btnLiveSystemYes.setSelected(true);
-            btnLiveSystemYes.setBackgroundColor(Color.GREEN);
-        } else {
-            btnLiveSystemNo.setSelected(true);
-            btnLiveSystemNo.setBackgroundColor(Color.RED);
-        }
+            if (DigitalFormActivity.SELECTEDFORM.isLiveSystem()) {
+                btnLiveSystemYes.setSelected(true);
+                btnLiveSystemYes.setBackgroundColor(Color.GREEN);
+            } else {
+                btnLiveSystemNo.setSelected(true);
+                btnLiveSystemNo.setBackgroundColor(Color.RED);
+            }
 
-        if (DigitalFormActivity.SELECTEDFORM.isTrained()) {
-            btnTrainedYes.setSelected(true);
-            btnTrainedYes.setBackgroundColor(Color.GREEN);
-        } else {
-            btnTrainedNo.setSelected(true);
-            btnTrainedNo.setBackgroundColor(Color.RED);
-        }
+            if (DigitalFormActivity.SELECTEDFORM.isTrained()) {
+                btnTrainedYes.setSelected(true);
+                btnTrainedYes.setBackgroundColor(Color.GREEN);
+            } else {
+                btnTrainedNo.setSelected(true);
+                btnTrainedNo.setBackgroundColor(Color.RED);
+            }
 
-        if (DigitalFormActivity.SELECTEDFORM.isMsds()) {
+            if (DigitalFormActivity.SELECTEDFORM.isMsds()) {
+                btnMSDSYes.setSelected(true);
+                btnMSDSYes.setBackgroundColor(Color.GREEN);
+            } else {
+                btnMSDSNo.setSelected(true);
+                btnMSDSNo.setBackgroundColor(Color.RED);
+            }
 
-        } else {
-
-        }
-
-        if (DigitalFormActivity.SELECTEDFORM.isAirMonitoring()) {
-
-        } else {
-
+            if (DigitalFormActivity.SELECTEDFORM.isAirMonitoring()) {
+                btnAirMonitoringYes.setSelected(true);
+                btnAirMonitoringYes.setBackgroundColor(Color.GREEN);
+            } else {
+                btnAirMonitoringNo.setSelected(true);
+                btnAirMonitoringNo.setBackgroundColor(Color.RED);
+            }
         }
 
     }
@@ -155,6 +160,7 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
         btnMSDSNo = (Button) view.findViewById(R.id.btn_msds_no);
         btnAirMonitoringYes = (Button) view.findViewById(R.id.btn_air_monitoring_yes);
         btnAirMonitoringNo = (Button) view.findViewById(R.id.btn_air_monitoring_no);
+        btnSave = (Button) view.findViewById(R.id.btn_evaluating_work_save);
     }
 
     @Override
@@ -163,51 +169,88 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
             case R.id.btn_walked_yes:
                 btnWalkedYes.setSelected(true);
                 btnWalkedYes.setBackgroundColor(Color.GREEN);
+                btnWalkedNo.setSelected(false);
+                btnWalkedNo.setBackgroundColor(Color.WHITE);
+                DigitalFormActivity.SELECTEDFORM.setWalked(true);
                 break;
 
             case R.id.btn_walked_no:
+                btnWalkedYes.setSelected(false);
+                btnWalkedYes.setBackgroundColor(Color.WHITE);
                 btnWalkedNo.setSelected(true);
                 btnWalkedNo.setBackgroundColor(Color.RED);
+                DigitalFormActivity.SELECTEDFORM.setWalked(false);
                 break;
 
             case R.id.btn_live_system_yes:
                 btnLiveSystemYes.setSelected(true);
                 btnLiveSystemYes.setBackgroundColor(Color.GREEN);
+                btnLiveSystemNo.setSelected(false);
+                btnLiveSystemNo.setBackgroundColor(Color.WHITE);
+                DigitalFormActivity.SELECTEDFORM.setLiveSystem(true);
                 break;
 
             case R.id.btn_live_system_no:
+                btnLiveSystemYes.setSelected(false);
+                btnLiveSystemYes.setBackgroundColor(Color.WHITE);
                 btnLiveSystemNo.setSelected(true);
                 btnLiveSystemNo.setBackgroundColor(Color.RED);
+                DigitalFormActivity.SELECTEDFORM.setLiveSystem(false);
                 break;
 
             case R.id.btn_trained_yes:
                 btnTrainedYes.setSelected(true);
                 btnTrainedYes.setBackgroundColor(Color.GREEN);
+                btnTrainedNo.setSelected(false);
+                btnTrainedNo.setBackgroundColor(Color.WHITE);
+                DigitalFormActivity.SELECTEDFORM.setTrained(true);
                 break;
 
             case R.id.btn_trained_no:
-                btnTrainedNo.setSelected(true);
-                btnTrainedNo.setBackgroundColor(Color.RED);
+                btnTrainedNo.setSelected(false);
+                btnTrainedNo.setBackgroundColor(Color.WHITE);
+                btnTrainedYes.setSelected(true);
+                btnTrainedYes.setBackgroundColor(Color.GREEN);
+                DigitalFormActivity.SELECTEDFORM.setTrained(false);
                 break;
 
             case R.id.btn_msds_yes:
                 btnMSDSYes.setSelected(true);
                 btnMSDSYes.setBackgroundColor(Color.GREEN);
+                btnMSDSNo.setSelected(false);
+                btnMSDSNo.setBackgroundColor(Color.WHITE);
+                DigitalFormActivity.SELECTEDFORM.setMsds(true);
                 break;
 
             case R.id.btn_msds_no:
+                btnMSDSYes.setSelected(false);
+                btnMSDSYes.setBackgroundColor(Color.WHITE);
                 btnMSDSNo.setSelected(true);
                 btnMSDSNo.setBackgroundColor(Color.RED);
+                DigitalFormActivity.SELECTEDFORM.setMsds(false);
                 break;
 
             case R.id.btn_air_monitoring_yes:
                 btnAirMonitoringYes.setSelected(true);
                 btnAirMonitoringYes.setBackgroundColor(Color.GREEN);
+                btnAirMonitoringNo.setSelected(false);
+                btnAirMonitoringNo.setBackgroundColor(Color.WHITE);
+                DigitalFormActivity.SELECTEDFORM.setAirMonitoring(true);
                 break;
 
             case R.id.btn_air_monitoring_no:
+                btnAirMonitoringYes.setSelected(false);
+                btnAirMonitoringYes.setBackgroundColor(Color.WHITE);
                 btnAirMonitoringNo.setSelected(true);
                 btnAirMonitoringNo.setBackgroundColor(Color.RED);
+                DigitalFormActivity.SELECTEDFORM.setAirMonitoring(false);
+                break;
+
+            case R.id.btn_evaluating_work_save:
+                DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
+                DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
+                DigitalFormActivity.initializeLists(getActivity());
+                Toast.makeText(getContext(), "Saved", Toast.LENGTH_LONG).show();
                 break;
         }
     }

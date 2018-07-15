@@ -1,5 +1,7 @@
 package intelligentsurveymanagement.activities;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +22,7 @@ import intelligentsurveymanagement.dummy.LeftPanelContent;
 import intelligentsurveymanagement.entity.Form;
 import intelligentsurveymanagement.executor.AppExecutors;
 import intelligentsurveymanagement.fragments.CustomerSignOffFragment;
+import intelligentsurveymanagement.fragments.DraftJobsFragment;
 import intelligentsurveymanagement.fragments.EquipmentDetailsFragment;
 import intelligentsurveymanagement.fragments.EvaluatingWorkFragment;
 import intelligentsurveymanagement.fragments.FormFragment;
@@ -37,15 +40,23 @@ public class DigitalFormActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         LeftFragment.OnListFragmentInteractionListener,
         SentJobsFragment.OnListFragmentInteractionListener,
-        InboxJobsFragment.OnListFragmentInteractionListener {
+        InboxJobsFragment.OnListFragmentInteractionListener,
+        DraftJobsFragment.OnListFragmentInteractionListener {
 
+    public static final String DRAFT = "draft";
+    public static final String INBOX = "inbox";
+    public static final String SENT = "sent";
     public static List<Form> ALLFORMS;
     public static List<Form> SENTFORMS;
     public static List<Form> INBOXFORMS;
+    public static List<Form> DRAFTFORMS;
     public static Form SELECTEDFORM;
 
     public static AppDatabase appDatabase;
     public static AppExecutors appExecutors;
+
+    private static SharedPreferences sharedPreferences;
+    private static boolean firstTimeAppLaunch;
 
     private static final String TAG = "DigitalForm";
 
@@ -58,26 +69,11 @@ public class DigitalFormActivity extends AppCompatActivity
 
         appExecutors = new AppExecutors();
 
-        SharedPreferences sharedPreferences = this.getPreferences(MODE_PRIVATE);
-        boolean firstTimeAppLaunch = sharedPreferences.getBoolean(getString(R.string.firstTimeAppLaunch), true);
+        sharedPreferences = this.getPreferences(MODE_PRIVATE);
+        firstTimeAppLaunch = sharedPreferences.getBoolean(getString(R.string.firstTimeAppLaunch), true);
         Log.e(TAG, firstTimeAppLaunch+"");
 
-        if (firstTimeAppLaunch) {
-            DatabaseInitializer.populateAsync(appDatabase, appExecutors, getApplicationContext());
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean(getString(R.string.firstTimeAppLaunch), false);
-            editor.commit();
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        DatabaseInitializer.getAllJobs(appDatabase, appExecutors, getApplicationContext());
-        DatabaseInitializer.getSentJobs(appDatabase, appExecutors, getApplicationContext());
-        DatabaseInitializer.getInboxJobs(appDatabase, appExecutors, getApplicationContext());
+        initializeLists(this);
 
 //        Log.e(TAG, SENTFORMS.size()+"");
 //        Log.e(TAG, INBOXFORMS.size()+"");
@@ -99,6 +95,28 @@ public class DigitalFormActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public static void initializeLists(Activity activity) {
+        Log.e(TAG, "Initialize List");
+
+        if (firstTimeAppLaunch) {
+            DatabaseInitializer.populateAsync(appDatabase, appExecutors, activity.getApplicationContext());
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(activity.getString(R.string.firstTimeAppLaunch), false);
+            editor.commit();
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        DatabaseInitializer.getAllJobs(appDatabase, appExecutors, activity.getApplicationContext());
+        DatabaseInitializer.getSentJobs(appDatabase, appExecutors, activity.getApplicationContext());
+        DatabaseInitializer.getInboxJobs(appDatabase, appExecutors, activity.getApplicationContext());
+        DatabaseInitializer.getDraftJobs(appDatabase, appExecutors, activity.getApplicationContext());
     }
 
     @Override

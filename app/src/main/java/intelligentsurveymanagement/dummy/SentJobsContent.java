@@ -18,12 +18,12 @@ public class SentJobsContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<Form> ITEMS = DigitalFormActivity.SENTFORMS;
+    public static List<Form> ITEMS = DigitalFormActivity.SENTFORMS;
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<Integer, Form> ITEM_MAP = new HashMap<Integer, Form>();
+    public static Map<Integer, Form> ITEM_MAP = new HashMap<Integer, Form>();
 
     static {
         // Add some sample items.
@@ -35,7 +35,8 @@ public class SentJobsContent {
 
     private static void addItem() {
 //        ITEMS.add(item);
-        for (Form form: ITEMS) {
+        ITEM_MAP = new HashMap<Integer, Form>();
+        for (Form form: DigitalFormActivity.SENTFORMS) {
             ITEM_MAP.put(form.getFormid(), form);
         }
     }

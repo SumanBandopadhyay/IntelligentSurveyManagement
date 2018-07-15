@@ -11,8 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.suman.intelligentsurveymanagement.R;
+
+import intelligentsurveymanagement.activities.DigitalFormActivity;
 import intelligentsurveymanagement.adapters.MyInboxFormRecyclerViewAdapter;
-import intelligentsurveymanagement.dummy.InboxJobsContent;
 import intelligentsurveymanagement.entity.Form;
 
 /**
@@ -25,6 +26,7 @@ public class InboxJobsFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    public static final String TAG = "InboxJobs";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
@@ -69,7 +71,7 @@ public class InboxJobsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyInboxFormRecyclerViewAdapter(InboxJobsContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyInboxFormRecyclerViewAdapter(DigitalFormActivity.INBOXFORMS, mListener));
         }
         return view;
     }

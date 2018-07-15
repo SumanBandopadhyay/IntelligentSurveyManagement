@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.example.suman.intelligentsurveymanagement.R;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 
+import intelligentsurveymanagement.activities.DigitalFormActivity;
+import intelligentsurveymanagement.utils.DatabaseInitializer;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -78,6 +81,11 @@ public class CustomerSignOffFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(),"Data submitted successfully !",Toast.LENGTH_LONG).show();
+                if (DigitalFormActivity.SELECTEDFORM.getFormStatus().equals(DigitalFormActivity.INBOX) || DigitalFormActivity.SELECTEDFORM.getFormStatus().equals(DigitalFormActivity.DRAFT)) {
+                    DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.SENT);
+                }
+                DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
+                DigitalFormActivity.initializeLists(getActivity());
             }
         });
         return view;

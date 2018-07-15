@@ -160,7 +160,9 @@ public class EquipmentDetailsFragment extends Fragment {
 
             DigitalFormActivity.SELECTEDFORM.setScanContent(content);
             DigitalFormActivity.SELECTEDFORM.setScanFormat(format);
+            DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
             DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
+            DigitalFormActivity.initializeLists(getActivity());
 
         }else{
             Toast toast = Toast.makeText(getContext(),"No scan data received!", Toast.LENGTH_SHORT);

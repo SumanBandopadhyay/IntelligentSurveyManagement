@@ -67,6 +67,16 @@ public class DatabaseInitializer {
         });
     }
 
+    public static void getDraftJobs(AppDatabase db, AppExecutors executors, Context context) {
+        executors.getDiskIO().execute(() -> {
+            // Add delay to simulate long running Action
+            // addDelay();
+            // Generate the data for pre-population
+            AppDatabase database = AppDatabase.getInstance(context.getApplicationContext());
+            DigitalFormActivity.DRAFTFORMS = database.formDao().getDraftForms();
+        });
+    }
+
     private static void addDelay() {
         try {
             Thread.sleep(4000);
@@ -78,16 +88,15 @@ public class DatabaseInitializer {
     private static void populateWithTestData(AppDatabase db) {
         Form form = new Form();
         form.setFormid(1);
-        form.setClientName("Client 1");
-        form.setFormStatus("sent");
+        form.setFormStatus(DigitalFormActivity.INBOX);
         addForm(db, form);
         form = new Form();
         form.setFormid(2);
-        form.setFormStatus("sent");
+        form.setFormStatus(DigitalFormActivity.INBOX);
         addForm(db, form);
         form = new Form();
         form.setFormid(3);
-        form.setFormStatus("sent");
+        form.setFormStatus(DigitalFormActivity.INBOX);
         addForm(db, form);
 
         List<Form> forms = db.formDao().getAllForms();

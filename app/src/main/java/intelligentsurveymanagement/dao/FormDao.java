@@ -22,6 +22,9 @@ public interface FormDao {
     @Query("SELECT * FROM forms where form_status = 'inbox'")
     List<Form> getInboxForms();
 
+    @Query("SELECT * FROM forms where form_status = 'draft'")
+    List<Form> getDraftForms();
+
     @Query("SELECT * FROM forms WHERE form_id = :id")
     Form getFormById(int id);
 

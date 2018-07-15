@@ -97,7 +97,18 @@ public class HomeFragment extends Fragment {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.main_frame, InboxJobsFragment.newInstance());
                 //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
-                transaction.addToBackStack(SentJobsFragment.TAG);
+                transaction.addToBackStack(InboxJobsFragment.TAG);
+                transaction.commit();
+            }
+        });
+
+        draftCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.main_frame, DraftJobsFragment.newInstance());
+                //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
+                transaction.addToBackStack(DraftJobsFragment.TAG);
                 transaction.commit();
             }
         });

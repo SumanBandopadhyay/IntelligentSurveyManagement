@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.example.suman.intelligentsurveymanagement.R;
 
 import intelligentsurveymanagement.activities.DigitalFormActivity;
-import intelligentsurveymanagement.adapters.MySentJobsFragmentRecyclerViewAdapter;
+import intelligentsurveymanagement.adapters.MyDraftJobsRecyclerViewAdapter;
 import intelligentsurveymanagement.entity.Form;
 
 /**
@@ -22,27 +22,26 @@ import intelligentsurveymanagement.entity.Form;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class SentJobsFragment extends Fragment {
+public class DraftJobsFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    public static final String TAG = "DraftJobs";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-
-    public static final String TAG = "SentJobs";
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public SentJobsFragment() {
+    public DraftJobsFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static SentJobsFragment newInstance() {
-        SentJobsFragment fragment = new SentJobsFragment();
+    public static DraftJobsFragment newInstance() {
+        DraftJobsFragment fragment = new DraftJobsFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, 1);
         fragment.setArguments(args);
@@ -61,7 +60,7 @@ public class SentJobsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sentjobsfragment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_draftjobs_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -72,7 +71,7 @@ public class SentJobsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MySentJobsFragmentRecyclerViewAdapter(DigitalFormActivity.SENTFORMS, mListener));
+            recyclerView.setAdapter(new MyDraftJobsRecyclerViewAdapter(DigitalFormActivity.DRAFTFORMS, mListener));
         }
         return view;
     }

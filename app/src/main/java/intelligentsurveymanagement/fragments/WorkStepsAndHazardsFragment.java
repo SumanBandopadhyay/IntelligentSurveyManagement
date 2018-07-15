@@ -211,7 +211,9 @@ public class WorkStepsAndHazardsFragment extends Fragment {
             //imageBitmap.recycle();
 
             DigitalFormActivity.SELECTEDFORM.setImage(bytes);
+            DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
             DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
+            DigitalFormActivity.initializeLists(getActivity());
 //            imageEditPad.setLayoutParams(new FrameLayout.LayoutParams(imageBitmap.getWidth(), imageBitmap.getHeight()));
 //            imageEditPad.setSignatureBitmap(imageBitmap);
 //            Toast.makeText(getContext(), "Width : " + imageBitmap.getWidth() + ", Height : " + imageBitmap.getHeight(), Toast.LENGTH_LONG).show();
