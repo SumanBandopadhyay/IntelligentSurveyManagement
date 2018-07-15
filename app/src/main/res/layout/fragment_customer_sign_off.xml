@@ -46,7 +46,8 @@
                 android:layout_height="2dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="16dp"
-                android:background="#DD2476"
+                android:layout_marginBottom="8dp"
+                android:background="@color/black_overlay"
                 android:paddingLeft="12dp"/>
 
             <TextView
@@ -55,7 +56,6 @@
                 android:text="Start Rating our Service"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:layout_marginTop="12dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"/>
 
@@ -66,7 +66,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="#DD2476"
+                android:background="@color/black_overlay"
                 android:paddingLeft="12dp"/>
 
             <TextView
@@ -81,13 +81,79 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal">
-                <RatingBar android:id="@+id/ratingbar"
+                <RatingBar android:id="@+id/ratingbar1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:numStars="5"
-                    android:stepSize="0.5"
-                    android:rating="2.5"
+                    android:stepSize="1"
+                    android:rating="2"
+                    android:theme="@style/RatingBar"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Do service representatives adhere to professional standards of conduct?"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+                <RatingBar android:id="@+id/ratingbar2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:numStars="5"
+                    android:stepSize="1"
+                    android:rating="2"
+                    android:theme="@style/RatingBar"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Were the service representattives well supervised?"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+                <RatingBar android:id="@+id/ratingbar3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:numStars="5"
+                    android:stepSize="1"
+                    android:rating="2"
+                    android:theme="@style/RatingBar"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Overall, how satisfied am I with the service?"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+                <RatingBar android:id="@+id/ratingbar4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:numStars="5"
+                    android:stepSize="1"
+                    android:rating="2"
                     android:theme="@style/RatingBar"/>
             </LinearLayout>
 

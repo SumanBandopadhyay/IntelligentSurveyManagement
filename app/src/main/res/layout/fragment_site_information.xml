@@ -19,18 +19,76 @@
             android:paddingBottom="16dp">
 
             <TextView
-                android:text="@string/form_id"
+                android:text="@string/job_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="16dp"/>
 
             <TextView
-                android:id="@+id/form_id"
-                android:text="ID"
+                android:id="@+id/job_id"
+                android:text="Job Id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:paddingLeft="12dp"
+                android:padding="12dp"/>
+
+            <TextView
+
+                android:text="@string/client_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/txt_client_name"
+                android:text="Xaviers Mathew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:paddingLeft="12dp"
+                android:padding="12dp"/>
+
+            <TextView
+                android:text="@string/job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/txt_job"
+                android:text="Maintenance of Buildings and Institution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:paddingLeft="12dp"
+                android:padding="12dp"/>
+
+            <TextView
+                android:text="@string/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"/>
+
+            <EditText
+                android:id="@+id/edt_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                android:background="#dfdcdc"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_marginTop="10dp"
+                android:textSize="16dp"
+                android:paddingLeft="12dp"
+                android:padding="12dp"/>
 
             <TextView
                 android:text="@string/date_time"
@@ -64,71 +122,6 @@
                 android:textSize="16dp"
                 android:paddingLeft="12dp"
                 android:padding="12dp"/>
-
-            <!--EditText
-                android:id="@+id/edt_inspector"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:paddingLeft="12dp"
-                android:padding="12dp"/-->
-
-            <TextView
-                android:text="@string/client_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16dp"/>
-
-            <EditText
-                android:id="@+id/edt_client_name"
-                android:hint="Xaviers Mathew"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:paddingLeft="12dp"
-                android:padding="12dp"/>
-
-            <TextView
-                android:text="@string/job"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16dp"/>
-
-            <EditText
-                android:id="@+id/edt_job"
-                android:hint="Maintenance of Buildings and Institution"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:paddingLeft="12dp"
-                android:padding="12dp"/>
-
-            <TextView
-                android:text="@string/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16dp"/>
-
-            <EditText
-                android:id="@+id/edt_description"
-                android:hint="@string/edt_description"
-                android:inputType="textMultiLine"
-                android:scrollbars="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:paddingLeft="12dp"
-                android:padding="12dp"/>
-
-            <!--TextView
-                android:text="Job Location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16dp"/-->
 
             <TextView
                 android:text="Job Location"

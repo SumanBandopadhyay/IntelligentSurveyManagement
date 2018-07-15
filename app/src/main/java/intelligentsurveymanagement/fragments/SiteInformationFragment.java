@@ -70,8 +70,8 @@ public class SiteInformationFragment extends Fragment implements LocationListene
     private TextView txtFormId;
     private EditText edtDateTime;
     private EditText edtInspector;
-    private EditText edtClientName;
-    private EditText edtJob;
+    private TextView txtClientName;
+    private TextView txtJob;
     private EditText edtDescription;
     private Button btnSave;
 
@@ -192,20 +192,20 @@ public class SiteInformationFragment extends Fragment implements LocationListene
         txtFormId.setText(Integer.toString(DigitalFormActivity.SELECTEDFORM.getFormid()));
         edtDateTime.setText(DigitalFormActivity.SELECTEDFORM.getDateTime());
         edtInspector.setText(DigitalFormActivity.SELECTEDFORM.getInspector());
-        edtClientName.setText(DigitalFormActivity.SELECTEDFORM.getClientName());
-        edtJob.setText(DigitalFormActivity.SELECTEDFORM.getProject());
+        txtClientName.setText(DigitalFormActivity.SELECTEDFORM.getClientName());
+        txtJob.setText(DigitalFormActivity.SELECTEDFORM.getProject());
         edtDescription.setText(DigitalFormActivity.SELECTEDFORM.getJobDescription());
         txtAddress.setText(DigitalFormActivity.SELECTEDFORM.getJobLocation());
     }
 
     private void initializeViews(View view) {
         txtAddress = (TextView) view.findViewById(R.id.txt_address);
-        txtFormId = (TextView) view.findViewById(R.id.form_id);
+        txtFormId = (TextView) view.findViewById(R.id.job_id);
         mapView = (MapView) view.findViewById(R.id.mapview);
         edtDateTime = (EditText) view.findViewById(R.id.edt_date_time);
         edtInspector = (EditText) view.findViewById(R.id.edt_inspector);
-        edtClientName = (EditText) view.findViewById(R.id.edt_client_name);
-        edtJob = (EditText) view.findViewById(R.id.edt_job);
+        txtClientName = (TextView) view.findViewById(R.id.txt_client_name);
+        txtJob = (TextView) view.findViewById(R.id.txt_job);
         edtDescription = (EditText) view.findViewById(R.id.edt_description);
         btnSave = (Button) view.findViewById(R.id.btn_site_information_save);
     }
@@ -326,10 +326,10 @@ public class SiteInformationFragment extends Fragment implements LocationListene
 
     @Override
     public void onClick(View view) {
-        DigitalFormActivity.SELECTEDFORM.setClientName(edtClientName.getText().toString());
+        DigitalFormActivity.SELECTEDFORM.setClientName(txtClientName.getText().toString());
         DigitalFormActivity.SELECTEDFORM.setDateTime(edtDateTime.getText().toString());
         DigitalFormActivity.SELECTEDFORM.setInspector(edtInspector.getText().toString());
-        DigitalFormActivity.SELECTEDFORM.setProject(edtJob.getText().toString());
+        DigitalFormActivity.SELECTEDFORM.setProject(txtJob.getText().toString());
         DigitalFormActivity.SELECTEDFORM.setJobDescription(edtDescription.getText().toString());
         DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
         DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
