@@ -65,6 +65,7 @@ public class DigitalFormActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_digital_form);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Jiffy");
         setSupportActionBar(toolbar);
 
         appExecutors = new AppExecutors();
@@ -155,13 +156,14 @@ public class DigitalFormActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_digital_form) {
+        /*if (id == R.id.nav_digital_form) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.main_frame, FormFragment.newInstance("intelligentsurveymanagement", "test2"));
             //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
             transaction.addToBackStack(null);
             transaction.commit();
-        } else if (id == R.id.nav_home) {
+        } else */
+        if (id == R.id.nav_home) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.main_frame, HomeFragment.newInstance("intelligentsurveymanagement", "test2"));
             //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
