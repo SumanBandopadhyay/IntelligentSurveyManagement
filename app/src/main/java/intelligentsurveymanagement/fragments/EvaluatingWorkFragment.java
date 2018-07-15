@@ -40,6 +40,8 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
     private Button btnTrainedNo;
     private Button btnMSDSYes;
     private Button btnMSDSNo;
+    private Button btnAirMonitoringYes;
+    private Button btnAirMonitoringNo;
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -85,6 +87,13 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
         loadDBData();
 
         btnWalkedYes.setOnClickListener(this);
+        btnWalkedNo.setOnClickListener(this);
+        btnTrainedYes.setOnClickListener(this);
+        btnTrainedNo.setOnClickListener(this);
+        btnLiveSystemYes.setOnClickListener(this);
+        btnLiveSystemNo.setOnClickListener(this);
+        btnMSDSYes.setOnClickListener(this);
+        btnMSDSNo.setOnClickListener(this);
 
         // Inflate the layout for this fragment
         return view;
@@ -92,10 +101,15 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
 
     private void loadDBData() {
 
+        // if ()
         if (DigitalFormActivity.SELECTEDFORM.isWalked()) {
             btnWalkedYes.setSelected(true);
             btnWalkedYes.setBackgroundColor(Color.GREEN);
+            btnWalkedNo.setSelected(false);
+            btnWalkedNo.setBackgroundColor(Color.WHITE);
         } else {
+            btnWalkedYes.setSelected(false);
+            btnWalkedYes.setBackgroundColor(Color.WHITE);
             btnWalkedNo.setSelected(true);
             btnWalkedNo.setBackgroundColor(Color.RED);
         }
@@ -116,6 +130,18 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
             btnTrainedNo.setBackgroundColor(Color.RED);
         }
 
+        if (DigitalFormActivity.SELECTEDFORM.isMsds()) {
+
+        } else {
+
+        }
+
+        if (DigitalFormActivity.SELECTEDFORM.isAirMonitoring()) {
+
+        } else {
+
+        }
+
     }
 
     private void initializeViews(View view) {
@@ -127,6 +153,8 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
         btnTrainedNo = (Button) view.findViewById(R.id.btn_trained_no);
         btnMSDSYes = (Button) view.findViewById(R.id.btn_msds_yes);
         btnMSDSNo = (Button) view.findViewById(R.id.btn_msds_no);
+        btnAirMonitoringYes = (Button) view.findViewById(R.id.btn_air_monitoring_yes);
+        btnAirMonitoringNo = (Button) view.findViewById(R.id.btn_air_monitoring_no);
     }
 
     @Override
@@ -139,7 +167,7 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
 
             case R.id.btn_walked_no:
                 btnWalkedNo.setSelected(true);
-                btnWalkedNo.setBackgroundColor(Color.GREEN);
+                btnWalkedNo.setBackgroundColor(Color.RED);
                 break;
 
             case R.id.btn_live_system_yes:
@@ -149,7 +177,7 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
 
             case R.id.btn_live_system_no:
                 btnLiveSystemNo.setSelected(true);
-                btnLiveSystemNo.setBackgroundColor(Color.GREEN);
+                btnLiveSystemNo.setBackgroundColor(Color.RED);
                 break;
 
             case R.id.btn_trained_yes:
@@ -159,7 +187,7 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
 
             case R.id.btn_trained_no:
                 btnTrainedNo.setSelected(true);
-                btnTrainedNo.setBackgroundColor(Color.GREEN);
+                btnTrainedNo.setBackgroundColor(Color.RED);
                 break;
 
             case R.id.btn_msds_yes:
@@ -169,7 +197,17 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
 
             case R.id.btn_msds_no:
                 btnMSDSNo.setSelected(true);
-                btnMSDSNo.setBackgroundColor(Color.GREEN);
+                btnMSDSNo.setBackgroundColor(Color.RED);
+                break;
+
+            case R.id.btn_air_monitoring_yes:
+                btnAirMonitoringYes.setSelected(true);
+                btnAirMonitoringYes.setBackgroundColor(Color.GREEN);
+                break;
+
+            case R.id.btn_air_monitoring_no:
+                btnAirMonitoringNo.setSelected(true);
+                btnAirMonitoringNo.setBackgroundColor(Color.RED);
                 break;
         }
     }

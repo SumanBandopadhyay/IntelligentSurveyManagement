@@ -50,8 +50,8 @@ public class Form {
     @ColumnInfo (name = "ppe")
     private boolean ppe;
 
-    @ColumnInfo (name = "image")
-    private String image;
+    @ColumnInfo (name = "image", typeAffinity = ColumnInfo.BLOB)
+    private byte[] image;
 
     @ColumnInfo (name = "scan_format")
     private String scanFormat;
@@ -199,11 +199,11 @@ public class Form {
         this.ppe = ppe;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

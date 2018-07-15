@@ -161,6 +161,7 @@
                 android:padding="10dp">
 
                 <Button
+                    android:id="@+id/btn_air_monitoring_yes"
                     android:text="Yes"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
@@ -168,6 +169,7 @@
                     android:textSize="14dp" />
 
                 <Button
+                    android:id="@+id/btn_air_monitoring_no"
                     android:text="No"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"

@@ -1,12 +1,15 @@
 package intelligentsurveymanagement.fragments;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableContainer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,6 +26,14 @@ import android.widget.VideoView;
 
 import com.example.suman.intelligentsurveymanagement.R;
 import com.github.gcacace.signaturepad.views.SignaturePad;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+import intelligentsurveymanagement.activities.DigitalFormActivity;
+import intelligentsurveymanagement.utils.DatabaseInitializer;
 //import com.google.zxing.integration.android.IntentIntegrator;
 
 
@@ -103,6 +114,13 @@ public class WorkStepsAndHazardsFragment extends Fragment {
         btnEditImage = (Button) view.findViewById(R.id.btn_edit_image);
         //btnSaveData = (Button) view.findViewById(R.id.btn_save_data);
         imageEditPad = (SignaturePad) view.findViewById(R.id.image_edit_pad);
+
+        if (DigitalFormActivity.SELECTEDFORM.getImage() != null) {
+            Drawable image = new BitmapDrawable(getResources(),BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
+            imageEditPad.setBackground(image);
+//            imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
+        }
+
 
         //btnCaptureVid = (Button) view.findViewById(R.id.btn_capture_video);
         //vidCapturedVid = (VideoView) view.findViewById(R.id.vid_captured_vid);
@@ -186,10 +204,18 @@ public class WorkStepsAndHazardsFragment extends Fragment {
 
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get(WorkStepsAndHazardsFragment.DATA);
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] bytes = byteArrayOutputStream.toByteArray();
+            //imageBitmap.recycle();
+
+            DigitalFormActivity.SELECTEDFORM.setImage(bytes);
+            DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
 //            imageEditPad.setLayoutParams(new FrameLayout.LayoutParams(imageBitmap.getWidth(), imageBitmap.getHeight()));
 //            imageEditPad.setSignatureBitmap(imageBitmap);
 //            Toast.makeText(getContext(), "Width : " + imageBitmap.getWidth() + ", Height : " + imageBitmap.getHeight(), Toast.LENGTH_LONG).show();
-            Drawable drawable = new BitmapDrawable(imageBitmap);
+            Drawable drawable = new BitmapDrawable(getResources(),imageBitmap);
             imageEditPad.setBackground(drawable);
 //            Bitmap mutableBitmap = imageBitmap.copy(Bitmap.Config.ARGB_8888, true);
 //            imageEditPad.draw(new Canvas(mutableBitmap));

@@ -45,6 +45,7 @@ public class DigitalFormActivity extends AppCompatActivity
     public static Form SELECTEDFORM;
 
     public static AppDatabase appDatabase;
+    public static AppExecutors appExecutors;
 
     private static final String TAG = "DigitalForm";
 
@@ -55,12 +56,14 @@ public class DigitalFormActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        appExecutors = new AppExecutors();
+
         SharedPreferences sharedPreferences = this.getPreferences(MODE_PRIVATE);
         boolean firstTimeAppLaunch = sharedPreferences.getBoolean(getString(R.string.firstTimeAppLaunch), true);
         Log.e(TAG, firstTimeAppLaunch+"");
 
         if (firstTimeAppLaunch) {
-            DatabaseInitializer.populateAsync(appDatabase, new AppExecutors(), getApplicationContext());
+            DatabaseInitializer.populateAsync(appDatabase, appExecutors, getApplicationContext());
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean(getString(R.string.firstTimeAppLaunch), false);
             editor.commit();
@@ -72,9 +75,9 @@ public class DigitalFormActivity extends AppCompatActivity
             }
         }
 
-        DatabaseInitializer.getAllJobs(appDatabase, new AppExecutors(), getApplicationContext());
-        DatabaseInitializer.getSentJobs(appDatabase, new AppExecutors(), getApplicationContext());
-        DatabaseInitializer.getInboxJobs(appDatabase, new AppExecutors(), getApplicationContext());
+        DatabaseInitializer.getAllJobs(appDatabase, appExecutors, getApplicationContext());
+        DatabaseInitializer.getSentJobs(appDatabase, appExecutors, getApplicationContext());
+        DatabaseInitializer.getInboxJobs(appDatabase, appExecutors, getApplicationContext());
 
 //        Log.e(TAG, SENTFORMS.size()+"");
 //        Log.e(TAG, INBOXFORMS.size()+"");

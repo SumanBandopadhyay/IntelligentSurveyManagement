@@ -13,16 +13,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.suman.intelligentsurveymanagement.R;
 import intelligentsurveymanagement.activities.DigitalFormActivity;
+import intelligentsurveymanagement.utils.DatabaseInitializer;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
@@ -42,7 +46,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class SiteInformationFragment extends Fragment implements com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class SiteInformationFragment extends Fragment implements LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -69,6 +73,7 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
     private EditText edtClientName;
     private EditText edtJob;
     private EditText edtDescription;
+    private Button btnSave;
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
@@ -178,6 +183,8 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
         mapView.onResume();
         MapsInitializer.initialize(getActivity().getApplicationContext());
 
+        btnSave.setOnClickListener(this);
+
         return view;
     }
 
@@ -200,6 +207,7 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
         edtClientName = (EditText) view.findViewById(R.id.edt_client_name);
         edtJob = (EditText) view.findViewById(R.id.edt_job);
         edtDescription = (EditText) view.findViewById(R.id.edt_description);
+        btnSave = (Button) view.findViewById(R.id.btn_site_information_save);
     }
 
     @Override
@@ -295,35 +303,6 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
                         }
                     });
 
-//            if (location == null) {
-//                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-//
-//            } else {
-//                //If everything went fine lets get latitude and longitude
-//                latitude = location.getLatitude();
-//                longitude = location.getLongitude();
-//
-//                //Toast.makeText(getContext(), latitude + " WORKS " + longitude + "", Toast.LENGTH_LONG).show();
-//
-//                mapView.getMapAsync(new OnMapReadyCallback() {
-//                    @Override
-//                    public void onMapReady(GoogleMap map) {
-//                        googleMap = map;
-//
-//                        LatLng loc = new LatLng(latitude, longitude);
-//                        googleMap.addMarker(new MarkerOptions().position(loc).title("Current Location"));
-//
-//                        CameraPosition cameraPosition = new CameraPosition.Builder().target(loc).zoom(12).build();
-//                        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-//                    }
-//                });
-//            }
-
-//            String lat = latitude + "";
-//            String lon = longitude + "";
-            // txtLat.setText(lat);
-            //txtLon.setText(lon);
-
         }
     }
 
@@ -343,6 +322,17 @@ public class SiteInformationFragment extends Fragment implements com.google.andr
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        DigitalFormActivity.SELECTEDFORM.setClientName(edtClientName.getText().toString());
+        DigitalFormActivity.SELECTEDFORM.setDateTime(edtDateTime.getText().toString());
+        DigitalFormActivity.SELECTEDFORM.setInspector(edtInspector.getText().toString());
+        DigitalFormActivity.SELECTEDFORM.setProject(edtJob.getText().toString());
+        DigitalFormActivity.SELECTEDFORM.setJobDescription(edtDescription.getText().toString());
+        DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
+        Toast.makeText(getContext(), "Saved", Toast.LENGTH_LONG).show();
     }
 
 //    // TODO: Rename method, update argument and hook method into UI event

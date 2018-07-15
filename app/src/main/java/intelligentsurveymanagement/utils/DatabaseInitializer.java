@@ -36,6 +36,16 @@ public class DatabaseInitializer {
         });
     }
 
+    public static void updateJob(@NonNull final AppDatabase db, AppExecutors executors, Context context, Form form) {
+        executors.getDiskIO().execute(() -> {
+            // Add delay to simulate long running Action
+            // addDelay();
+            // Generate the data for pre-population
+            AppDatabase database = AppDatabase.getInstance(context.getApplicationContext());
+            database.formDao().updateForm(form);
+        });
+    }
+
     public static void getSentJobs(@NonNull final AppDatabase db, AppExecutors executors, Context context) {
         executors.getDiskIO().execute(() -> {
             // Add delay to simulate long running Action
