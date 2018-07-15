@@ -30,7 +30,89 @@
                 android:id="@+id/edt_customer_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"/>
+                android:minLines="1"
+                android:textSize="16dp"
+                android:background="#dfdcdc"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_marginTop="10dp"
+                android:scrollbars="vertical"/>
+
+            <View
+                android:id="@+id/view_seperator0"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="16dp"
+                android:background="#DD2476"
+                android:paddingLeft="12dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start Rating our Service"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"/>
+
+            <View
+                android:id="@+id/view_seperator1"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#DD2476"
+                android:paddingLeft="12dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="How well trained were the service representatives?"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+                <RatingBar android:id="@+id/ratingbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:rating="2.5"
+                    android:theme="@style/RatingBar"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comment"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"/>
+
+            <EditText
+                android:id="@+id/edt_customer_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                android:background="#dfdcdc"
+                android:textSize="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -41,36 +123,59 @@
                 android:layout_marginTop="12dp"/>
 
             <View
-                android:id="@+id/view_seperator1"
-                android:layout_width="fill_parent"
-                android:layout_height="2dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="#DD2476"
-                android:paddingLeft="12dp"/>
-
-            <com.github.gcacace.signaturepad.views.SignaturePad
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:id="@+id/signature_pad"/>
-
-            <View
                 android:id="@+id/view_seperator2"
                 android:layout_width="fill_parent"
                 android:layout_height="2dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="#DD2476"
+                android:paddingLeft="12dp"/>
+
+            <com.github.gcacace.signaturepad.views.SignaturePad
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/signature_pad"/>
+
+            <View
+                android:id="@+id/view_seperator3"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
                 android:background="#DD2476"
                 android:paddingRight="12dp"/>
 
-            <Button
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_clear_button"
+                    android:text="Clear"
+                    android:layout_weight="1"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="#DD2476"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_submit"
+                    android:text="Submit"
+                    android:layout_weight="1"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="#DD2476"/>
+            </LinearLayout>
+
+            <!--Button
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Submit Data"
-                android:backgroundTint="#DD2476" />
+                android:backgroundTint="#DD2476" /-->
 
         </LinearLayout>
     </ScrollView>

@@ -37,6 +37,8 @@ public class CustomerSignOffFragment extends Fragment {
     private EditText edtCustomerName;
     private SignaturePad signaturePad;
     private Button btnSubmitData;
+    //private Button btnSave;
+    private Button btnClear;
 
     public CustomerSignOffFragment() {
         // Required empty public constructor
@@ -76,6 +78,38 @@ public class CustomerSignOffFragment extends Fragment {
         edtCustomerName = (EditText) view.findViewById(R.id.edt_customer_name);
         signaturePad = (SignaturePad) view.findViewById(R.id.signature_pad);
         btnSubmitData = (Button) view.findViewById(R.id.btn_submit);
+        //btnSave = (Button) view.findViewById(R.id.btn_save_button);
+        btnClear = (Button) view.findViewById(R.id.btn_clear_button);
+
+        //disable both buttons at start
+        btnSubmitData.setEnabled(false);
+        btnClear.setEnabled(false);
+
+        signaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
+            @Override
+            public void onStartSigning() {
+
+            }
+
+            @Override
+            public void onSigned() {
+                btnSubmitData.setEnabled(true);
+                btnClear.setEnabled(true);
+            }
+
+            @Override
+            public void onClear() {
+                btnSubmitData.setEnabled(false);
+                btnClear.setEnabled(false);
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signaturePad.clear();
+            }
+        });
 
         btnSubmitData.setOnClickListener(new View.OnClickListener() {
             @Override
