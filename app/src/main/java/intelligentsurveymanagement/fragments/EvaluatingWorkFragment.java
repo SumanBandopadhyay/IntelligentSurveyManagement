@@ -44,6 +44,8 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
     private Button btnMSDSNo;
     private Button btnAirMonitoringYes;
     private Button btnAirMonitoringNo;
+    private Button btnWorkPermitsYes;
+    private Button btnWorkPermitsNo;
     private Button btnSave;
 
 //    private OnFragmentInteractionListener mListener;
@@ -107,43 +109,39 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
 
         if (!DigitalFormActivity.SELECTEDFORM.getFormStatus().equals(DigitalFormActivity.INBOX)) {
             if (DigitalFormActivity.SELECTEDFORM.isWalked()) {
-                btnWalkedYes.setSelected(true);
                 btnWalkedYes.setBackgroundColor(Color.GREEN);
             } else {
-                btnWalkedNo.setSelected(true);
                 btnWalkedNo.setBackgroundColor(Color.RED);
             }
 
             if (DigitalFormActivity.SELECTEDFORM.isLiveSystem()) {
-                btnLiveSystemYes.setSelected(true);
                 btnLiveSystemYes.setBackgroundColor(Color.GREEN);
             } else {
-                btnLiveSystemNo.setSelected(true);
                 btnLiveSystemNo.setBackgroundColor(Color.RED);
             }
 
             if (DigitalFormActivity.SELECTEDFORM.isTrained()) {
-                btnTrainedYes.setSelected(true);
                 btnTrainedYes.setBackgroundColor(Color.GREEN);
             } else {
-                btnTrainedNo.setSelected(true);
                 btnTrainedNo.setBackgroundColor(Color.RED);
             }
 
             if (DigitalFormActivity.SELECTEDFORM.isMsds()) {
-                btnMSDSYes.setSelected(true);
                 btnMSDSYes.setBackgroundColor(Color.GREEN);
             } else {
-                btnMSDSNo.setSelected(true);
                 btnMSDSNo.setBackgroundColor(Color.RED);
             }
 
             if (DigitalFormActivity.SELECTEDFORM.isAirMonitoring()) {
-                btnAirMonitoringYes.setSelected(true);
                 btnAirMonitoringYes.setBackgroundColor(Color.GREEN);
             } else {
-                btnAirMonitoringNo.setSelected(true);
                 btnAirMonitoringNo.setBackgroundColor(Color.RED);
+            }
+
+            if (DigitalFormActivity.SELECTEDFORM.isWorkPermits()) {
+                btnWorkPermitsYes.setBackgroundColor(Color.GREEN);
+            } else {
+                btnWorkPermitsNo.setBackgroundColor(Color.RED);
             }
         }
 
@@ -160,6 +158,8 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
         btnMSDSNo = (Button) view.findViewById(R.id.btn_msds_no);
         btnAirMonitoringYes = (Button) view.findViewById(R.id.btn_air_monitoring_yes);
         btnAirMonitoringNo = (Button) view.findViewById(R.id.btn_air_monitoring_no);
+        btnWorkPermitsYes = (Button) view.findViewById(R.id.btn_work_permits_yes);
+        btnWorkPermitsNo = (Button) view.findViewById(R.id.btn_work_permits_no);
         btnSave = (Button) view.findViewById(R.id.btn_evaluating_work_save);
     }
 
@@ -167,83 +167,75 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_walked_yes:
-                btnWalkedYes.setSelected(true);
                 btnWalkedYes.setBackgroundColor(Color.GREEN);
-                btnWalkedNo.setSelected(false);
-                btnWalkedNo.setBackgroundColor(Color.WHITE);
+                btnWalkedNo.setBackgroundColor(Color.GRAY);
                 DigitalFormActivity.SELECTEDFORM.setWalked(true);
                 break;
 
             case R.id.btn_walked_no:
-                btnWalkedYes.setSelected(false);
-                btnWalkedYes.setBackgroundColor(Color.WHITE);
-                btnWalkedNo.setSelected(true);
+                btnWalkedYes.setBackgroundColor(Color.GRAY);
                 btnWalkedNo.setBackgroundColor(Color.RED);
                 DigitalFormActivity.SELECTEDFORM.setWalked(false);
                 break;
 
             case R.id.btn_live_system_yes:
-                btnLiveSystemYes.setSelected(true);
                 btnLiveSystemYes.setBackgroundColor(Color.GREEN);
-                btnLiveSystemNo.setSelected(false);
-                btnLiveSystemNo.setBackgroundColor(Color.WHITE);
+                btnLiveSystemNo.setBackgroundColor(Color.GRAY);
                 DigitalFormActivity.SELECTEDFORM.setLiveSystem(true);
                 break;
 
             case R.id.btn_live_system_no:
-                btnLiveSystemYes.setSelected(false);
-                btnLiveSystemYes.setBackgroundColor(Color.WHITE);
-                btnLiveSystemNo.setSelected(true);
+                btnLiveSystemYes.setBackgroundColor(Color.GRAY);
                 btnLiveSystemNo.setBackgroundColor(Color.RED);
                 DigitalFormActivity.SELECTEDFORM.setLiveSystem(false);
                 break;
 
             case R.id.btn_trained_yes:
-                btnTrainedYes.setSelected(true);
                 btnTrainedYes.setBackgroundColor(Color.GREEN);
-                btnTrainedNo.setSelected(false);
-                btnTrainedNo.setBackgroundColor(Color.WHITE);
+                btnTrainedNo.setBackgroundColor(Color.GRAY);
                 DigitalFormActivity.SELECTEDFORM.setTrained(true);
                 break;
 
             case R.id.btn_trained_no:
-                btnTrainedNo.setSelected(false);
-                btnTrainedNo.setBackgroundColor(Color.WHITE);
-                btnTrainedYes.setSelected(true);
+                btnTrainedNo.setBackgroundColor(Color.GRAY);
                 btnTrainedYes.setBackgroundColor(Color.GREEN);
                 DigitalFormActivity.SELECTEDFORM.setTrained(false);
                 break;
 
             case R.id.btn_msds_yes:
-                btnMSDSYes.setSelected(true);
                 btnMSDSYes.setBackgroundColor(Color.GREEN);
-                btnMSDSNo.setSelected(false);
-                btnMSDSNo.setBackgroundColor(Color.WHITE);
+                btnMSDSNo.setBackgroundColor(Color.GRAY);
                 DigitalFormActivity.SELECTEDFORM.setMsds(true);
                 break;
 
             case R.id.btn_msds_no:
-                btnMSDSYes.setSelected(false);
-                btnMSDSYes.setBackgroundColor(Color.WHITE);
-                btnMSDSNo.setSelected(true);
+                btnMSDSYes.setBackgroundColor(Color.GRAY);
                 btnMSDSNo.setBackgroundColor(Color.RED);
                 DigitalFormActivity.SELECTEDFORM.setMsds(false);
                 break;
 
             case R.id.btn_air_monitoring_yes:
-                btnAirMonitoringYes.setSelected(true);
                 btnAirMonitoringYes.setBackgroundColor(Color.GREEN);
-                btnAirMonitoringNo.setSelected(false);
-                btnAirMonitoringNo.setBackgroundColor(Color.WHITE);
+                btnAirMonitoringNo.setBackgroundColor(Color.GRAY);
                 DigitalFormActivity.SELECTEDFORM.setAirMonitoring(true);
                 break;
 
             case R.id.btn_air_monitoring_no:
-                btnAirMonitoringYes.setSelected(false);
-                btnAirMonitoringYes.setBackgroundColor(Color.WHITE);
-                btnAirMonitoringNo.setSelected(true);
+                btnAirMonitoringYes.setBackgroundColor(Color.GRAY);
                 btnAirMonitoringNo.setBackgroundColor(Color.RED);
                 DigitalFormActivity.SELECTEDFORM.setAirMonitoring(false);
+                break;
+
+            case R.id.btn_work_permits_yes:
+                btnWorkPermitsYes.setBackgroundColor(Color.GREEN);
+                btnWorkPermitsNo.setBackgroundColor(Color.GRAY);
+                DigitalFormActivity.SELECTEDFORM.setWorkPermits(true);
+                break;
+
+            case R.id.btn_work_permits_no:
+                btnWorkPermitsYes.setBackgroundColor(Color.GRAY);
+                btnWorkPermitsNo.setBackgroundColor(Color.RED);
+                DigitalFormActivity.SELECTEDFORM.setWorkPermits(false);
                 break;
 
             case R.id.btn_evaluating_work_save:

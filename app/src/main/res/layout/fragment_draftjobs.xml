@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="14dp"
     card_view:cardCornerRadius="4dp"
-    card_view:cardBackgroundColor="#f1e7ea"
+    android:foreground="?android:attr/selectableItemBackground"
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout

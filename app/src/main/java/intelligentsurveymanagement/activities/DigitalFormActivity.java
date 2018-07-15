@@ -75,17 +75,11 @@ public class DigitalFormActivity extends AppCompatActivity
 
         initializeLists(this);
 
-//        Log.e(TAG, SENTFORMS.size()+"");
-//        Log.e(TAG, INBOXFORMS.size()+"");
-
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.main_frame, HomeFragment.newInstance("intelligentsurveymanagement", "test2"));
+//        //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
+//        transaction.addToBackStack(HomeFragment.TAG);
+//        transaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -95,6 +89,10 @@ public class DigitalFormActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+//        navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
+//        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
+//        navigationView.getMenu().getItem(0).setChecked(true);
+//        navigationView.setCheckedItem(R.id.nav_home);
     }
 
     public static void initializeLists(Activity activity) {
@@ -161,13 +159,13 @@ public class DigitalFormActivity extends AppCompatActivity
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.main_frame, FormFragment.newInstance("intelligentsurveymanagement", "test2"));
             //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
-            transaction.addToBackStack(FormFragment.TAG);
+            transaction.addToBackStack(null);
             transaction.commit();
         } else if (id == R.id.nav_home) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.main_frame, HomeFragment.newInstance("intelligentsurveymanagement", "test2"));
             //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
-            transaction.addToBackStack(HomeFragment.TAG);
+            transaction.addToBackStack(null);
             transaction.commit();
         } else if (id == R.id.nav_settings) {
 
@@ -228,7 +226,7 @@ public class DigitalFormActivity extends AppCompatActivity
 
     }
 
-    // SentJobsFragment listener method
+    // JobsFragment listener method
     @Override
     public void onListFragmentInteraction(Form item) {
         SELECTEDFORM = item;
