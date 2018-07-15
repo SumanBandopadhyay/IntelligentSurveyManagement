@@ -43,6 +43,7 @@ public class DatabaseInitializer {
             // Generate the data for pre-population
             AppDatabase database = AppDatabase.getInstance(context.getApplicationContext());
             DigitalFormActivity.SENTFORMS = database.formDao().getSentForms();
+            Log.e(TAG, "Get Sent Jobs" + DigitalFormActivity.SENTFORMS.size());
         });
     }
 
@@ -68,7 +69,7 @@ public class DatabaseInitializer {
         Form form = new Form();
         form.setFormid(1);
         form.setClientName("Client 1");
-        form.setFormStatus("inbox");
+        form.setFormStatus("sent");
         addForm(db, form);
         form = new Form();
         form.setFormid(2);
@@ -76,7 +77,7 @@ public class DatabaseInitializer {
         addForm(db, form);
         form = new Form();
         form.setFormid(3);
-        form.setFormStatus("draft");
+        form.setFormStatus("sent");
         addForm(db, form);
 
         List<Form> forms = db.formDao().getAllForms();

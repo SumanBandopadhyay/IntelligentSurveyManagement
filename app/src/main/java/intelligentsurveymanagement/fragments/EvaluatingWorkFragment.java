@@ -125,6 +125,8 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
         btnLiveSystemNo = (Button) view.findViewById(R.id.btn_live_system_no);
         btnTrainedYes = (Button) view.findViewById(R.id.btn_trained_yes);
         btnTrainedNo = (Button) view.findViewById(R.id.btn_trained_no);
+        btnMSDSYes = (Button) view.findViewById(R.id.btn_msds_yes);
+        btnMSDSNo = (Button) view.findViewById(R.id.btn_msds_no);
     }
 
     @Override
@@ -138,6 +140,36 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
             case R.id.btn_walked_no:
                 btnWalkedNo.setSelected(true);
                 btnWalkedNo.setBackgroundColor(Color.GREEN);
+                break;
+
+            case R.id.btn_live_system_yes:
+                btnLiveSystemYes.setSelected(true);
+                btnLiveSystemYes.setBackgroundColor(Color.GREEN);
+                break;
+
+            case R.id.btn_live_system_no:
+                btnLiveSystemNo.setSelected(true);
+                btnLiveSystemNo.setBackgroundColor(Color.GREEN);
+                break;
+
+            case R.id.btn_trained_yes:
+                btnTrainedYes.setSelected(true);
+                btnTrainedYes.setBackgroundColor(Color.GREEN);
+                break;
+
+            case R.id.btn_trained_no:
+                btnTrainedNo.setSelected(true);
+                btnTrainedNo.setBackgroundColor(Color.GREEN);
+                break;
+
+            case R.id.btn_msds_yes:
+                btnMSDSYes.setSelected(true);
+                btnMSDSYes.setBackgroundColor(Color.GREEN);
+                break;
+
+            case R.id.btn_msds_no:
+                btnMSDSNo.setSelected(true);
+                btnMSDSNo.setBackgroundColor(Color.GREEN);
                 break;
         }
     }
