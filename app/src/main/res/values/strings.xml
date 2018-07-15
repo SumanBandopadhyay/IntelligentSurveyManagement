@@ -10,13 +10,13 @@
     <string name="hello_blank_fragment">Fragment 1</string>
     <string name="date_time">Date and Time</string>
     <string name="inspector">Inspector</string>
-    <string name="client_name">Client Name</string>
+    <string name="client_name">Client Name : </string>
     <string name="job">Job Title</string>
     <string name="description">Description</string>
     <string name="edt_description">Maintenance management in an area that has given very little attention in public institutions. If the number of detoriating buildings is anything to go by, the current state of buildings or built faciities is a symptom of an inherent problem with management of maintenance works in these institutions</string>
     <string name="have_you_walked_your_area">Have you walked your area?</string>
     <string name="are_you_working_around_live_system">Are you working around live system?</string>
-    <string name="job_id">Job Id</string>
+    <string name="job_id">Job Id : </string>
     <string name="firstTimeAppLaunch">first_time</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package intelligentsurveymanagement.fragments;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -14,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +45,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -69,12 +73,14 @@ public class SiteInformationFragment extends Fragment implements LocationListene
     private TextView txtAddress;
     private TextView txtFormId;
     private EditText edtDateTime;
+    private ImageView imgDatePicker;
     private EditText edtInspector;
     private TextView txtClientName;
     private TextView txtJob;
     private EditText edtDescription;
     private Button btnSave;
 
+    private int mYear, mMonth, mDay;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
@@ -138,6 +144,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
             ;
         };
 
+        imgDatePicker.setOnClickListener(this);
     }
 
     @Override
@@ -203,6 +210,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
         txtFormId = (TextView) view.findViewById(R.id.job_id);
         mapView = (MapView) view.findViewById(R.id.mapview);
         edtDateTime = (EditText) view.findViewById(R.id.edt_date_time);
+        imgDatePicker = (ImageView) view.findViewById(R.id.img_date_picker);
         edtInspector = (EditText) view.findViewById(R.id.edt_inspector);
         txtClientName = (TextView) view.findViewById(R.id.txt_client_name);
         txtJob = (TextView) view.findViewById(R.id.txt_job);
@@ -326,6 +334,28 @@ public class SiteInformationFragment extends Fragment implements LocationListene
 
     @Override
     public void onClick(View view) {
+
+        if(view == imgDatePicker){
+            // Get Current Date
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+//            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+//                    new DatePickerDialog.OnDateSetListener() {
+//
+//                        @Override
+//                        public void onDateSet(DatePicker view, int year,
+//                                              int monthOfYear, int dayOfMonth) {
+//
+//                            edtDateTime.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+//
+//                        }
+//                    }, mYear, mMonth, mDay);
+//            datePickerDialog.show();
+        }
         DigitalFormActivity.SELECTEDFORM.setClientName(txtClientName.getText().toString());
         DigitalFormActivity.SELECTEDFORM.setDateTime(edtDateTime.getText().toString());
         DigitalFormActivity.SELECTEDFORM.setInspector(edtInspector.getText().toString());

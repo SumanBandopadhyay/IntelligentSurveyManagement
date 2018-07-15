@@ -17,25 +17,29 @@
             android:paddingRight="16dp"
             android:paddingLeft="16dp"
             android:paddingBottom="16dp">
-
-            <TextView
-                android:text="@string/job_id"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16dp"/>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/job_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/job_id"
+                    android:text="Job Id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:paddingLeft="8dp"/>
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/job_id"
-                android:text="Job Id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:paddingLeft="12dp"
-                android:padding="12dp"/>
-
-            <TextView
-
                 android:text="@string/client_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,15 +101,28 @@
                 android:textStyle="bold"
                 android:textSize="16dp"/>
 
-            <EditText
-                android:id="@+id/edt_date_time"
-                android:hint="07/07/2018 07:34 PM"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minLines="1"
-                android:textSize="16dp"
-                android:paddingLeft="12dp"
-                android:padding="12dp"/>
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edt_date_time"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minLines="1"
+                    android:textSize="16dp"
+                    android:paddingLeft="12dp"
+                    android:padding="12dp"/>
+
+                <ImageView
+                    android:id="@+id/img_date_picker"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_date_range_black_24dp" />
+            </LinearLayout>
 
             <TextView
                 android:text="@string/inspector"

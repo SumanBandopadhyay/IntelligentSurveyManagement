@@ -37,8 +37,9 @@ public class MyInboxFormRecyclerViewAdapter extends RecyclerView.Adapter<MyInbox
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(Integer.toString(mValues.get(position).getFormid()));
-        holder.mContentView.setText(mValues.get(position).getFormStatus());
+        holder.txtInboxJobId.setText(Integer.toString(mValues.get(position).getFormid()));
+        holder.txtInboxJobTitle.setText(mValues.get(position).getProject());
+        holder.txtInboxClientName.setText(mValues.get(position).getClientName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,20 +60,22 @@ public class MyInboxFormRecyclerViewAdapter extends RecyclerView.Adapter<MyInbox
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView txtInboxJobId;
+        public final TextView txtInboxJobTitle;
+        public final TextView txtInboxClientName;
         public Form mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            txtInboxJobId = (TextView) view.findViewById(R.id.txt_inbox_job_id);
+            txtInboxJobTitle = (TextView) view.findViewById(R.id.txt_inbox_job_title);
+            txtInboxClientName = (TextView) view.findViewById(R.id.txt_inbox_client_name);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + txtInboxJobTitle.getText() + "'";
         }
     }
 }
