@@ -1,10 +1,11 @@
 package intelligentsurveymanagement.fragments;
 
+import android.app.FragmentTransaction;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,7 +88,8 @@ public class HomeFragment extends Fragment {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.main_frame, SentJobsFragment.newInstance());
                 //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
-                transaction.addToBackStack(SentJobsFragment.TAG);
+//                transaction.addToBackStack(SentJobsFragment.TAG);
+                transaction.disallowAddToBackStack();
                 transaction.commit();
             }
         });
@@ -95,10 +97,13 @@ public class HomeFragment extends Fragment {
         inboxCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.e(TAG, "Inbox Clicked");
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.main_frame, InboxJobsFragment.newInstance());
                 //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
-                transaction.addToBackStack(InboxJobsFragment.TAG);
+//                transaction.addToBackStack(InboxJobsFragment.TAG);
+//                transaction.disallowAddToBackStack();
+                transaction.disallowAddToBackStack();
                 transaction.commit();
             }
         });

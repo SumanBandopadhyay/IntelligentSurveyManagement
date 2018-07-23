@@ -1,10 +1,12 @@
 package intelligentsurveymanagement.activities;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.suman.intelligentsurveymanagement.R;
 import intelligentsurveymanagement.database.AppDatabase;
@@ -76,13 +79,14 @@ public class DigitalFormActivity extends AppCompatActivity
 
         initializeLists(this);
 
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.main_frame, HomeFragment.newInstance("intelligentsurveymanagement", "test2"));
-//        //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
-//        transaction.addToBackStack(HomeFragment.TAG);
-//        transaction.commit();
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            Fragment fragment = new HomeFragment();
+            transaction.replace(R.id.main_frame, fragment);
+//            transaction.disallowAddToBackStack();
+            transaction.commit();
+//        }
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -95,6 +99,18 @@ public class DigitalFormActivity extends AppCompatActivity
 //        navigationView.getMenu().getItem(0).setChecked(true);
 //        navigationView.setCheckedItem(R.id.nav_home);
     }
+
+//    @Override
+//    public void onConfigurationChanged(Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//
+//        // Checks the orientation of the screen
+//        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+//        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+//            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     public static void initializeLists(Activity activity) {
         Log.e(TAG, "Initialize List");
@@ -164,10 +180,11 @@ public class DigitalFormActivity extends AppCompatActivity
             transaction.commit();
         } else */
         if (id == R.id.nav_home) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.replace(R.id.main_frame, HomeFragment.newInstance("intelligentsurveymanagement", "test2"));
             //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
-            transaction.addToBackStack(null);
+            //transaction.addToBackStack(null);
+            transaction.disallowAddToBackStack();
             transaction.commit();
         } else if (id == R.id.nav_settings) {
 
@@ -185,43 +202,48 @@ public class DigitalFormActivity extends AppCompatActivity
     public void onListFragmentInteraction(LeftPanelContent.DummyItem item) {
         switch (item.id) {
             case R.layout.fragment_site_information:
-                SiteInformationFragment siteInformationFragment = SiteInformationFragment.newInstance("", "");
+                Fragment fragment = new SiteInformationFragment();
                 FrameLayout fl = (FrameLayout) findViewById(R.id.right_panel);
                 fl.removeAllViews();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.right_panel, siteInformationFragment);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.right_panel, fragment);
+                transaction.disallowAddToBackStack();
                 transaction.commit();
                 break;
             case R.layout.fragment_evaluating_work:
                 EvaluatingWorkFragment evaluatingWorkFragment = EvaluatingWorkFragment.newInstance("", "");
                 fl = (FrameLayout) findViewById(R.id.right_panel);
                 fl.removeAllViews();
-                transaction = getSupportFragmentManager().beginTransaction();
+                transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.right_panel, evaluatingWorkFragment);
+                transaction.disallowAddToBackStack();
                 transaction.commit();
                 break;
             case R.layout.fragment_work_steps_and_hazards:
                 WorkStepsAndHazardsFragment workStepsAndHazardsFragment = WorkStepsAndHazardsFragment.newInstance("", "");
                 fl = (FrameLayout) findViewById(R.id.right_panel);
                 fl.removeAllViews();
-                transaction = getSupportFragmentManager().beginTransaction();
+                transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.right_panel, workStepsAndHazardsFragment);
+                transaction.disallowAddToBackStack();
                 transaction.commit();
                 break;
             case R.layout.fragment_equipment_details:
                 EquipmentDetailsFragment equipmentDetailsFragment = EquipmentDetailsFragment.newInstance("", "");
                 fl = (FrameLayout) findViewById(R.id.right_panel);
                 fl.removeAllViews();
-                transaction = getSupportFragmentManager().beginTransaction();
+                transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.right_panel, equipmentDetailsFragment);
+                transaction.disallowAddToBackStack();
                 transaction.commit();
                 break;
             case R.layout.fragment_customer_sign_off:
                 CustomerSignOffFragment customerSignOffFragment = CustomerSignOffFragment.newInstance("", "");
                 fl = (FrameLayout) findViewById(R.id.right_panel);
                 fl.removeAllViews();
-                transaction = getSupportFragmentManager().beginTransaction();
+                transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.right_panel, customerSignOffFragment);
+                transaction.disallowAddToBackStack();
                 transaction.commit();
                 break;
         }
@@ -232,10 +254,12 @@ public class DigitalFormActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(Form item) {
         SELECTEDFORM = item;
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        Log.e(TAG, "Form Fragment call");
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.main_frame, FormFragment.newInstance("intelligentsurveymanagement", "test2"));
         //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
-        transaction.addToBackStack(FormFragment.TAG);
+//        transaction.addToBackStack(FormFragment.TAG);
+        transaction.disallowAddToBackStack();
         transaction.commit();
     }
 

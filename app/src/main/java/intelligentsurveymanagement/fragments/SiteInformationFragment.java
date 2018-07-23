@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -160,14 +159,14 @@ public class SiteInformationFragment extends Fragment implements LocationListene
 
                     // contacts-related task you need to do.
 
-                    Toast.makeText(getContext(), "Location permission granted", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Location permission granted", Toast.LENGTH_LONG).show();
 
                 } else {
 
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
 
-                    Toast.makeText(getContext(), "You need to grant permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "You need to grant permission", Toast.LENGTH_SHORT).show();
                 }
                 return;
             }
@@ -265,11 +264,11 @@ public class SiteInformationFragment extends Fragment implements LocationListene
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
         } else {
-            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
             Task<Location> location = mFusedLocationClient.getLastLocation()
                     .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                         @Override
@@ -297,7 +296,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
                                 });
 
                                 Geocoder geocoder;
-                                geocoder = new Geocoder(getContext(), Locale.getDefault());
+                                geocoder = new Geocoder(getActivity(), Locale.getDefault());
 
                                 try {
                                     List<Address> addresses;
@@ -315,7 +314,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
     }
 
     private void startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
         }
@@ -345,7 +344,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
                 DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
                 DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
                 DigitalFormActivity.initializeLists(getActivity());
-                Toast.makeText(getContext(), "Saved", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Saved", Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.btn_date_picker:
@@ -355,7 +354,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
                 mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override

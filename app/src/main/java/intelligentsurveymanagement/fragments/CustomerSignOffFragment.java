@@ -1,16 +1,21 @@
 package intelligentsurveymanagement.fragments;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.example.suman.intelligentsurveymanagement.R;
 import com.github.gcacace.signaturepad.views.SignaturePad;
+
+import java.io.ByteArrayOutputStream;
 
 import intelligentsurveymanagement.activities.DigitalFormActivity;
 import intelligentsurveymanagement.utils.DatabaseInitializer;
@@ -36,6 +41,11 @@ public class CustomerSignOffFragment extends Fragment {
 
     private EditText edtCustomerName;
     private SignaturePad signaturePad;
+    private RatingBar rbWellTrainedEngg;
+    private RatingBar rbProfessionalStandard;
+    private RatingBar rbWellSupervisedEngineer;
+    private RatingBar rbCustomerSatisfied;
+    private EditText edtCustomerComment;
     private Button btnSubmitData;
     //private Button btnSave;
     private Button btnClear;
@@ -75,11 +85,10 @@ public class CustomerSignOffFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_customer_sign_off, container, false);
-        edtCustomerName = (EditText) view.findViewById(R.id.edt_customer_name);
-        signaturePad = (SignaturePad) view.findViewById(R.id.signature_pad);
-        btnSubmitData = (Button) view.findViewById(R.id.btn_submit);
-        //btnSave = (Button) view.findViewById(R.id.btn_save_button);
-        btnClear = (Button) view.findViewById(R.id.btn_clear_button);
+
+        initializeViews(view);
+
+        loadDBData();
 
         //disable both buttons at start
         btnSubmitData.setEnabled(false);
@@ -114,15 +123,53 @@ public class CustomerSignOffFragment extends Fragment {
         btnSubmitData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(),"Data submitted successfully !",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"Data submitted successfully !",Toast.LENGTH_LONG).show();
+
+                DigitalFormActivity.SELECTEDFORM.setCustomerName(edtCustomerName.getText().toString());
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                Bitmap bitmap = signaturePad.getSignatureBitmap();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                byte[] bytes = byteArrayOutputStream.toByteArray();
+                DigitalFormActivity.SELECTEDFORM.setCustomerSignature(bytes);
+                DigitalFormActivity.SELECTEDFORM.setWellTrainedEngineer(rbWellTrainedEngg.getRating());
+                DigitalFormActivity.SELECTEDFORM.setWellSupervisedEngineer(rbWellSupervisedEngineer.getRating());
+                DigitalFormActivity.SELECTEDFORM.setProfessionalStandard(rbProfessionalStandard.getRating());
+                DigitalFormActivity.SELECTEDFORM.setCustomerSatisfied(rbCustomerSatisfied.getRating());
+                DigitalFormActivity.SELECTEDFORM.setCustomerComment(edtCustomerComment.getText().toString());
+
                 if (DigitalFormActivity.SELECTEDFORM.getFormStatus().equals(DigitalFormActivity.INBOX) || DigitalFormActivity.SELECTEDFORM.getFormStatus().equals(DigitalFormActivity.DRAFT)) {
                     DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.SENT);
                 }
+
                 DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
                 DigitalFormActivity.initializeLists(getActivity());
             }
         });
         return view;
+    }
+
+    private void loadDBData() {
+        edtCustomerName.setText(DigitalFormActivity.SELECTEDFORM.getCustomerName());
+        if (DigitalFormActivity.SELECTEDFORM.getCustomerSignature() != null) {
+            signaturePad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getCustomerSignature(), 0, DigitalFormActivity.SELECTEDFORM.getCustomerSignature().length));
+        }
+        rbWellTrainedEngg.setRating(DigitalFormActivity.SELECTEDFORM.getWellTrainedEngineer());
+        rbWellSupervisedEngineer.setRating(DigitalFormActivity.SELECTEDFORM.getWellSupervisedEngineer());
+        rbProfessionalStandard.setRating(DigitalFormActivity.SELECTEDFORM.getProfessionalStandard());
+        rbCustomerSatisfied.setRating(DigitalFormActivity.SELECTEDFORM.getCustomerSatisfied());
+        edtCustomerComment.setText(DigitalFormActivity.SELECTEDFORM.getCustomerComment());
+    }
+
+    private void initializeViews(View view) {
+        edtCustomerName = (EditText) view.findViewById(R.id.edt_customer_name);
+        signaturePad = (SignaturePad) view.findViewById(R.id.signature_pad);
+        rbWellTrainedEngg = (RatingBar) view.findViewById(R.id.rb_well_trained_engineer);
+        rbWellSupervisedEngineer = (RatingBar) view.findViewById(R.id.rb_well_supervised_engineer);
+        rbProfessionalStandard = (RatingBar) view.findViewById(R.id.rb_professional_standard);
+        rbCustomerSatisfied = (RatingBar) view.findViewById(R.id.rb_customer_satisfied);
+        edtCustomerComment = (EditText) view.findViewById(R.id.edt_customer_comment);
+        btnSubmitData = (Button) view.findViewById(R.id.btn_submit);
+        btnClear = (Button) view.findViewById(R.id.btn_clear_button);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

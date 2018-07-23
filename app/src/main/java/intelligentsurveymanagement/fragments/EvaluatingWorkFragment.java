@@ -2,7 +2,7 @@ package intelligentsurveymanagement.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,6 +99,10 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
         btnLiveSystemNo.setOnClickListener(this);
         btnMSDSYes.setOnClickListener(this);
         btnMSDSNo.setOnClickListener(this);
+        btnAirMonitoringYes.setOnClickListener(this);
+        btnAirMonitoringNo.setOnClickListener(this);
+        btnWorkPermitsYes.setOnClickListener(this);
+        btnWorkPermitsNo.setOnClickListener(this);
         btnSave.setOnClickListener(this);
 
         // Inflate the layout for this fragment
@@ -109,39 +113,39 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
 
         if (!DigitalFormActivity.SELECTEDFORM.getFormStatus().equals(DigitalFormActivity.INBOX)) {
             if (DigitalFormActivity.SELECTEDFORM.isWalked()) {
-                btnWalkedYes.setBackgroundColor(Color.GREEN);
+                btnWalkedYes.setBackgroundColor(getActivity().getResources().getColor(R.color.green));
             } else {
-                btnWalkedNo.setBackgroundColor(Color.RED);
+                btnWalkedNo.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
             }
 
             if (DigitalFormActivity.SELECTEDFORM.isLiveSystem()) {
-                btnLiveSystemYes.setBackgroundColor(Color.GREEN);
+                btnLiveSystemYes.setBackgroundColor(getActivity().getResources().getColor(R.color.green));
             } else {
-                btnLiveSystemNo.setBackgroundColor(Color.RED);
+                btnLiveSystemNo.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
             }
 
             if (DigitalFormActivity.SELECTEDFORM.isTrained()) {
-                btnTrainedYes.setBackgroundColor(Color.GREEN);
+                btnTrainedYes.setBackgroundColor(getActivity().getResources().getColor(R.color.green));
             } else {
-                btnTrainedNo.setBackgroundColor(Color.RED);
+                btnTrainedNo.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
             }
 
             if (DigitalFormActivity.SELECTEDFORM.isMsds()) {
-                btnMSDSYes.setBackgroundColor(Color.GREEN);
+                btnMSDSYes.setBackgroundColor(getActivity().getResources().getColor(R.color.green));
             } else {
-                btnMSDSNo.setBackgroundColor(Color.RED);
+                btnMSDSNo.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
             }
 
             if (DigitalFormActivity.SELECTEDFORM.isAirMonitoring()) {
-                btnAirMonitoringYes.setBackgroundColor(Color.GREEN);
+                btnAirMonitoringYes.setBackgroundColor(getActivity().getResources().getColor(R.color.green));
             } else {
-                btnAirMonitoringNo.setBackgroundColor(Color.RED);
+                btnAirMonitoringNo.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
             }
 
             if (DigitalFormActivity.SELECTEDFORM.isWorkPermits()) {
-                btnWorkPermitsYes.setBackgroundColor(Color.GREEN);
+                btnWorkPermitsYes.setBackgroundColor(getActivity().getResources().getColor(R.color.green));
             } else {
-                btnWorkPermitsNo.setBackgroundColor(Color.RED);
+                btnWorkPermitsNo.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
             }
         }
 
@@ -167,74 +171,74 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_walked_yes:
-                btnWalkedYes.setBackgroundColor(Color.GREEN);
-                btnWalkedNo.setBackgroundColor(Color.GRAY);
+                btnWalkedYes.setBackgroundColor(getActivity().getResources().getColor(R.color.green));
+                btnWalkedNo.setBackgroundColor(getActivity().getResources().getColor(R.color.silver));
                 DigitalFormActivity.SELECTEDFORM.setWalked(true);
                 break;
 
             case R.id.btn_walked_no:
-                btnWalkedYes.setBackgroundColor(Color.GRAY);
-                btnWalkedNo.setBackgroundColor(Color.RED);
+                btnWalkedYes.setBackgroundColor(getActivity().getResources().getColor(R.color.silver));
+                btnWalkedNo.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
                 DigitalFormActivity.SELECTEDFORM.setWalked(false);
                 break;
 
             case R.id.btn_live_system_yes:
-                btnLiveSystemYes.setBackgroundColor(Color.GREEN);
-                btnLiveSystemNo.setBackgroundColor(Color.GRAY);
+                btnLiveSystemYes.setBackgroundColor(getActivity().getResources().getColor(R.color.green));
+                btnLiveSystemNo.setBackgroundColor(getActivity().getResources().getColor(R.color.silver));
                 DigitalFormActivity.SELECTEDFORM.setLiveSystem(true);
                 break;
 
             case R.id.btn_live_system_no:
-                btnLiveSystemYes.setBackgroundColor(Color.GRAY);
-                btnLiveSystemNo.setBackgroundColor(Color.RED);
+                btnLiveSystemYes.setBackgroundColor(getActivity().getResources().getColor(R.color.silver));
+                btnLiveSystemNo.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
                 DigitalFormActivity.SELECTEDFORM.setLiveSystem(false);
                 break;
 
             case R.id.btn_trained_yes:
-                btnTrainedYes.setBackgroundColor(Color.GREEN);
-                btnTrainedNo.setBackgroundColor(Color.GRAY);
+                btnTrainedYes.setBackgroundColor(getActivity().getResources().getColor(R.color.green));
+                btnTrainedNo.setBackgroundColor(getActivity().getResources().getColor(R.color.silver));
                 DigitalFormActivity.SELECTEDFORM.setTrained(true);
                 break;
 
             case R.id.btn_trained_no:
-                btnTrainedNo.setBackgroundColor(Color.GRAY);
-                btnTrainedYes.setBackgroundColor(Color.GREEN);
+                btnTrainedYes.setBackgroundColor(getActivity().getResources().getColor(R.color.silver));
+                btnTrainedNo.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
                 DigitalFormActivity.SELECTEDFORM.setTrained(false);
                 break;
 
             case R.id.btn_msds_yes:
-                btnMSDSYes.setBackgroundColor(Color.GREEN);
-                btnMSDSNo.setBackgroundColor(Color.GRAY);
+                btnMSDSYes.setBackgroundColor(getActivity().getResources().getColor(R.color.green));
+                btnMSDSNo.setBackgroundColor(getActivity().getResources().getColor(R.color.silver));
                 DigitalFormActivity.SELECTEDFORM.setMsds(true);
                 break;
 
             case R.id.btn_msds_no:
-                btnMSDSYes.setBackgroundColor(Color.GRAY);
-                btnMSDSNo.setBackgroundColor(Color.RED);
+                btnMSDSYes.setBackgroundColor(getActivity().getResources().getColor(R.color.silver));
+                btnMSDSNo.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
                 DigitalFormActivity.SELECTEDFORM.setMsds(false);
                 break;
 
             case R.id.btn_air_monitoring_yes:
-                btnAirMonitoringYes.setBackgroundColor(Color.GREEN);
-                btnAirMonitoringNo.setBackgroundColor(Color.GRAY);
+                btnAirMonitoringYes.setBackgroundColor(getActivity().getResources().getColor(R.color.green));
+                btnAirMonitoringNo.setBackgroundColor(getActivity().getResources().getColor(R.color.silver));
                 DigitalFormActivity.SELECTEDFORM.setAirMonitoring(true);
                 break;
 
             case R.id.btn_air_monitoring_no:
-                btnAirMonitoringYes.setBackgroundColor(Color.GRAY);
-                btnAirMonitoringNo.setBackgroundColor(Color.RED);
+                btnAirMonitoringYes.setBackgroundColor(getActivity().getResources().getColor(R.color.silver));
+                btnAirMonitoringNo.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
                 DigitalFormActivity.SELECTEDFORM.setAirMonitoring(false);
                 break;
 
             case R.id.btn_work_permits_yes:
-                btnWorkPermitsYes.setBackgroundColor(Color.GREEN);
-                btnWorkPermitsNo.setBackgroundColor(Color.GRAY);
+                btnWorkPermitsYes.setBackgroundColor(getActivity().getResources().getColor(R.color.green));
+                btnWorkPermitsNo.setBackgroundColor(getActivity().getResources().getColor(R.color.silver));
                 DigitalFormActivity.SELECTEDFORM.setWorkPermits(true);
                 break;
 
             case R.id.btn_work_permits_no:
-                btnWorkPermitsYes.setBackgroundColor(Color.GRAY);
-                btnWorkPermitsNo.setBackgroundColor(Color.RED);
+                btnWorkPermitsYes.setBackgroundColor(getActivity().getResources().getColor(R.color.silver));
+                btnWorkPermitsNo.setBackgroundColor(getActivity().getResources().getColor(R.color.colorAccent));
                 DigitalFormActivity.SELECTEDFORM.setWorkPermits(false);
                 break;
 
@@ -242,7 +246,7 @@ public class EvaluatingWorkFragment extends Fragment implements View.OnClickList
                 DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
                 DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
                 DigitalFormActivity.initializeLists(getActivity());
-                Toast.makeText(getContext(), "Saved", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Saved", Toast.LENGTH_LONG).show();
                 break;
         }
     }

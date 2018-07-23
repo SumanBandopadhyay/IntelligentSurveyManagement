@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal">
-                <RatingBar android:id="@+id/ratingbar1"
+                <RatingBar android:id="@+id/rb_well_trained_engineer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal">
-                <RatingBar android:id="@+id/ratingbar2"
+                <RatingBar android:id="@+id/rb_professional_standard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -116,7 +116,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Were the service representattives well supervised?"
+                android:text="Were the service representatives well supervised?"
                 android:textSize="16dp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"/>
@@ -125,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal">
-                <RatingBar android:id="@+id/ratingbar3"
+                <RatingBar android:id="@+id/rb_well_supervised_engineer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -147,7 +147,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal">
-                <RatingBar android:id="@+id/ratingbar4"
+                <RatingBar android:id="@+id/rb_customer_satisfied"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"

@@ -62,14 +62,69 @@ public class Form {
     @ColumnInfo (name = "customer_name")
     private String customerName;
 
-    @ColumnInfo (name = "customer_sign")
-    private String customerSignature;
+    @ColumnInfo (name = "customer_sign", typeAffinity = ColumnInfo.BLOB)
+    private byte[] customerSignature;
 
     @ColumnInfo (name = "form_status")
     private String formStatus;
 
     @ColumnInfo (name = "form_description")
     private String jobDescription;
+
+    @ColumnInfo (name = "well_trained")
+    private float wellTrainedEngineer;
+
+    @ColumnInfo (name = "well_supervised")
+    private float wellSupervisedEngineer;
+
+    @ColumnInfo (name = "professional_standard")
+    private float professionalStandard;
+
+    @ColumnInfo (name = "customer_satisfied")
+    private float customerSatisfied;
+
+    @ColumnInfo (name = "customer_comment")
+    private String customerComment;
+
+    public String getCustomerComment() {
+        return customerComment;
+    }
+
+    public void setCustomerComment(String customerComment) {
+        this.customerComment = customerComment;
+    }
+
+    public float getWellTrainedEngineer() {
+        return wellTrainedEngineer;
+    }
+
+    public void setWellTrainedEngineer(float wellTrainedEngineer) {
+        this.wellTrainedEngineer = wellTrainedEngineer;
+    }
+
+    public float getWellSupervisedEngineer() {
+        return wellSupervisedEngineer;
+    }
+
+    public void setWellSupervisedEngineer(float wellSupervisedEngineer) {
+        this.wellSupervisedEngineer = wellSupervisedEngineer;
+    }
+
+    public float getProfessionalStandard() {
+        return professionalStandard;
+    }
+
+    public void setProfessionalStandard(float professionalStandard) {
+        this.professionalStandard = professionalStandard;
+    }
+
+    public float getCustomerSatisfied() {
+        return customerSatisfied;
+    }
+
+    public void setCustomerSatisfied(float customerSatisfied) {
+        this.customerSatisfied = customerSatisfied;
+    }
 
     public String getJobDescription() {
         return jobDescription;
@@ -231,11 +286,11 @@ public class Form {
         this.customerName = customerName;
     }
 
-    public String getCustomerSignature() {
+    public byte[] getCustomerSignature() {
         return customerSignature;
     }
 
-    public void setCustomerSignature(String customerSignature) {
+    public void setCustomerSignature(byte[] customerSignature) {
         this.customerSignature = customerSignature;
     }
 }

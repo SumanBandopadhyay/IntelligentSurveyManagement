@@ -1,13 +1,19 @@
 package intelligentsurveymanagement.adapters;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.suman.intelligentsurveymanagement.R;
+
+import intelligentsurveymanagement.activities.DigitalFormActivity;
 import intelligentsurveymanagement.entity.Form;
+import intelligentsurveymanagement.fragments.FormFragment;
 import intelligentsurveymanagement.fragments.InboxJobsFragment.OnListFragmentInteractionListener;
 
 import java.util.List;
@@ -21,10 +27,14 @@ public class MyInboxFormRecyclerViewAdapter extends RecyclerView.Adapter<MyInbox
 
     private final List<Form> mValues;
     private final OnListFragmentInteractionListener mListener;
+    private FragmentManager mFragmentManager;
 
-    public MyInboxFormRecyclerViewAdapter(List<Form> items, OnListFragmentInteractionListener listener) {
+    private final static String TAG = "InboxAdapter";
+
+    public MyInboxFormRecyclerViewAdapter(List<Form> items, OnListFragmentInteractionListener listener, FragmentManager fragmentManager) {
         mValues = items;
         mListener = listener;
+        mFragmentManager = fragmentManager;
     }
 
     @Override
@@ -48,6 +58,13 @@ public class MyInboxFormRecyclerViewAdapter extends RecyclerView.Adapter<MyInbox
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
+//                    Log.e(TAG, "Form Launch");
+//                    DigitalFormActivity.SELECTEDFORM = holder.mItem;
+//                    FragmentTransaction transaction = mFragmentManager.beginTransaction();
+//                    transaction.replace(R.id.main_frame, new FormFragment());
+//                    //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
+//                    transaction.addToBackStack(FormFragment.TAG);
+//                    transaction.commit();
                 }
             }
         });
