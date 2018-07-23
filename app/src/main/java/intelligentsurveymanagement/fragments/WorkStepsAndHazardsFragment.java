@@ -172,6 +172,7 @@ public class WorkStepsAndHazardsFragment extends Fragment {
                     DigitalFormActivity.SELECTEDFORM.setImage(bytes);
                     DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
                     DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getContext(), DigitalFormActivity.SELECTEDFORM);
+//                    DigitalFormActivity.initializeLists(getActivity());
                 } else {
                     btnEditImage.setText("Save");
                     imageEditPad.setEnabled(true);
@@ -250,6 +251,7 @@ public class WorkStepsAndHazardsFragment extends Fragment {
             DigitalFormActivity.SELECTEDFORM.setImage(bytes);
             DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
             DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getContext(), DigitalFormActivity.SELECTEDFORM);
+            DigitalFormActivity.initializeLists(getActivity());
 //            loadimage();
 //            try {
 //                Thread.sleep(2000);

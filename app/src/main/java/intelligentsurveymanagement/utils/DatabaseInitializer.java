@@ -88,20 +88,32 @@ public class DatabaseInitializer {
     private static void populateWithTestData(AppDatabase db) {
         Form form = new Form();
         form.setFormid(1001);
-        form.setClientName("Sunil Basu");
+        form.setClientName("Albert Einstein");
         form.setProject("Maintenance on building");
         form.setFormStatus(DigitalFormActivity.INBOX);
         addForm(db, form);
         form = new Form();
         form.setFormid(1002);
-        form.setClientName("Amit Mehta");
+        form.setClientName("Charles Darwin");
         form.setProject("Blockage in Water Supply");
         form.setFormStatus(DigitalFormActivity.INBOX);
         addForm(db, form);
         form = new Form();
         form.setFormid(1003);
-        form.setClientName("Amitava Saha");
+        form.setClientName("Galileo Galilei");
         form.setProject("Monthly maintenance in Electricity wiring");
+        form.setFormStatus(DigitalFormActivity.INBOX);
+        addForm(db, form);
+        form = new Form();
+        form.setFormid(1004);
+        form.setClientName("C.V. Raman");
+        form.setProject("Glass door instalment");
+        form.setFormStatus(DigitalFormActivity.INBOX);
+        addForm(db, form);
+        form = new Form();
+        form.setFormid(1005);
+        form.setClientName("Isaac Newton");
+        form.setProject("Lab Setup");
         form.setFormStatus(DigitalFormActivity.INBOX);
         addForm(db, form);
 
