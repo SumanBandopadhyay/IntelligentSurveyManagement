@@ -1,9 +1,9 @@
 package intelligentsurveymanagement.fragments;
 
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentTransaction;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,11 +85,11 @@ public class HomeFragment extends Fragment {
         sentCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.main_frame, SentJobsFragment.newInstance());
                 //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
-//                transaction.addToBackStack(SentJobsFragment.TAG);
-                transaction.disallowAddToBackStack();
+                transaction.addToBackStack(SentJobsFragment.TAG);
+//                transaction.disallowAddToBackStack();
                 transaction.commit();
             }
         });
@@ -98,12 +98,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.e(TAG, "Inbox Clicked");
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.main_frame, InboxJobsFragment.newInstance());
                 //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
-//                transaction.addToBackStack(InboxJobsFragment.TAG);
+                transaction.addToBackStack(InboxJobsFragment.TAG);
 //                transaction.disallowAddToBackStack();
-                transaction.disallowAddToBackStack();
+//                transaction.disallowAddToBackStack();
                 transaction.commit();
             }
         });

@@ -15,7 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -116,11 +116,13 @@ public class WorkStepsAndHazardsFragment extends Fragment {
         btnEditImage = (Button) view.findViewById(R.id.btn_edit_image);
         //btnSaveData = (Button) view.findViewById(R.id.btn_save_data);
         imageEditPad = (SignaturePad) view.findViewById(R.id.image_edit_pad);
+        imageEditPad.setBackgroundColor(Color.TRANSPARENT);
 
         if (DigitalFormActivity.SELECTEDFORM.getImage() != null) {
 //            Drawable image = new BitmapDrawable(getResources(),BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
 //            imageEditPad.setBackground(image);
-            imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
+//            imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
+            loadimage();
 //            imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
         }
 
@@ -159,8 +161,8 @@ public class WorkStepsAndHazardsFragment extends Fragment {
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 //                    imageEditPad.setMaxWidth(imageEditPad.getBackground().getMinimumWidth());
                     Bitmap bitmap = imageEditPad.getSignatureBitmap();
-//                    Drawable drawable = imageEditPad.getBackground();
-//                    Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+
+//                    bitmap = imageEditPad.getSignatureBitmap();
 //                    Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(),
 //                            drawable);
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
@@ -169,10 +171,13 @@ public class WorkStepsAndHazardsFragment extends Fragment {
 
                     DigitalFormActivity.SELECTEDFORM.setImage(bytes);
                     DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
-                    DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
+                    DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getContext(), DigitalFormActivity.SELECTEDFORM);
                 } else {
                     btnEditImage.setText("Save");
                     imageEditPad.setEnabled(true);
+//                    Drawable drawable = imageEditPad.getSignatureBitmap();
+//                    imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
+                    loadimage();
                 }
             }
         });
@@ -193,21 +198,26 @@ public class WorkStepsAndHazardsFragment extends Fragment {
 
     private void dispatchTakeVideoIntent() {
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-        if (takeVideoIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+        if (takeVideoIntent.resolveActivity(getContext().getPackageManager()) != null) {
             startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
         }
     }
 
     private void dispatchTakePictureIntent(){
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+        if(takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
 
+    private void loadimage() {
+        imageEditPad.setBackgroundColor(Color.TRANSPARENT);
+        imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
+    }
+
     public void scanQR(){
         // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(getActivity(),
+        if (ContextCompat.checkSelfPermission(getContext(),
                 Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
 
@@ -226,32 +236,41 @@ public class WorkStepsAndHazardsFragment extends Fragment {
         Log.e(WorkStepsAndHazardsFragment.TAG, "On Activity Result call");
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
-
-//            Bitmap bitmap = Bitmap.createBitmap(imageEditPad.getWidth(),imageEditPad.getWidth(), Bitmap.Config.ARGB_8888);
-//            imageEditPad.setSignatureBitmap(bitmap);
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get(WorkStepsAndHazardsFragment.DATA);
-//            imageBitmap = Bitmap.createBitmap(imageEditPad.getWidth(),imageEditPad.getWidth(), Bitmap.Config.ARGB_8888);
-//            imageEditPad.setMinWidth(400);
 //            imageEditPad.setSignatureBitmap(imageBitmap);
+            imageEditPad.clear();
 
+//            Bitmap bitmap = Bitmap.createBitmap(imageBitmap);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             byte[] bytes = byteArrayOutputStream.toByteArray();
-            //imageBitmap.recycle();
-
+//            //imageBitmap.recycle();
+//
             DigitalFormActivity.SELECTEDFORM.setImage(bytes);
             DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
-            DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
+            DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getContext(), DigitalFormActivity.SELECTEDFORM);
+//            loadimage();
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
 //            imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-//            DigitalFormActivity.initializeLists(getActivity());
-//            imageEditPad.setLayoutParams(new FrameLayout.LayoutParams(imageBitmap.getWidth(), imageBitmap.getHeight()));
 //            imageEditPad.setSignatureBitmap(imageBitmap);
 //            Toast.makeText(getContext(), "Width : " + imageBitmap.getWidth() + ", Height : " + imageBitmap.getHeight(), Toast.LENGTH_LONG).show();
-//            Drawable drawable = new BitmapDrawable(getResources(),imageBitmap);
+            Drawable drawable = new BitmapDrawable(getResources(),imageBitmap);
+//            Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+//            imageEditPad.setSignatureBitmap(bitmap);
 //            imageEditPad.setMaxWidth(imageEditPad.getBackground().getMinimumWidth());
+//            imageEditPad.setMaxWidth(imageBitmap.getWidth());
+//            int width = getActivity().getResources().getDisplayMetrics().widthPixels;
+//            int height = (width*bitmap.getHeight())/bitmap.getWidth();
 //            imageEditPad.setSignatureBitmap(imageBitmap);
-//            imageEditPad.setBackground(drawable);
+//            imageEditPad.setMinWidth(width);
+//            imageEditPad.setMinimumHeight(height);
+            imageEditPad.setBackground(drawable);
 //            Bitmap mutableBitmap = imageBitmap.copy(Bitmap.Config.ARGB_8888, true);
 //            imageEditPad.draw(new Canvas(mutableBitmap));
         } else if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
@@ -276,7 +295,7 @@ public class WorkStepsAndHazardsFragment extends Fragment {
                     //integrator.setCameraId(3);  // Use a specific camera of the device
                     //integrator.initiateScan();
                 } else {
-                    Toast.makeText(getActivity(), "Camera permission denied. Cannot scan QR.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Camera permission denied. Cannot scan QR.", Toast.LENGTH_LONG).show();
                 }
                 return;
             }

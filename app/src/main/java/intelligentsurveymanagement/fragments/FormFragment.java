@@ -2,7 +2,7 @@ package intelligentsurveymanagement.fragments;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +72,7 @@ public class FormFragment extends Fragment {
 //    @Override
 //    public void onDestroy() {
 //        super.onDestroy();
+//        Log.e(TAG, "Form Fragment On destroy");
 //        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 //    }
 

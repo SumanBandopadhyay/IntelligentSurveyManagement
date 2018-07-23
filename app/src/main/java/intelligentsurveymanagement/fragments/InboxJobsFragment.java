@@ -2,7 +2,7 @@ package intelligentsurveymanagement.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -73,7 +73,7 @@ public class InboxJobsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyInboxFormRecyclerViewAdapter(DigitalFormActivity.INBOXFORMS, mListener, getFragmentManager()));
+            recyclerView.setAdapter(new MyInboxFormRecyclerViewAdapter(DigitalFormActivity.INBOXFORMS, mListener, getActivity().getSupportFragmentManager()));
         }
         return view;
     }

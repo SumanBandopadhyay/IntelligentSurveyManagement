@@ -2,7 +2,7 @@ package intelligentsurveymanagement.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -138,8 +138,8 @@ public class EquipmentDetailsFragment extends Fragment {
 //        integrator.setPrompt("Scan a QR Code");
 //        integrator.setResultDisplayDuration(0);
 //        integrator.setCameraId(0);  // Use a specific camera of the device
-        //IntentIntegrator.forSupportFragment(EquipmentDetailsFragment.this).setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES).initiateScan();
-        IntentIntegrator.forFragment(EquipmentDetailsFragment.this).setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES).initiateScan();
+        IntentIntegrator.forSupportFragment(EquipmentDetailsFragment.this).setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES).initiateScan();
+//        IntentIntegrator.forFragment(EquipmentDetailsFragment.this).setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES).initiateScan();
     }
 
     @Override
