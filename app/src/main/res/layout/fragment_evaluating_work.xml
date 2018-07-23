@@ -274,7 +274,8 @@
                 android:id="@+id/btn_evaluating_work_save"
                 android:text="SAVE"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorAccent"/>
 
 
         </LinearLayout>
