@@ -32,6 +32,7 @@ import intelligentsurveymanagement.fragments.FormFragment;
 import intelligentsurveymanagement.fragments.HomeFragment;
 import intelligentsurveymanagement.fragments.InboxJobsFragment;
 import intelligentsurveymanagement.fragments.LeftFragment;
+import intelligentsurveymanagement.fragments.SentJobDetailsFragment;
 import intelligentsurveymanagement.fragments.SentJobsFragment;
 import intelligentsurveymanagement.fragments.SiteInformationFragment;
 import intelligentsurveymanagement.fragments.WorkStepsAndHazardsFragment;
@@ -254,14 +255,26 @@ public class DigitalFormActivity extends AppCompatActivity
     // JobsFragment listener method
     @Override
     public void onListFragmentInteraction(Form item) {
-        SELECTEDFORM = item;
-        Log.e(TAG, "Form Fragment call");
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_frame, FormFragment.newInstance("intelligentsurveymanagement", "test2"));
-        //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
-        transaction.addToBackStack(FormFragment.TAG);
+        switch (item.getFormStatus()) {
+            case DigitalFormActivity.SENT:
+                SELECTEDFORM = item;
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.main_frame, new SentJobDetailsFragment());
+                transaction.addToBackStack(SentJobDetailsFragment.TAG);
+                transaction.commit();
+                break;
+            default:
+                SELECTEDFORM = item;
+                Log.e(TAG, "Form Fragment call");
+                transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.main_frame, FormFragment.newInstance("intelligentsurveymanagement", "test2"));
+                //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
+                transaction.addToBackStack(FormFragment.TAG);
 //        transaction.disallowAddToBackStack();
-        transaction.commit();
+                transaction.commit();
+                break;
+        }
+
     }
 
 }

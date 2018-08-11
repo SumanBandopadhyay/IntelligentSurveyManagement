@@ -15,6 +15,9 @@ import com.example.suman.intelligentsurveymanagement.R;
 public class SentJobDetailsFragment extends Fragment {
 
 
+    // Tag
+    public static final String TAG = "SentJobDetails";
+
     public SentJobDetailsFragment() {
         // Required empty public constructor
     }
