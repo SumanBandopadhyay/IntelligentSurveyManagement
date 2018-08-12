@@ -9,4 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="350dp" />
 
+    <Button
+        android:id="@+id/btnImgDialogEdit"
+        android:text="Edit Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

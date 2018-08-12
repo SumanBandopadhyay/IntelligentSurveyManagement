@@ -141,19 +141,20 @@ public class WorkStepsAndHazardsFragment extends Fragment {
         imgImage1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showInDialog(imgImage1.getDrawable());
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) imgImage1.getDrawable();
+                showInDialog(bitmapDrawable.getBitmap());
             }
         });
 
         return view;
     }
 
-    private void showInDialog(Drawable drawable) {
+    private void showInDialog(Bitmap bitmap) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getActivity(), "Image Saved", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Image Saved", Toast.LENGTH_SHORT).show();
             }
         }).setNegativeButton("Close", new DialogInterface.OnClickListener() {
             @Override
@@ -165,51 +166,40 @@ public class WorkStepsAndHazardsFragment extends Fragment {
                 Toast.makeText(getActivity(), "Image Editted", Toast.LENGTH_SHORT).show();
             }
         });
-        final AlertDialog dialog = builder.create();
-        LayoutInflater inflater = getLayoutInflater();
-        View dialogLayout = inflater.inflate(R.layout.image_dialog_layout, null);
-        dialog.setView(dialogLayout);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        builder.setMessage("Selected Image : ");
 
-        dialog.show();
+        LayoutInflater factory = LayoutInflater.from(getActivity());
+        final View view = factory.inflate(R.layout.image_dialog_layout, null);
+        builder.setView(view);
 
+        ImageView imageView = (ImageView) view.findViewById(R.id.imgDialogImage);
+        imageView.setImageBitmap(bitmap);
+
+
+        AlertDialog dialog = builder.create();
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
-            public void onShow(DialogInterface d) {
-                ImageView image = (ImageView) dialog.findViewById(R.id.imgDialogImage);
-                Bitmap icon = drawableToBitmap(drawable);
-                image.setImageBitmap(icon);
-                float imageWidthInPX = (float)image.getWidth();
+            public void onShow(DialogInterface dialog) {
+                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setOnClickListener(new View.OnClickListener() {
 
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(Math.round(imageWidthInPX),
-                        Math.round(imageWidthInPX * (float)icon.getHeight() / (float)icon.getWidth()));
-                image.setLayoutParams(layoutParams);
+                    @Override
+                    public void onClick(View view) {
+                        // TODO Do something
 
-
+                        //Dismiss once everything is OK.
+                    }
+                });
             }
         });
-    }
+//        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+        builder.show();
 
-    public static Bitmap drawableToBitmap (Drawable drawable) {
-        Bitmap bitmap = null;
-
-        if (drawable instanceof BitmapDrawable) {
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            if(bitmapDrawable.getBitmap() != null) {
-                return bitmapDrawable.getBitmap();
-            }
-        }
-
-        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
-        } else {
-            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        }
-
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-        return bitmap;
     }
 
     private void dispatchTakePictureIntent(){
