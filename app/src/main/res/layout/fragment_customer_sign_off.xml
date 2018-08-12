@@ -224,7 +224,9 @@
                     android:text="Clear"
                     android:layout_weight="1"
                     android:layout_marginTop="16dp"
-                    android:backgroundTint="#DD2476"/>
+                    android:background="@drawable/my_button"
+                    android:textColor="#FFF"
+                    android:layout_marginRight="10dp"/>
 
                 <Button
                     android:layout_width="match_parent"
@@ -233,7 +235,8 @@
                     android:text="Submit"
                     android:layout_weight="1"
                     android:layout_marginTop="16dp"
-                    android:backgroundTint="#DD2476"/>
+                    android:background="@drawable/my_button"
+                    android:textColor="#FFF"/>
             </LinearLayout>
 
             <!--Button

@@ -5,14 +5,16 @@
     <color name="colorAccent">#FF4081</color>
     <color name="backgroundcolor">#fcfcfc</color>
     <color name="lightgray">#ededed</color>
-    <color name="deeppurple">#7c4dff</color>
+    <color name="deepblue">#0F6BAC</color>
     <color name="yellow">#ffb300</color>
     <color name="green">#00bfa5</color>
     <color name="darkblue">#23283a</color>
     <color name="testcolorblue">#152b38</color>
     <color name="pink">#fe104d</color>
     <color name="black_overlay">#66000000</color>
-    <color name="colorYellow">#D4AF37</color>
+    <color name="colorYellow">#F6A113</color>
+    <color name="colorNegative">#F2692D</color>
     <color name="colorWhite">#fff</color>
+    <color name="colorOrange">#F05C1E</color>
     <color name="silver">#C0C0C0</color>
 </resources>

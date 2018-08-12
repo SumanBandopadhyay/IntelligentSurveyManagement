@@ -344,7 +344,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
                 DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
                 DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
                 DigitalFormActivity.initializeLists(getActivity());
-                Toast.makeText(getActivity(), "Saved", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.btn_date_picker:

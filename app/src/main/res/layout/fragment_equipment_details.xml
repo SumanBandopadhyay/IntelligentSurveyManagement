@@ -36,7 +36,8 @@
                     android:layout_height="wrap_content"
                     android:text="start scan"
                     android:layout_weight="1"
-                    android:backgroundTint="#DD2476"/>
+                    android:background="@drawable/my_button"
+                    android:textColor="#FFF"/>
 
             </LinearLayout>
 

@@ -136,7 +136,7 @@ public class CustomerSignOffFragment extends Fragment {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Data submitted successfully !", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Data submitted successfully !", Toast.LENGTH_LONG).show();
 
                         DigitalFormActivity.SELECTEDFORM.setCustomerName(edtCustomerName.getText().toString());
                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

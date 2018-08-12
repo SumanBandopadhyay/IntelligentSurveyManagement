@@ -275,7 +275,8 @@
                 android:text="SAVE"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorAccent"/>
+                android:background="@drawable/my_button"
+                android:textColor="#FFF"/>
 
 
         </LinearLayout>
