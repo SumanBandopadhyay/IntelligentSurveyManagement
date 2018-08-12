@@ -1,13 +1,18 @@
 package intelligentsurveymanagement.fragments;
 
+import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.CursorLoader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -27,6 +32,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 import java.util.Random;
 
@@ -100,9 +107,6 @@ public class VideoReferenceFragment extends Fragment {
         btnCaptureVid = (Button) view.findViewById(R.id.btn_capture_vid);
         vidCapturedVid = (VideoView) view.findViewById(R.id.vid_captured_vid);
 
-//        if (DigitalFormActivity.SELECTEDFORM.getVideoURI().length() > 0) {
-//            vidCapturedVid.setVideoURI(Uri.parse(DigitalFormActivity.SELECTEDFORM.getVideoURI()));
-//        }
         Toast.makeText(getActivity(), DigitalFormActivity.SELECTEDFORM.getVideoURI(), Toast.LENGTH_LONG).show();
 
         vidCapturedVid.setZOrderOnTop(true);
@@ -113,7 +117,10 @@ public class VideoReferenceFragment extends Fragment {
         vidCapturedVid.setBackgroundColor(Color.TRANSPARENT);
         vidCapturedVid.requestFocus();
 
-        vidCapturedVid.setVideoURI(Uri.parse(DigitalFormActivity.SELECTEDFORM.getVideoURI()));
+        if (DigitalFormActivity.SELECTEDFORM.getVideoURI() != null) {
+            vidCapturedVid.setVideoURI(Uri.parse(DigitalFormActivity.SELECTEDFORM.getVideoURI()));
+            vidCapturedVid.start();
+        }
 
         btnCaptureVid.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,142 +132,41 @@ public class VideoReferenceFragment extends Fragment {
         return view;
     }
 
-    public File getPublicAlbumStorageDir(String albumName) {
-        // Get the directory for the user's public pictures directory.
-        File file = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOWNLOADS), albumName);
-        file.mkdirs();
-        if (!file.mkdirs()) {
-            Log.e(VideoReferenceFragment.TAG, "Directory not created");
-        }
-        return file;
+    public String getRealPathFromURI(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+
+        //This method was deprecated in API level 11
+        //Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+
+        CursorLoader cursorLoader = new CursorLoader(
+                getActivity(),
+                contentUri, proj, null, null, null);
+        Cursor cursor = cursorLoader.loadInBackground();
+
+        int column_index =
+                cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             Uri videoUri = data.getData();
+            //path converted from Uri
+            String convertedPath = getRealPathFromURI(videoUri);
+            Log.e(TAG, "Converted Path : " + convertedPath);
+            ContentResolver cr = getActivity().getContentResolver();
+            String mime = cr.getType(videoUri);
+            Log.e(TAG, "Mime : " + mime);
+            File file = new File(convertedPath);
+            Log.e(TAG, "File : " + file.toString());
             vidCapturedVid.setVideoURI(videoUri);
             vidCapturedVid.start();
-
-//            File file = getPublicAlbumStorageDir("vid.mp4");
-
-//            savefile(videoUri);
-
-            // make the directory
-            File vidDir = new File(android.os.Environment.getExternalStoragePublicDirectory
-                    (Environment.DIRECTORY_DOWNLOADS) + File.separator + "Saved iCute Videos");
-            vidDir.mkdirs();
-            // create unique identifier
-            Random generator = new Random();
-            int n = 100;
-            n = generator.nextInt(n);
-            // create file name
-            String videoName = "Video_" + n + ".mp4";
-            File fileVideo = new File(vidDir.getAbsolutePath(), videoName);
-
-            saveVideo(Uri.parse(fileVideo.getPath()));
-            DigitalFormActivity.SELECTEDFORM.setVideoURI(fileVideo.getPath());
+            DigitalFormActivity.SELECTEDFORM.setVideoURI(convertedPath);
             DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
             DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
             DigitalFormActivity.initializeLists(getActivity());
-        }
-    }
-
-    // save your video to SD card
-    protected void saveVideo(final Uri uriVideo){
-
-        File fileVideo = new File(uriVideo.toString());
-        Toast.makeText(getActivity(), fileVideo.getPath(), Toast.LENGTH_LONG).show();
-
-        boolean success = false;
-
-        try {
-            if (fileVideo.createNewFile()) {
-                success = true;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (success) {
-            Toast.makeText(getActivity(), "Video saved!",
-                    Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getActivity(),
-                    "Error during video saving", Toast.LENGTH_LONG).show();
-        }
-
-        // click the video to save it
-//        vidCapturedVid.setOnTouchListener(new View.OnTouchListener() {
-//
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//                boolean success = false;
-//
-//                File fileVideo = new File(uriVideo.toString());
-//                Toast.makeText(getActivity(), fileVideo.getPath(), Toast.LENGTH_LONG).show();
-//
-//                try {
-//                    fileVideo.createNewFile();
-//                    success = true;
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                if (success) {
-//                    Toast.makeText(getActivity(), "Video saved!",
-//                            Toast.LENGTH_LONG).show();
-//                } else {
-//                    Toast.makeText(getActivity(),
-//                            "Error during video saving", Toast.LENGTH_LONG).show();
-//                }
-//
-//                return true;
-//            }
-//        });
-    }
-
-    void savefile(Uri sourceuri)
-    {
-        String sourceFilename= sourceuri.getPath();
-
-        File file = getPublicAlbumStorageDir("vid");
-        Toast.makeText(getActivity(), file.getPath(), Toast.LENGTH_LONG).show();
-//        try {
-//            FileOutputStream fos = new FileOutputStream(file);
-//            fos.write();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
-        DigitalFormActivity.SELECTEDFORM.setVideoURI(file.toString());
-        DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
-        DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
-        DigitalFormActivity.initializeLists(getActivity());
-
-
-        BufferedInputStream bis = null;
-        BufferedOutputStream bos = null;
-
-        try {
-            bis = new BufferedInputStream(new FileInputStream(sourceFilename));
-            bos = new BufferedOutputStream(new FileOutputStream(file));
-            File tempFile = new File(sourceFilename);
-            byte[] buf = new byte[(int)tempFile.length()];
-            bis.read(buf);
-            do {
-                bos.write(buf);
-            } while(bis.read(buf) != -1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (bis != null) bis.close();
-                if (bos != null) bos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
