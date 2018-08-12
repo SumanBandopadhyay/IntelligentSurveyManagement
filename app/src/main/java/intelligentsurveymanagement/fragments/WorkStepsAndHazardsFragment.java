@@ -114,35 +114,16 @@ public class WorkStepsAndHazardsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_work_steps_and_hazards, container, false);
         btnCaptureImage = (Button) view.findViewById(R.id.btn_capture_image);
         btnEditImage = (Button) view.findViewById(R.id.btn_edit_image);
-        //btnSaveData = (Button) view.findViewById(R.id.btn_save_data);
         imageEditPad = (SignaturePad) view.findViewById(R.id.image_edit_pad);
         imageEditPad.setBackgroundColor(Color.TRANSPARENT);
 
         if (DigitalFormActivity.SELECTEDFORM.getImage() != null) {
-//            Drawable image = new BitmapDrawable(getResources(),BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
-//            imageEditPad.setBackground(image);
-//            imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
             loadimage();
-//            imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
         }
 
-
-        //btnCaptureVid = (Button) view.findViewById(R.id.btn_capture_video);
-        //vidCapturedVid = (VideoView) view.findViewById(R.id.vid_captured_vid);
-
-//        btnQRScan = (Button) view.findViewById(R.id.btn_qr_scan);
         imageEditPad.setEnabled(false);
         imageEditPad.setPenColor(Color.RED);
 
-        /*vidCapturedVid.setZOrderOnTop(true);
-        MediaController mediaController = new MediaController(getContext());
-        mediaController.setAnchorView(vidCapturedVid);
-        mediaController.setMediaPlayer(vidCapturedVid);
-        vidCapturedVid.setMediaController(mediaController);
-        vidCapturedVid.setBackgroundColor(Color.TRANSPARENT);*/
-
-        //vidCapturedVid.requestFocus();
-        //vidCapturedVid.setZOrderMediaOverlay(false);
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,20 +140,15 @@ public class WorkStepsAndHazardsFragment extends Fragment {
                     imageEditPad.setEnabled(false);
 
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//                    imageEditPad.setMaxWidth(imageEditPad.getBackground().getMinimumWidth());
                     Bitmap bitmap = imageEditPad.getSignatureBitmap();
-
-//                    bitmap = imageEditPad.getSignatureBitmap();
-//                    Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(),
-//                            drawable);
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                     byte[] bytes = byteArrayOutputStream.toByteArray();
-                    //imageBitmap.recycle();
 
                     DigitalFormActivity.SELECTEDFORM.setImage(bytes);
                     DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
                     DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getContext(), DigitalFormActivity.SELECTEDFORM);
-//                    DigitalFormActivity.initializeLists(getActivity());
+
+                    Toast.makeText(getActivity(), "Successfully Saved", Toast.LENGTH_LONG).show();
                 } else {
                     btnEditImage.setText("Save");
                     imageEditPad.setEnabled(true);
@@ -182,27 +158,8 @@ public class WorkStepsAndHazardsFragment extends Fragment {
                 }
             }
         });
-       /* btnCaptureVid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dispatchTakeVideoIntent();
-            }
-        });*/
-//        btnQRScan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                scanQR();
-//            }
-//        });
         return view;
     }
-
-//    private void dispatchTakeVideoIntent() {
-//        Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-//        if (takeVideoIntent.resolveActivity(getContext().getPackageManager()) != null) {
-//            startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
-//        }
-//    }
 
     private void dispatchTakePictureIntent(){
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -239,48 +196,19 @@ public class WorkStepsAndHazardsFragment extends Fragment {
 
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get(WorkStepsAndHazardsFragment.DATA);
-//            imageEditPad.setSignatureBitmap(imageBitmap);
             imageEditPad.clear();
 
-//            Bitmap bitmap = Bitmap.createBitmap(imageBitmap);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             byte[] bytes = byteArrayOutputStream.toByteArray();
-//            //imageBitmap.recycle();
-//
+
             DigitalFormActivity.SELECTEDFORM.setImage(bytes);
             DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
             DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getContext(), DigitalFormActivity.SELECTEDFORM);
             DigitalFormActivity.initializeLists(getActivity());
-//            loadimage();
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
-//            imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-//            imageEditPad.setSignatureBitmap(imageBitmap);
-//            Toast.makeText(getContext(), "Width : " + imageBitmap.getWidth() + ", Height : " + imageBitmap.getHeight(), Toast.LENGTH_LONG).show();
             Drawable drawable = new BitmapDrawable(getResources(),imageBitmap);
-//            Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
-//            imageEditPad.setSignatureBitmap(bitmap);
-//            imageEditPad.setMaxWidth(imageEditPad.getBackground().getMinimumWidth());
-//            imageEditPad.setMaxWidth(imageBitmap.getWidth());
-//            int width = getActivity().getResources().getDisplayMetrics().widthPixels;
-//            int height = (width*bitmap.getHeight())/bitmap.getWidth();
-//            imageEditPad.setSignatureBitmap(imageBitmap);
-//            imageEditPad.setMinWidth(width);
-//            imageEditPad.setMinimumHeight(height);
             imageEditPad.setBackground(drawable);
-//            Bitmap mutableBitmap = imageBitmap.copy(Bitmap.Config.ARGB_8888, true);
-//            imageEditPad.draw(new Canvas(mutableBitmap));
         }
-//        else if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-//            Uri videoUri = data.getData();
-//            vidCapturedVid.setVideoURI(videoUri);
-//            vidCapturedVid.start();
-//        }
     }
 
     @Override
@@ -291,12 +219,6 @@ public class WorkStepsAndHazardsFragment extends Fragment {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //IntentIntegrator integrator = new IntentIntegrator(getActivity());
-                    //integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                    //integrator.setPrompt("Scan a QR Code");
-                    //integrator.setResultDisplayDuration(0);
-                    //integrator.setCameraId(3);  // Use a specific camera of the device
-                    //integrator.initiateScan();
                 } else {
                     Toast.makeText(getContext(), "Camera permission denied. Cannot scan QR.", Toast.LENGTH_LONG).show();
                 }
