@@ -79,7 +79,9 @@ public class DigitalFormActivity extends AppCompatActivity
         String[] PERMISSIONS = {
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
-                android.Manifest.permission.CAMERA
+                android.Manifest.permission.CAMERA,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
         };
 
         if(!hasPermissions(this, PERMISSIONS)){
