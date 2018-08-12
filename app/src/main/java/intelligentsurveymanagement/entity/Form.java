@@ -53,6 +53,9 @@ public class Form {
     @ColumnInfo (name = "image", typeAffinity = ColumnInfo.BLOB)
     private byte[] image;
 
+    @ColumnInfo (name = "video_uri")
+    private String videoURI;
+
     @ColumnInfo (name = "scan_format")
     private String scanFormat;
 
@@ -292,5 +295,13 @@ public class Form {
 
     public void setCustomerSignature(byte[] customerSignature) {
         this.customerSignature = customerSignature;
+    }
+
+    public String getVideoURI() {
+        return videoURI;
+    }
+
+    public void setVideoURI(String videoURI) {
+        this.videoURI = videoURI;
     }
 }
