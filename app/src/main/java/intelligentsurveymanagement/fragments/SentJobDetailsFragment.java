@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.example.suman.intelligentsurveymanagement.R;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 
+import org.w3c.dom.Text;
+
 import intelligentsurveymanagement.activities.DigitalFormActivity;
 
 /**
@@ -40,7 +42,16 @@ public class SentJobDetailsFragment extends Fragment {
     private TextView txtEvalThree;
     private TextView txtEvalFour;
     private TextView txtEvalFive;
+    private TextView txtEvalSix;
     private ImageView imgSentImage;
+    private TextView txtScanCode;
+    private TextView txtCustomerName;
+    private TextView txtRbWellTrainedEngg;
+    private TextView txtRbProfessionalStandard;
+    private TextView txtRbWellSupervisedEngineer;
+    private TextView txtRbCustomerSatisfied;
+    private TextView txtSentComment;
+    private ImageView imgSentCustomerSignature;
 
     public SentJobDetailsFragment() {
         // Required empty public constructor
@@ -69,8 +80,19 @@ public class SentJobDetailsFragment extends Fragment {
         txtSentLocation = (TextView)view.findViewById(R.id.sent_address);
         txtEvalOne = (TextView)view.findViewById(R.id.sent_eval_one);
         txtEvalTwo = (TextView)view.findViewById(R.id.sent_eval_two);
+        txtEvalThree = (TextView)view.findViewById(R.id.sent_eval_three);
+        txtEvalFour = (TextView)view.findViewById(R.id.sent_eval_four);
+        txtEvalFive = (TextView)view.findViewById(R.id.sent_eval_five);
+        txtEvalSix = (TextView)view.findViewById(R.id.sent_eval_six);
         imgSentImage = (ImageView) view.findViewById(R.id.sent_image);
-
+        txtScanCode = (TextView)view.findViewById(R.id.sent_code);
+        txtCustomerName = (TextView)view.findViewById(R.id.sent_customer_name);
+        txtRbWellTrainedEngg = (TextView) view.findViewById(R.id.sent_customer_rating_one);
+        txtRbProfessionalStandard = (TextView) view.findViewById(R.id.sent_customer_rating_two);
+        txtRbWellSupervisedEngineer = (TextView) view.findViewById(R.id.sent_customer_rating_three);
+        txtRbCustomerSatisfied = (TextView) view.findViewById(R.id.sent_customer_rating_four);
+        txtSentComment = (TextView) view.findViewById(R.id.sent_comment);
+        imgSentCustomerSignature = (ImageView) view.findViewById(R.id.sent_customer_signature);
     }
 
     private void loadDBData() {
@@ -82,16 +104,34 @@ public class SentJobDetailsFragment extends Fragment {
         txtSentInspector.setText(DigitalFormActivity.SELECTEDFORM.getInspector());
         txtSentLocation.setText(DigitalFormActivity.SELECTEDFORM.getJobLocation());
         txtEvalOne.setText(DigitalFormActivity.SELECTEDFORM.isWalked()+"");
+        txtEvalTwo.setText(DigitalFormActivity.SELECTEDFORM.isLiveSystem()+"");
+        txtEvalThree.setText(DigitalFormActivity.SELECTEDFORM.isTrained()+"");
+        txtEvalFour.setText(DigitalFormActivity.SELECTEDFORM.isMsds()+"");
+        txtEvalFive.setText(DigitalFormActivity.SELECTEDFORM.isAirMonitoring()+"");
+        txtEvalSix.setText(DigitalFormActivity.SELECTEDFORM.isWorkPermits()+"");
         if (DigitalFormActivity.SELECTEDFORM.getImage() != null) {
             loadimage();
         }
-
-
+        txtScanCode.setText(DigitalFormActivity.SELECTEDFORM.getScanContent());
+        txtCustomerName.setText(DigitalFormActivity.SELECTEDFORM.getCustomerName());
+        txtRbWellTrainedEngg.setText(Float.toString(DigitalFormActivity.SELECTEDFORM.getWellTrainedEngineer()));
+        txtRbProfessionalStandard.setText(Float.toString(DigitalFormActivity.SELECTEDFORM.getProfessionalStandard()));
+        txtRbWellSupervisedEngineer.setText(Float.toString(DigitalFormActivity.SELECTEDFORM.getWellSupervisedEngineer()));
+        txtRbCustomerSatisfied.setText(Float.toString(DigitalFormActivity.SELECTEDFORM.getCustomerSatisfied()));
+        txtSentComment.setText(DigitalFormActivity.SELECTEDFORM.getCustomerComment());
+        if (DigitalFormActivity.SELECTEDFORM.getCustomerSignature() != null) {
+            loadSignature();
+        }
     }
 
     private void loadimage() {
         imgSentImage.setBackgroundColor(Color.TRANSPARENT);
         imgSentImage.setImageBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
+    }
+
+    private void loadSignature() {
+        imgSentCustomerSignature.setBackgroundColor(Color.TRANSPARENT);
+        imgSentCustomerSignature.setImageBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getCustomerSignature(), 0, DigitalFormActivity.SELECTEDFORM.getCustomerSignature().length));
     }
 
 }

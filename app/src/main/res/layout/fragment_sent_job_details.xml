@@ -366,7 +366,7 @@
                     android:textSize="16dp"/>
 
                 <TextView
-                    android:id="@+id/sent_QR"
+                    android:id="@+id/sent_code"
                     android:text="Field Survey"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -572,7 +572,6 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:maxLines="4"
-                    android:lines="4"
                     android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                     android:textSize="16dp"
                     android:paddingLeft="8dp"
@@ -594,7 +593,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/sent_customer_image_two"
+                    android:id="@+id/sent_customer_signature"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:src="@drawable/sunset"/>
