@@ -80,7 +80,7 @@
                     android:textSize="16dp"/>
 
                 <TextView
-                    android:id="@+id/sent_job"
+                    android:id="@+id/sent_job_title"
                     android:text="Maintenance of Buildings and Institution"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -95,13 +95,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:text="Date and Time : "
+                    android:text="Date and Time :"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/sent_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
@@ -128,7 +129,6 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:maxLines="4"
-                    android:lines="4"
                     android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                     android:textSize="16dp"
                     android:paddingLeft="8dp"

@@ -107,7 +107,7 @@ public class VideoReferenceFragment extends Fragment {
         btnCaptureVid = (Button) view.findViewById(R.id.btn_capture_vid);
         vidCapturedVid = (VideoView) view.findViewById(R.id.vid_captured_vid);
 
-        Toast.makeText(getActivity(), DigitalFormActivity.SELECTEDFORM.getVideoURI(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), DigitalFormActivity.SELECTEDFORM.getVideoURI(), Toast.LENGTH_LONG).show();
 
         vidCapturedVid.setZOrderOnTop(true);
         MediaController mediaController = new MediaController(getActivity());
