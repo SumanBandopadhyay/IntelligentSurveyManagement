@@ -1,11 +1,13 @@
 package intelligentsurveymanagement.activities;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -35,6 +37,7 @@ import intelligentsurveymanagement.fragments.LeftFragment;
 import intelligentsurveymanagement.fragments.SentJobDetailsFragment;
 import intelligentsurveymanagement.fragments.SentJobsFragment;
 import intelligentsurveymanagement.fragments.SiteInformationFragment;
+import intelligentsurveymanagement.fragments.VideoReferenceFragment;
 import intelligentsurveymanagement.fragments.WorkStepsAndHazardsFragment;
 import intelligentsurveymanagement.utils.DatabaseInitializer;
 
@@ -72,6 +75,41 @@ public class DigitalFormActivity extends AppCompatActivity
         toolbar.setTitle("Jiffy");
         setSupportActionBar(toolbar);
 
+        int PERMISSION_ALL = 1;
+        String[] PERMISSIONS = {
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                android.Manifest.permission.CAMERA
+        };
+
+        if(!hasPermissions(this, PERMISSIONS)){
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
+
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+//                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+//                && ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+//                    && ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)
+//                    && ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
+//                Toast.makeText(this, "Need Location and Camera Permission for Form", Toast.LENGTH_LONG).show();
+//            } else {
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+//
+//            }
+//        }
+
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+//                Toast.makeText(this, "Need Camera permission for Form", Toast.LENGTH_LONG).show();
+//            } else {
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 3);
+//
+//            }
+//        }
+
         appExecutors = new AppExecutors();
 
         sharedPreferences = this.getPreferences(MODE_PRIVATE);
@@ -100,6 +138,17 @@ public class DigitalFormActivity extends AppCompatActivity
 //        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
 //        navigationView.getMenu().getItem(0).setChecked(true);
 //        navigationView.setCheckedItem(R.id.nav_home);
+    }
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 //    @Override
@@ -245,6 +294,15 @@ public class DigitalFormActivity extends AppCompatActivity
                 fl.removeAllViews();
                 transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.right_panel, customerSignOffFragment);
+                transaction.disallowAddToBackStack();
+                transaction.commit();
+                break;
+            case R.layout.fragment_video_reference:
+                VideoReferenceFragment videoReferenceFragment = VideoReferenceFragment.newInstance("", "");
+                fl = (FrameLayout) findViewById(R.id.right_panel);
+                fl.removeAllViews();
+                transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.right_panel, videoReferenceFragment);
                 transaction.disallowAddToBackStack();
                 transaction.commit();
                 break;

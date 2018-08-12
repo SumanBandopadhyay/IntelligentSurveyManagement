@@ -1,14 +1,19 @@
 package intelligentsurveymanagement.fragments;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -123,26 +128,55 @@ public class CustomerSignOffFragment extends Fragment {
         btnSubmitData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Data submitted successfully !",Toast.LENGTH_LONG).show();
 
-                DigitalFormActivity.SELECTEDFORM.setCustomerName(edtCustomerName.getText().toString());
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                Bitmap bitmap = signaturePad.getSignatureBitmap();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                byte[] bytes = byteArrayOutputStream.toByteArray();
-                DigitalFormActivity.SELECTEDFORM.setCustomerSignature(bytes);
-                DigitalFormActivity.SELECTEDFORM.setWellTrainedEngineer(rbWellTrainedEngg.getRating());
-                DigitalFormActivity.SELECTEDFORM.setWellSupervisedEngineer(rbWellSupervisedEngineer.getRating());
-                DigitalFormActivity.SELECTEDFORM.setProfessionalStandard(rbProfessionalStandard.getRating());
-                DigitalFormActivity.SELECTEDFORM.setCustomerSatisfied(rbCustomerSatisfied.getRating());
-                DigitalFormActivity.SELECTEDFORM.setCustomerComment(edtCustomerComment.getText().toString());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Confirm Submit !");
+                builder.setMessage("Are you sure you want to submit the data ?");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Data submitted successfully !", Toast.LENGTH_SHORT).show();
 
-                if (DigitalFormActivity.SELECTEDFORM.getFormStatus().equals(DigitalFormActivity.INBOX) || DigitalFormActivity.SELECTEDFORM.getFormStatus().equals(DigitalFormActivity.DRAFT)) {
-                    DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.SENT);
-                }
+                        DigitalFormActivity.SELECTEDFORM.setCustomerName(edtCustomerName.getText().toString());
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        Bitmap bitmap = signaturePad.getSignatureBitmap();
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                        byte[] bytes = byteArrayOutputStream.toByteArray();
+                        DigitalFormActivity.SELECTEDFORM.setCustomerSignature(bytes);
+                        DigitalFormActivity.SELECTEDFORM.setWellTrainedEngineer(rbWellTrainedEngg.getRating());
+                        DigitalFormActivity.SELECTEDFORM.setWellSupervisedEngineer(rbWellSupervisedEngineer.getRating());
+                        DigitalFormActivity.SELECTEDFORM.setProfessionalStandard(rbProfessionalStandard.getRating());
+                        DigitalFormActivity.SELECTEDFORM.setCustomerSatisfied(rbCustomerSatisfied.getRating());
+                        DigitalFormActivity.SELECTEDFORM.setCustomerComment(edtCustomerComment.getText().toString());
 
-                DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
-                DigitalFormActivity.initializeLists(getActivity());
+                        if (DigitalFormActivity.SELECTEDFORM.getFormStatus().equals(DigitalFormActivity.INBOX) || DigitalFormActivity.SELECTEDFORM.getFormStatus().equals(DigitalFormActivity.DRAFT)) {
+                            DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.SENT);
+                        }
+
+                        DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
+                        DigitalFormActivity.initializeLists(getActivity());
+
+                        HomeFragment videoReferenceFragment = HomeFragment.newInstance("", "");
+//                        FrameLayout fl = (FrameLayout) view.findViewById(R.id.right_panel);
+//                        fl.removeAllViews();
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.main_frame, videoReferenceFragment);
+                        transaction.disallowAddToBackStack();
+                        transaction.commit();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Submission Cancelled !", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                builder.show();
+
+                //Toast.makeText(getActivity(),"Data submitted successfully !",Toast.LENGTH_LONG).show();
             }
         });
         return view;

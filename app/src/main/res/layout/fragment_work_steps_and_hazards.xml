@@ -25,111 +25,29 @@
                 android:textSize="16dp"
                 android:textStyle="bold"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:padding="10dp">
-
-                <Button
-                    android:id="@+id/btn_capture_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Capture Image"
-                    android:layout_weight="1"
-                    android:backgroundTint="#DD2476"/>
-
-                <Button
-                    android:id="@+id/btn_edit_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Edit Image"
-                    android:layout_weight="1"
-                    android:backgroundTint="#DD2476"
-                    android:enabled="false"/>
-
-                <!--ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_menu_camera"/-->
-
-                <!--ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_camera"/-->
-
-            </LinearLayout>
-
-
-            <com.github.gcacace.signaturepad.views.SignaturePad
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:id="@+id/image_edit_pad"/>
-
-
-
-            <!--Button
-                android:id="@+id/btn_save_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Save"
-                android:backgroundTint="#DD2476"
-                android:enabled="false"/-->
-
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Upload any reference Video : "-->
-                <!--android:textSize="20dp"-->
-                <!--android:textStyle="bold"/>-->
-
-
-            <!--<Button android:id="@+id/btn_qr_scan"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:text="SCAN" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/scan_format"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textIsSelectable="true"-->
-                <!--android:layout_centerHorizontal="true"/>-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/scan_content"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textIsSelectable="true"-->
-                <!--android:layout_centerHorizontal="true"/>-->
-
-            <!--TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Upload any reference Video : "
-                android:textSize="16dp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"/>
-
             <Button
-                android:id="@+id/btn_capture_video"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Capture Video"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#DD2476"/>
+                android:id="@+id/btn_add_img"
+                android:text="Add Image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-            <VideoView
-                android:id="@+id/vid_captured_vid"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="#DD2476"/-->
+            <ImageView
+                android:id="@+id/img_image_1"
+                android:visibility="gone"
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
 
+            <ImageView
+                android:id="@+id/img_image_2"
+                android:visibility="gone"
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
+
+            <ImageView
+                android:id="@+id/img_image_3"
+                android:visibility="gone"
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
 
         </LinearLayout>
     </ScrollView>

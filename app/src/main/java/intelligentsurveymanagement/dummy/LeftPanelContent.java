@@ -38,6 +38,8 @@ public class LeftPanelContent {
         addItem(dummyItem);
         dummyItem = new DummyItem(R.layout.fragment_work_steps_and_hazards, "Work Steps and Hazards");
         addItem(dummyItem);
+        dummyItem = new DummyItem(R.layout.fragment_video_reference, "Video Reference");
+        addItem(dummyItem);
         dummyItem = new DummyItem(R.layout.fragment_equipment_details, "Equipment Details");
         addItem(dummyItem);
         dummyItem = new DummyItem(R.layout.fragment_customer_sign_off, "Customer Sign Off");

@@ -139,7 +139,7 @@ public class EquipmentDetailsFragment extends Fragment {
 //        integrator.setResultDisplayDuration(0);
 //        integrator.setCameraId(0);  // Use a specific camera of the device
         IntentIntegrator.forSupportFragment(EquipmentDetailsFragment.this).setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES).initiateScan();
-//        IntentIntegrator.forFragment(EquipmentDetailsFragment.this).setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES).initiateScan();
+        IntentIntegrator.forSupportFragment(EquipmentDetailsFragment.this).setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES).initiateScan();
     }
 
     @Override
@@ -154,7 +154,7 @@ public class EquipmentDetailsFragment extends Fragment {
             String content = scanningResult.getContents();
             String format = scanningResult.getFormatName();
 
-            Toast.makeText(getActivity(),"Content : "+content, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(),"Content : "+content, Toast.LENGTH_LONG).show();
             txtScanFormat.setText(format);
             txtScanContent.setText(content);
 
@@ -165,8 +165,8 @@ public class EquipmentDetailsFragment extends Fragment {
             DigitalFormActivity.initializeLists(getActivity());
 
         }else{
-            Toast toast = Toast.makeText(getActivity(),"No scan data received!", Toast.LENGTH_SHORT);
-            toast.show();
+            //Toast toast = Toast.makeText(getActivity(),"No scan data received!", Toast.LENGTH_SHORT);
+            //toast.show();
         }
     }
     // TODO: Rename method, update argument and hook method into UI event
