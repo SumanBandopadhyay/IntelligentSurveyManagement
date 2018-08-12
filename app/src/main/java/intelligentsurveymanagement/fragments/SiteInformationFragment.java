@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -195,6 +196,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
     }
 
     private void loadDBData() {
+        Toast.makeText(getActivity(), "DB Data Loaded", Toast.LENGTH_LONG).show();
         txtFormId.setText(Integer.toString(DigitalFormActivity.SELECTEDFORM.getFormid()));
         edtDateTime.setText(DigitalFormActivity.SELECTEDFORM.getDateTime());
         edtInspector.setText(DigitalFormActivity.SELECTEDFORM.getInspector());
