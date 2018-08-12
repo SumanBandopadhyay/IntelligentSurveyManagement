@@ -51,12 +51,8 @@ public class WorkStepsAndHazardsFragment extends Fragment {
     private static final String DATA = "data";
     private Button btnCaptureImage;
     private Button btnEditImage;
-    //private Button btnSaveData;
 
-    //    private Button btnQRScan;
     private SignaturePad imageEditPad;
-    //    private Button btnCaptureVid;
-//    private VideoView vidCapturedVid;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,7 +60,6 @@ public class WorkStepsAndHazardsFragment extends Fragment {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int RESULT_OK = -1;
-    //    static final int REQUEST_VIDEO_CAPTURE = 2;
     private static  final int MY_PERMISSIONS_REQUEST_CAMERA = 3;
 
     // TODO: Rename and change types of parameters
@@ -72,8 +67,6 @@ public class WorkStepsAndHazardsFragment extends Fragment {
     private String mParam2;
 
     public static final String TAG = "WorkStepsAndHazard";
-
-    //private OnFragmentInteractionListener mListener;
 
     public WorkStepsAndHazardsFragment() {
         // Required empty public constructor
@@ -115,8 +108,9 @@ public class WorkStepsAndHazardsFragment extends Fragment {
         btnCaptureImage = (Button) view.findViewById(R.id.btn_capture_image);
         btnEditImage = (Button) view.findViewById(R.id.btn_edit_image);
         imageEditPad = (SignaturePad) view.findViewById(R.id.image_edit_pad);
-        imageEditPad.setBackgroundColor(Color.TRANSPARENT);
+//        imageEditPad.setBackgroundColor(Color.TRANSPARENT);
 
+        Log.e(TAG, "Image at onCreateView");
         if (DigitalFormActivity.SELECTEDFORM.getImage() != null) {
             loadimage();
         }
@@ -146,13 +140,17 @@ public class WorkStepsAndHazardsFragment extends Fragment {
 
                     DigitalFormActivity.SELECTEDFORM.setImage(bytes);
                     DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
-                    DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getContext(), DigitalFormActivity.SELECTEDFORM);
-
+                    DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
+                    DigitalFormActivity.initializeLists(getActivity());
+                    
+                    loadimage();
+                    Log.e(TAG, "Image at save");
                     Toast.makeText(getActivity(), "Successfully Saved", Toast.LENGTH_LONG).show();
                 } else {
                     btnEditImage.setText("Save");
                     imageEditPad.setEnabled(true);
                     loadimage();
+                    Log.e(TAG, "Image at Edit");
                 }
             }
         });
@@ -187,10 +185,11 @@ public class WorkStepsAndHazardsFragment extends Fragment {
 
             DigitalFormActivity.SELECTEDFORM.setImage(bytes);
             DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
-            DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getContext(), DigitalFormActivity.SELECTEDFORM);
+            DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
             DigitalFormActivity.initializeLists(getActivity());
             Drawable drawable = new BitmapDrawable(getResources(),imageBitmap);
             imageEditPad.setBackground(drawable);
+            Log.e(TAG, "Image at onActivityResult");
         }
     }
 
