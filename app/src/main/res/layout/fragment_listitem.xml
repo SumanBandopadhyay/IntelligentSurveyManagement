@@ -17,7 +17,8 @@
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin" />
+        android:layout_margin="@dimen/text_margin"
+        android:buttonTint="@color/colorOrange"/>
 
     <!--<CheckBox-->
         <!--android:id="@+id/left_panel_check_box"-->

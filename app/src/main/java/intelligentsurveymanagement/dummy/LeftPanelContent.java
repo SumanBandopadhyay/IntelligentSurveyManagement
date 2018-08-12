@@ -36,7 +36,7 @@ public class LeftPanelContent {
         addItem(dummyItem);
         dummyItem = new DummyItem(R.layout.fragment_evaluating_work, "Evaluating your Work Area");
         addItem(dummyItem);
-        dummyItem = new DummyItem(R.layout.fragment_work_steps_and_hazards, "Work Steps and Hazards");
+        dummyItem = new DummyItem(R.layout.fragment_work_steps_and_hazards, "Work Steps");
         addItem(dummyItem);
         dummyItem = new DummyItem(R.layout.fragment_video_reference, "Video Reference");
         addItem(dummyItem);

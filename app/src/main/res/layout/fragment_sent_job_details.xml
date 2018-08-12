@@ -192,7 +192,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:text="Have you walked your area ? : "
@@ -213,7 +214,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:text="Are you working around live system ? : "
@@ -234,7 +236,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:text="Are you trained for this task ? : "
@@ -255,7 +258,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:text="Is an MSDS necessary for this task ? : "
@@ -276,7 +280,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:text="Is air monitoring required ? : "
@@ -370,13 +375,13 @@
             </LinearLayout>
 
             <TextView
-                android:text="CUSTOMER SIIGN OFF"
+                android:text="CUSTOMER SIGN OFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="8dp"
                 android:textColor="#454343"/>
 
             <LinearLayout
@@ -412,14 +417,26 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <TextView
-                    android:text="How well trained were the service representatives ? : "
+                    android:id="@+id/text_customer_rating_one"
+                    android:text="How well trained were the service representatives ?"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:textSize="16dp"/>
+                    android:textSize="16dp"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:layout_weight="0"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/sent_customer_rating_one"
@@ -427,22 +444,34 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:textSize="16dp"
-                    android:paddingLeft="8dp"
-                    android:padding="8dp"/>
+                    android:layout_weight="0"
+                    android:maxLines="1"/>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <TextView
-                    android:text="Do service representatives adhere to professional standards of conduct ? : "
+                    android:id="@+id/text_customer_rating_two"
+                    android:text="Do service representatives adhere to professional standards of conduct ?"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:textSize="16dp"/>
+                    android:textSize="16dp"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:layout_weight="0"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/sent_customer_rating_two"
@@ -450,45 +479,69 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:textSize="16dp"
-                    android:paddingLeft="8dp"
-                    android:padding="8dp"/>
+                    android:layout_weight="0"
+                    android:maxLines="1"/>
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/text_customer_rating_three"
-                    android:text="Were the service representatives well supervised ? : "
+                    android:text="Were the service representatives well supervised ?"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:lines="2"
                     android:textStyle="bold"
-                    android:textSize="16dp"/>
+                    android:textSize="16dp"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:layout_weight="0"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/sent_customer_rating_three"
+                    android:text="4"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:textSize="16dp"
-                    android:layout_toRightOf="@+id/text_customer_rating_three"
-                    android:text="AA"/>
+                    android:layout_weight="0"
+                    android:maxLines="1"/>
 
-            </RelativeLayout>
+            </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="4dp">
 
                 <TextView
                     android:id="@+id/text_customer_rating_four"
-                    android:text="Overall how satisfied am I with the ? : "
+                    android:text="Overall how satisfied am I with the service ?"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:textSize="16dp"/>
+                    android:textSize="16dp"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=": "
+                    android:layout_weight="0"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/sent_customer_rating_four"
@@ -496,9 +549,10 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:textSize="16dp"
-                    android:layout_toRightOf="@+id/text_customer_rating_four"/>
+                    android:layout_weight="0"
+                    android:maxLines="1"/>
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -531,7 +585,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="16dp"/>
+                android:textSize="16dp"
+                android:layout_marginBottom="10dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"

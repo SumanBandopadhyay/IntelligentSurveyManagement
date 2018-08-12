@@ -21,7 +21,10 @@
             android:text="Capture  Video"
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_button"
+            android:textColor="#FFF"
+            android:layout_marginRight="10dp"/>
 
         <Button
             android:id="@+id/btn_vid_save"
@@ -29,7 +32,9 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="false"/>
+            android:enabled="false"
+            android:background="@drawable/my_button"
+            android:textColor="#FFF"/>
 
     </LinearLayout>
 

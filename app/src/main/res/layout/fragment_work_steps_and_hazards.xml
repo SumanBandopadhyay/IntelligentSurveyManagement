@@ -38,7 +38,9 @@
                     android:layout_height="wrap_content"
                     android:text="Capture Image"
                     android:layout_weight="1"
-                    android:backgroundTint="#DD2476"/>
+                    android:background="@drawable/my_button"
+                    android:textColor="#FFF"
+                    android:layout_marginRight="10dp"/>
 
                 <Button
                     android:id="@+id/btn_edit_image"
@@ -46,7 +48,8 @@
                     android:layout_height="wrap_content"
                     android:text="Edit Image"
                     android:layout_weight="1"
-                    android:backgroundTint="#DD2476"
+                    android:background="@drawable/my_button"
+                    android:textColor="#FFF"
                     android:enabled="false"/>
 
                 <!--ImageButton
