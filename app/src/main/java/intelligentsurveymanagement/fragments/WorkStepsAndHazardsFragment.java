@@ -142,7 +142,7 @@ public class WorkStepsAndHazardsFragment extends Fragment {
                     DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
                     DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
                     DigitalFormActivity.initializeLists(getActivity());
-                    
+
                     loadimage();
                     Log.e(TAG, "Image at save");
                     Toast.makeText(getActivity(), "Successfully Saved", Toast.LENGTH_LONG).show();
