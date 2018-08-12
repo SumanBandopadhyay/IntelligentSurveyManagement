@@ -2,6 +2,7 @@ package intelligentsurveymanagement.fragments;
 
 
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -33,6 +35,12 @@ public class SentJobDetailsFragment extends Fragment {
     private TextView txtSentJobDescription;
     private TextView txtSentInspector;
     private TextView txtSentLocation;
+    private TextView txtEvalOne;
+    private TextView txtEvalTwo;
+    private TextView txtEvalThree;
+    private TextView txtEvalFour;
+    private TextView txtEvalFive;
+    private ImageView imgSentImage;
 
     public SentJobDetailsFragment() {
         // Required empty public constructor
@@ -59,17 +67,31 @@ public class SentJobDetailsFragment extends Fragment {
         txtSentJobDescription = (TextView)view.findViewById(R.id.sent_description);
         txtSentInspector = (TextView)view.findViewById(R.id.sent_inspector);
         txtSentLocation = (TextView)view.findViewById(R.id.sent_address);
+        txtEvalOne = (TextView)view.findViewById(R.id.sent_eval_one);
+        txtEvalTwo = (TextView)view.findViewById(R.id.sent_eval_two);
+        imgSentImage = (ImageView) view.findViewById(R.id.sent_image);
+
     }
 
     private void loadDBData() {
-        //txtSentJobId.setText(DigitalFormActivity.SELECTEDFORM.getFormid());
+        txtSentJobId.setText(Integer.toString(DigitalFormActivity.SELECTEDFORM.getFormid()));
         txtSentClientName.setText(DigitalFormActivity.SELECTEDFORM.getClientName());
-        //txtSentJobTitle.setText(DigitalFormActivity.SELECTEDFORM.);
+        txtSentJobTitle.setText(DigitalFormActivity.SELECTEDFORM.getProject());
         txtSentDate.setText(DigitalFormActivity.SELECTEDFORM.getDateTime());
         txtSentJobDescription.setText(DigitalFormActivity.SELECTEDFORM.getJobDescription());
         txtSentInspector.setText(DigitalFormActivity.SELECTEDFORM.getInspector());
         txtSentLocation.setText(DigitalFormActivity.SELECTEDFORM.getJobLocation());
+        txtEvalOne.setText(DigitalFormActivity.SELECTEDFORM.isWalked()+"");
+        if (DigitalFormActivity.SELECTEDFORM.getImage() != null) {
+            loadimage();
+        }
 
+
+    }
+
+    private void loadimage() {
+        imgSentImage.setBackgroundColor(Color.TRANSPARENT);
+        imgSentImage.setImageBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
     }
 
 }

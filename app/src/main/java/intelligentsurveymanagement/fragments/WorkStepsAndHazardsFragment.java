@@ -152,8 +152,6 @@ public class WorkStepsAndHazardsFragment extends Fragment {
                 } else {
                     btnEditImage.setText("Save");
                     imageEditPad.setEnabled(true);
-//                    Drawable drawable = imageEditPad.getSignatureBitmap();
-//                    imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
                     loadimage();
                 }
             }
@@ -171,21 +169,6 @@ public class WorkStepsAndHazardsFragment extends Fragment {
     private void loadimage() {
         imageEditPad.setBackgroundColor(Color.TRANSPARENT);
         imageEditPad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getImage(), 0, DigitalFormActivity.SELECTEDFORM.getImage().length));
-    }
-
-    public void scanQR(){
-        // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(getContext(),
-                Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.CAMERA},
-                    MY_PERMISSIONS_REQUEST_CAMERA);
-        } else {
-            // Permission has already been granted
-        }
-
     }
 
     @Override

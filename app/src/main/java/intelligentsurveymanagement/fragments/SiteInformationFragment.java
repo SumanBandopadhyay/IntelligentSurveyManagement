@@ -342,6 +342,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
                 DigitalFormActivity.SELECTEDFORM.setProject(txtJob.getText().toString());
                 DigitalFormActivity.SELECTEDFORM.setJobDescription(edtDescription.getText().toString());
                 DigitalFormActivity.SELECTEDFORM.setFormStatus(DigitalFormActivity.DRAFT);
+                DigitalFormActivity.SELECTEDFORM.setJobLocation(txtAddress.getText().toString());
                 DatabaseInitializer.updateJob(DigitalFormActivity.appDatabase, DigitalFormActivity.appExecutors, getActivity().getApplicationContext(), DigitalFormActivity.SELECTEDFORM);
                 DigitalFormActivity.initializeLists(getActivity());
                 Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
