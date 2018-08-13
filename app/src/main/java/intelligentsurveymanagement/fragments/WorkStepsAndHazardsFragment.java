@@ -145,7 +145,7 @@ public class WorkStepsAndHazardsFragment extends Fragment {
 
                     loadimage();
                     Log.e(TAG, "Image at save");
-                    Toast.makeText(getActivity(), "Successfully Saved", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Saved", Toast.LENGTH_LONG).show();
                 } else {
                     btnEditImage.setText("Save");
                     imageEditPad.setEnabled(true);

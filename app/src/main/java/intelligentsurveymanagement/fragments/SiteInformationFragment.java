@@ -196,7 +196,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
     }
 
     private void loadDBData() {
-        Toast.makeText(getActivity(), "DB Data Loaded", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), "DB Data Loaded", Toast.LENGTH_LONG).show();
         txtFormId.setText(Integer.toString(DigitalFormActivity.SELECTEDFORM.getFormid()));
         edtDateTime.setText(DigitalFormActivity.SELECTEDFORM.getDateTime());
         edtInspector.setText(DigitalFormActivity.SELECTEDFORM.getInspector());
