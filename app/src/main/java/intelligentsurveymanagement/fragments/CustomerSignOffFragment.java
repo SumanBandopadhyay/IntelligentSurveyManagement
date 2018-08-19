@@ -2,12 +2,16 @@ package intelligentsurveymanagement.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +45,8 @@ public class CustomerSignOffFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private static final String TAG = "CustomerSignOff";
 
     //private OnFragmentInteractionListener mListener;
 
@@ -158,11 +164,16 @@ public class CustomerSignOffFragment extends Fragment {
                         DigitalFormActivity.initializeLists(getActivity());
 
                         HomeFragment videoReferenceFragment = HomeFragment.newInstance("", "");
-//                        FrameLayout fl = (FrameLayout) view.findViewById(R.id.right_panel);
-//                        fl.removeAllViews();
-                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                        FrameLayout fl = (FrameLayout) view.findViewById(R.id.main_frame);
+//                        DigitalFormActivity.MAIN_FRAME.removeAllViews();
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        fm.popBackStack();
+                        FragmentTransaction transaction = fm.beginTransaction();
+//                        transaction.remove(fm.findFragmentByTag(DraftJobsFragment.TAG));
+//                        transaction.remove(fm.findFragmentByTag(InboxJobsFragment.TAG));
                         transaction.replace(R.id.main_frame, videoReferenceFragment);
-                        transaction.disallowAddToBackStack();
+//                        transaction.disallowAddToBackStack();
+//                        transaction.addToBackStack(HomeFragment.TAG);
                         transaction.commit();
                     }
                 });
@@ -176,10 +187,34 @@ public class CustomerSignOffFragment extends Fragment {
 
                 builder.show();
 
+                emailSend();
+
                 //Toast.makeText(getActivity(),"Data submitted successfully !",Toast.LENGTH_LONG).show();
             }
         });
         return view;
+    }
+
+    private void emailSend() {
+        Log.e("Send email", "");
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        String[] TO = {""};
+        String[] CC = {""};
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Intelligent Survey Management");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Customer :");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+//            getActivity().finish();
+            Log.e(TAG, "Finished sending email...");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(getActivity(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void loadDBData() {

@@ -25,6 +25,8 @@ import com.example.suman.intelligentsurveymanagement.R;
 import intelligentsurveymanagement.database.AppDatabase;
 import intelligentsurveymanagement.dummy.LeftPanelContent;
 import intelligentsurveymanagement.entity.Form;
+import intelligentsurveymanagement.entity.Job;
+import intelligentsurveymanagement.entity.SOAnswersResponse;
 import intelligentsurveymanagement.executor.AppExecutors;
 import intelligentsurveymanagement.fragments.CustomerSignOffFragment;
 import intelligentsurveymanagement.fragments.DraftJobsFragment;
@@ -39,7 +41,12 @@ import intelligentsurveymanagement.fragments.SentJobsFragment;
 import intelligentsurveymanagement.fragments.SiteInformationFragment;
 import intelligentsurveymanagement.fragments.VideoReferenceFragment;
 import intelligentsurveymanagement.fragments.WorkStepsAndHazardsFragment;
+import intelligentsurveymanagement.retrofit.ApiUtils;
+import intelligentsurveymanagement.retrofit.ItemsService;
 import intelligentsurveymanagement.utils.DatabaseInitializer;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import java.util.List;
 
@@ -58,6 +65,8 @@ public class DigitalFormActivity extends AppCompatActivity
     public static List<Form> INBOXFORMS;
     public static List<Form> DRAFTFORMS;
     public static Form SELECTEDFORM;
+
+    private ItemsService mService;
 
     public static AppDatabase appDatabase;
     public static AppExecutors appExecutors;
@@ -88,30 +97,6 @@ public class DigitalFormActivity extends AppCompatActivity
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
         }
 
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-//                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-//                && ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-//                    && ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)
-//                    && ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
-//                Toast.makeText(this, "Need Location and Camera Permission for Form", Toast.LENGTH_LONG).show();
-//            } else {
-//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
-//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-//
-//            }
-//        }
-
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-//                Toast.makeText(this, "Need Camera permission for Form", Toast.LENGTH_LONG).show();
-//            } else {
-//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 3);
-//
-//            }
-//        }
-
         appExecutors = new AppExecutors();
 
         sharedPreferences = this.getPreferences(MODE_PRIVATE);
@@ -119,6 +104,9 @@ public class DigitalFormActivity extends AppCompatActivity
         Log.e(TAG, firstTimeAppLaunch+"");
 
         initializeLists(this);
+
+        mService = ApiUtils.getItemsService();
+        populateJobFromNetwork(mService, appExecutors, this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         Log.e(TAG, "HomeFragment called");
@@ -140,6 +128,29 @@ public class DigitalFormActivity extends AppCompatActivity
 //        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
 //        navigationView.getMenu().getItem(0).setChecked(true);
 //        navigationView.setCheckedItem(R.id.nav_home);
+    }
+
+    private static void populateJobFromNetwork(ItemsService mService, AppExecutors executors, Context context) {
+        executors.getNetworkIO().execute(() -> {
+            mService.getJobs().enqueue(new Callback<List<Job>>() {
+                @Override
+                public void onResponse(Call<List<Job>> call, Response<List<Job>> response) {
+                    if (response.isSuccessful()) {
+                        for (int i = 0; i < response.body().size(); i++) {
+                            Log.e(TAG, "Jobs : " + response.body().get(i).getJobTitle());
+                        }
+                    } else {
+                        int statusCode = response.code();
+                        Log.e(TAG, "Status Code : " + statusCode + "; Error : " + response.errorBody());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Job>> call, Throwable t) {
+                    Log.e(TAG, "Error during API call" + call.toString() + t);
+                }
+            });
+        });
     }
 
     public static boolean hasPermissions(Context context, String... permissions) {
@@ -321,6 +332,7 @@ public class DigitalFormActivity extends AppCompatActivity
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.main_frame, new SentJobDetailsFragment());
                 transaction.addToBackStack(SentJobDetailsFragment.TAG);
+//                transaction.disallowAddToBackStack();
                 transaction.commit();
                 break;
             default:
@@ -330,7 +342,7 @@ public class DigitalFormActivity extends AppCompatActivity
                 transaction.replace(R.id.main_frame, FormFragment.newInstance("intelligentsurveymanagement", "test2"));
                 //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
                 transaction.addToBackStack(FormFragment.TAG);
-//        transaction.disallowAddToBackStack();
+//                transaction.disallowAddToBackStack();
                 transaction.commit();
                 break;
         }

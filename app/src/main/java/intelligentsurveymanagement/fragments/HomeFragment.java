@@ -87,7 +87,6 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.main_frame, SentJobsFragment.newInstance());
-                //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
                 transaction.addToBackStack(SentJobsFragment.TAG);
 //                transaction.disallowAddToBackStack();
                 transaction.commit();
@@ -100,9 +99,7 @@ public class HomeFragment extends Fragment {
                 Log.e(TAG, "Inbox Clicked");
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.main_frame, InboxJobsFragment.newInstance());
-                //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
                 transaction.addToBackStack(InboxJobsFragment.TAG);
-//                transaction.disallowAddToBackStack();
 //                transaction.disallowAddToBackStack();
                 transaction.commit();
             }
@@ -113,7 +110,6 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();//getContext().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.main_frame, DraftJobsFragment.newInstance());
-                //transaction.replace(R.id.main_frame, LeftFragment.newInstance(1));
                 transaction.addToBackStack(DraftJobsFragment.TAG);
                 transaction.commit();
             }

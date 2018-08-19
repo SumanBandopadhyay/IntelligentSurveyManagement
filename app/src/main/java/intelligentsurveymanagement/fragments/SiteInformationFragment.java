@@ -39,6 +39,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -289,8 +290,11 @@ public class SiteInformationFragment extends Fragment implements LocationListene
                                     public void onMapReady(GoogleMap map) {
                                         googleMap = map;
 
+                                        LatLng jobAddr = new LatLng(22.6112, 88.3998);
+                                        googleMap.addMarker(new MarkerOptions().position(jobAddr).title("Job Location"));
+
                                         LatLng loc = new LatLng(latitude, longitude);
-                                        googleMap.addMarker(new MarkerOptions().position(loc).title("Current Location"));
+                                        googleMap.addMarker(new MarkerOptions().position(loc).title("Current Location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
 
                                         CameraPosition cameraPosition = new CameraPosition.Builder().target(loc).zoom(12).build();
                                         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));

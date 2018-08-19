@@ -2,15 +2,22 @@ package intelligentsurveymanagement.utils;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import intelligentsurveymanagement.activities.DigitalFormActivity;
 import intelligentsurveymanagement.database.AppDatabase;
 import intelligentsurveymanagement.entity.Form;
+import intelligentsurveymanagement.entity.SOAnswersResponse;
 import intelligentsurveymanagement.executor.AppExecutors;
 
 import java.util.List;
 
+import intelligentsurveymanagement.retrofit.ApiUtils;
+import intelligentsurveymanagement.retrofit.ItemsService;
 import io.reactivex.annotations.NonNull;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DatabaseInitializer {
 
