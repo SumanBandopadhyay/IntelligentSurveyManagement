@@ -26,6 +26,9 @@ import intelligentsurveymanagement.database.AppDatabase;
 import intelligentsurveymanagement.dummy.LeftPanelContent;
 import intelligentsurveymanagement.entity.Form;
 import intelligentsurveymanagement.entity.Job;
+import intelligentsurveymanagement.entity.JobForm;
+import intelligentsurveymanagement.entity.LoginForm;
+import intelligentsurveymanagement.entity.ModelApiResponse;
 import intelligentsurveymanagement.entity.SOAnswersResponse;
 import intelligentsurveymanagement.executor.AppExecutors;
 import intelligentsurveymanagement.fragments.CustomerSignOffFragment;
@@ -107,6 +110,9 @@ public class DigitalFormActivity extends AppCompatActivity
 
         mService = ApiUtils.getItemsService();
         populateJobFromNetwork(mService, appExecutors, this);
+        populateFormByIdFromNetwork(mService, appExecutors, this, 1);
+        populateJobsByUsernameFromNetwork(mService, appExecutors, this, "charly194");
+        loginUserWithNetwork(mService, appExecutors, this, "charly194", "charles123");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         Log.e(TAG, "HomeFragment called");
@@ -128,6 +134,76 @@ public class DigitalFormActivity extends AppCompatActivity
 //        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
 //        navigationView.getMenu().getItem(0).setChecked(true);
 //        navigationView.setCheckedItem(R.id.nav_home);
+    }
+
+    private void loginUserWithNetwork(ItemsService mService, AppExecutors executors, Context context, String username, String password) {
+        LoginForm loginForm = new LoginForm();
+        loginForm.setUsername(username);
+        loginForm.setPassword(password);
+        executors.getNetworkIO().execute(() -> {
+            mService.login(loginForm).enqueue(new Callback<ModelApiResponse>() {
+                @Override
+                public void onResponse(Call<ModelApiResponse> call, Response<ModelApiResponse> response) {
+                    if (response.isSuccessful()) {
+                        Log.e(TAG, "JWT Key : " + response.body().getMessage());
+                    } else {
+                        int statusCode = response.code();
+                        Log.e(TAG, "Status Code : " + statusCode + "; Error : " + response.errorBody() + response.raw());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ModelApiResponse> call, Throwable t) {
+                    Log.e(TAG, "Error during API call" + call.toString() + t);
+                }
+            });
+        });
+    }
+
+    private void populateJobsByUsernameFromNetwork(ItemsService mService, AppExecutors executors, Context context, String username) {
+        executors.getNetworkIO().execute(() -> {
+            mService.getJobsByUsername(username).enqueue(new Callback<List<Job>>() {
+                @Override
+                public void onResponse(Call<List<Job>> call, Response<List<Job>> response) {
+                    if (response.isSuccessful()) {
+                        for (int i = 0; i < response.body().size(); i++) {
+                            Log.e(TAG, "Jobs for username : " + response.body().get(i).getJobTitle());
+                        }
+                    } else {
+                        int statusCode = response.code();
+                        Log.e(TAG, "Status Code : " + statusCode + "; Error : " + response.errorBody() + response.raw());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Job>> call, Throwable t) {
+                    Log.e(TAG, "Error during API call" + call.toString() + t);
+                }
+            });
+        });
+    }
+
+    private void populateFormByIdFromNetwork(ItemsService mService, AppExecutors executors, Context context, int formId) {
+        executors.getNetworkIO().execute(() -> {
+            mService.getForm(formId).enqueue(new Callback<List<JobForm>>() {
+                @Override
+                public void onResponse(Call<List<JobForm>> call, Response<List<JobForm>> response) {
+                    if (response.isSuccessful()) {
+                        for (int i = 0; i < response.body().size(); i++) {
+                            Log.e(TAG, "Form : " + response.body().get(i).getCustomerSignUrl());
+                        }
+                    } else {
+                        int statusCode = response.code();
+                        Log.e(TAG, "Status Code : " + statusCode + "; Error : " + response.errorBody() + response.raw());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<JobForm>> call, Throwable t) {
+                    Log.e(TAG, "Error during API call" + call.toString() + t);
+                }
+            });
+        });
     }
 
     private static void populateJobFromNetwork(ItemsService mService, AppExecutors executors, Context context) {
