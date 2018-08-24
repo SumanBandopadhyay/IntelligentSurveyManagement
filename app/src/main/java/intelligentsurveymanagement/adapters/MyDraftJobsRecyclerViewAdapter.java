@@ -38,7 +38,7 @@ public class MyDraftJobsRecyclerViewAdapter extends RecyclerView.Adapter<MyDraft
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.txtDraftJobId.setText(Integer.toString(mValues.get(position).getFormid()));
+        holder.txtDraftJobId.setText(Integer.toString(Math.toIntExact(mValues.get(position).getFormid())));
         holder.txtDraftJobTitle.setText(mValues.get(position).getProject());
         holder.txtDraftClientName.setText(mValues.get(position).getClientName());
 
