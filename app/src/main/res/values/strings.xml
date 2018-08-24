@@ -19,5 +19,6 @@
     <string name="job_id">Job Id : </string>
     <string name="firstTimeAppLaunch">first_time</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="jwtToken">JWTToken</string>
 
 </resources>

@@ -19,7 +19,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.example.suman.intelligentsurveymanagement.R;
 import intelligentsurveymanagement.database.AppDatabase;
@@ -27,9 +26,7 @@ import intelligentsurveymanagement.dummy.LeftPanelContent;
 import intelligentsurveymanagement.entity.Form;
 import intelligentsurveymanagement.entity.Job;
 import intelligentsurveymanagement.entity.JobForm;
-import intelligentsurveymanagement.entity.LoginForm;
-import intelligentsurveymanagement.entity.ModelApiResponse;
-import intelligentsurveymanagement.entity.SOAnswersResponse;
+import intelligentsurveymanagement.entity.User;
 import intelligentsurveymanagement.executor.AppExecutors;
 import intelligentsurveymanagement.fragments.CustomerSignOffFragment;
 import intelligentsurveymanagement.fragments.DraftJobsFragment;
@@ -44,12 +41,10 @@ import intelligentsurveymanagement.fragments.SentJobsFragment;
 import intelligentsurveymanagement.fragments.SiteInformationFragment;
 import intelligentsurveymanagement.fragments.VideoReferenceFragment;
 import intelligentsurveymanagement.fragments.WorkStepsAndHazardsFragment;
+import intelligentsurveymanagement.retrofit.APICalls;
 import intelligentsurveymanagement.retrofit.ApiUtils;
 import intelligentsurveymanagement.retrofit.ItemsService;
 import intelligentsurveymanagement.utils.DatabaseInitializer;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import java.util.List;
 
@@ -69,13 +64,18 @@ public class DigitalFormActivity extends AppCompatActivity
     public static List<Form> DRAFTFORMS;
     public static Form SELECTEDFORM;
 
-    private ItemsService mService;
+    public static List<Job> jobs;
+    public static List<JobForm> jobForms;
+    public static List<User> users;
+
+    public static ItemsService mService;
 
     public static AppDatabase appDatabase;
     public static AppExecutors appExecutors;
 
-    private static SharedPreferences sharedPreferences;
+    public static SharedPreferences sharedPreferences;
     private static boolean firstTimeAppLaunch;
+    private static String JWTToken;
 
     private static final String TAG = "DigitalForm";
 
@@ -104,15 +104,15 @@ public class DigitalFormActivity extends AppCompatActivity
 
         sharedPreferences = this.getPreferences(MODE_PRIVATE);
         firstTimeAppLaunch = sharedPreferences.getBoolean(getString(R.string.firstTimeAppLaunch), true);
+
         Log.e(TAG, firstTimeAppLaunch+"");
 
         initializeLists(this);
 
         mService = ApiUtils.getItemsService();
-        populateJobFromNetwork(mService, appExecutors, this);
-        populateFormByIdFromNetwork(mService, appExecutors, this, 1);
-        populateJobsByUsernameFromNetwork(mService, appExecutors, this, "charly194");
-        loginUserWithNetwork(mService, appExecutors, this, "charly194", "charles123");
+//        APICalls.populateJobFromNetwork(mService, appExecutors, this);
+//        populateFormByIdFromNetwork(mService, appExecutors, this, 1);
+//        populateJobsByUsernameFromNetwork(mService, appExecutors, this, "charly194");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         Log.e(TAG, "HomeFragment called");
@@ -136,98 +136,7 @@ public class DigitalFormActivity extends AppCompatActivity
 //        navigationView.setCheckedItem(R.id.nav_home);
     }
 
-    private void loginUserWithNetwork(ItemsService mService, AppExecutors executors, Context context, String username, String password) {
-        LoginForm loginForm = new LoginForm();
-        loginForm.setUsername(username);
-        loginForm.setPassword(password);
-        executors.getNetworkIO().execute(() -> {
-            mService.login(loginForm).enqueue(new Callback<ModelApiResponse>() {
-                @Override
-                public void onResponse(Call<ModelApiResponse> call, Response<ModelApiResponse> response) {
-                    if (response.isSuccessful()) {
-                        Log.e(TAG, "JWT Key : " + response.body().getMessage());
-                    } else {
-                        int statusCode = response.code();
-                        Log.e(TAG, "Status Code : " + statusCode + "; Error : " + response.errorBody() + response.raw());
-                    }
-                }
 
-                @Override
-                public void onFailure(Call<ModelApiResponse> call, Throwable t) {
-                    Log.e(TAG, "Error during API call" + call.toString() + t);
-                }
-            });
-        });
-    }
-
-    private void populateJobsByUsernameFromNetwork(ItemsService mService, AppExecutors executors, Context context, String username) {
-        executors.getNetworkIO().execute(() -> {
-            mService.getJobsByUsername(username).enqueue(new Callback<List<Job>>() {
-                @Override
-                public void onResponse(Call<List<Job>> call, Response<List<Job>> response) {
-                    if (response.isSuccessful()) {
-                        for (int i = 0; i < response.body().size(); i++) {
-                            Log.e(TAG, "Jobs for username : " + response.body().get(i).getJobTitle());
-                        }
-                    } else {
-                        int statusCode = response.code();
-                        Log.e(TAG, "Status Code : " + statusCode + "; Error : " + response.errorBody() + response.raw());
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<List<Job>> call, Throwable t) {
-                    Log.e(TAG, "Error during API call" + call.toString() + t);
-                }
-            });
-        });
-    }
-
-    private void populateFormByIdFromNetwork(ItemsService mService, AppExecutors executors, Context context, int formId) {
-        executors.getNetworkIO().execute(() -> {
-            mService.getForm(formId).enqueue(new Callback<List<JobForm>>() {
-                @Override
-                public void onResponse(Call<List<JobForm>> call, Response<List<JobForm>> response) {
-                    if (response.isSuccessful()) {
-                        for (int i = 0; i < response.body().size(); i++) {
-                            Log.e(TAG, "Form : " + response.body().get(i).getCustomerSignUrl());
-                        }
-                    } else {
-                        int statusCode = response.code();
-                        Log.e(TAG, "Status Code : " + statusCode + "; Error : " + response.errorBody() + response.raw());
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<List<JobForm>> call, Throwable t) {
-                    Log.e(TAG, "Error during API call" + call.toString() + t);
-                }
-            });
-        });
-    }
-
-    private static void populateJobFromNetwork(ItemsService mService, AppExecutors executors, Context context) {
-        executors.getNetworkIO().execute(() -> {
-            mService.getJobs().enqueue(new Callback<List<Job>>() {
-                @Override
-                public void onResponse(Call<List<Job>> call, Response<List<Job>> response) {
-                    if (response.isSuccessful()) {
-                        for (int i = 0; i < response.body().size(); i++) {
-                            Log.e(TAG, "Jobs : " + response.body().get(i).getJobTitle());
-                        }
-                    } else {
-                        int statusCode = response.code();
-                        Log.e(TAG, "Status Code : " + statusCode + "; Error : " + response.errorBody());
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<List<Job>> call, Throwable t) {
-                    Log.e(TAG, "Error during API call" + call.toString() + t);
-                }
-            });
-        });
-    }
 
     public static boolean hasPermissions(Context context, String... permissions) {
         if (context != null && permissions != null) {
@@ -259,13 +168,13 @@ public class DigitalFormActivity extends AppCompatActivity
             DatabaseInitializer.populateAsync(appDatabase, appExecutors, activity.getApplicationContext());
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean(activity.getString(R.string.firstTimeAppLaunch), false);
-            editor.commit();
+            editor.apply();
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
         }
 
         DatabaseInitializer.getAllJobs(appDatabase, appExecutors, activity.getApplicationContext());
