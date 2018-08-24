@@ -1,6 +1,7 @@
 package intelligentsurveymanagement.retrofit;
 
 import java.util.List;
+import java.util.Map;
 
 import intelligentsurveymanagement.entity.Form;
 import intelligentsurveymanagement.entity.Job;
@@ -14,6 +15,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
+import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -26,23 +28,31 @@ import retrofit2.http.Query;
 public interface ItemsService {
 
     @GET("job")
-    @Headers({"Accept: application/json"})
-    Call<List<Job>> getJobs();
+    Call<List<Job>> getJobs(
+            @HeaderMap Map<String, String> headers
+    );
 
     @GET("user")
-    @Headers({"Accept: application/json"})
-    Call<List<User>> getUsers();
+    Call<List<User>> getUsers(
+            @HeaderMap Map<String, String> headers
+    );
 
     @GET("form/{formId}")
-    @Headers({"Accept: application/json"})
-    Call<List<JobForm>> getForm(@Path("formId") long formId);
+    Call<List<JobForm>> getForm(
+            @Path("formId") long formId,
+            @HeaderMap Map<String, String> headers
+    );
 
     @GET("job/findByUser")
-    @Headers({"Accept: application/json"})
-    Call<List<Job>> getJobsByUsername(@Query("username") String username);
+    Call<List<Job>> getJobsByUsername(
+            @Query("username") String username,
+            @HeaderMap Map<String, String> headers
+    );
 
     @POST("user/login")
-    @Headers({"Accept: application/json"})
-    Call<ModelApiResponse> login(@Body LoginForm loginForm);
+    Call<ModelApiResponse> login(
+            @Body LoginForm loginForm,
+            @HeaderMap Map<String, String> headers
+    );
 
 }
