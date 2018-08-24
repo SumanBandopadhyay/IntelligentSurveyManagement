@@ -33,7 +33,7 @@ public class SentJobDetailsFragment extends Fragment {
     private TextView txtSentJobId;
     private TextView txtSentClientName;
     private TextView txtSentJobTitle;
-    private TextView txtSentDate;
+    //private TextView txtSentDate;
     private TextView txtSentJobDescription;
     private TextView txtSentInspector;
     private TextView txtSentLocation;
@@ -74,7 +74,7 @@ public class SentJobDetailsFragment extends Fragment {
         txtSentJobId = (TextView) view.findViewById(R.id.sent_job_id);
         txtSentClientName = (TextView)view.findViewById(R.id.sent_client_name);
         txtSentJobTitle = (TextView)view.findViewById(R.id.sent_job_title);
-        txtSentDate = (TextView)view.findViewById(R.id.sent_date);
+        //txtSentDate = (TextView)view.findViewById(R.id.sent_date);
         txtSentJobDescription = (TextView)view.findViewById(R.id.sent_description);
         txtSentInspector = (TextView)view.findViewById(R.id.sent_inspector);
         txtSentLocation = (TextView)view.findViewById(R.id.sent_address);
@@ -99,7 +99,7 @@ public class SentJobDetailsFragment extends Fragment {
         txtSentJobId.setText(Integer.toString(DigitalFormActivity.SELECTEDFORM.getFormid()));
         txtSentClientName.setText(DigitalFormActivity.SELECTEDFORM.getClientName());
         txtSentJobTitle.setText(DigitalFormActivity.SELECTEDFORM.getProject());
-        txtSentDate.setText(DigitalFormActivity.SELECTEDFORM.getDateTime());
+        //txtSentDate.setText(DigitalFormActivity.SELECTEDFORM.getDateTime());
         txtSentJobDescription.setText(DigitalFormActivity.SELECTEDFORM.getJobDescription());
         txtSentInspector.setText(DigitalFormActivity.SELECTEDFORM.getInspector());
         txtSentLocation.setText(DigitalFormActivity.SELECTEDFORM.getJobLocation());

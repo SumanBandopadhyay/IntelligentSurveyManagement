@@ -74,8 +74,8 @@ public class SiteInformationFragment extends Fragment implements LocationListene
     private GoogleMap googleMap;
     private TextView txtAddress;
     private TextView txtFormId;
-    private EditText edtDateTime;
-    private ImageButton imgDatePicker;
+   //private EditText edtDateTime;
+    //private ImageButton imgDatePicker;
     private EditText edtInspector;
     private TextView txtClientName;
     private TextView txtJob;
@@ -191,7 +191,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
         MapsInitializer.initialize(getActivity().getApplicationContext());
 
         btnSave.setOnClickListener(this);
-        imgDatePicker.setOnClickListener(this);
+        //imgDatePicker.setOnClickListener(this);
 
         return view;
     }
@@ -199,7 +199,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
     private void loadDBData() {
         //Toast.makeText(getActivity(), "DB Data Loaded", Toast.LENGTH_LONG).show();
         txtFormId.setText(Integer.toString(DigitalFormActivity.SELECTEDFORM.getFormid()));
-        edtDateTime.setText(DigitalFormActivity.SELECTEDFORM.getDateTime());
+        //edtDateTime.setText(DigitalFormActivity.SELECTEDFORM.getDateTime());
         edtInspector.setText(DigitalFormActivity.SELECTEDFORM.getInspector());
         txtClientName.setText(DigitalFormActivity.SELECTEDFORM.getClientName());
         txtJob.setText(DigitalFormActivity.SELECTEDFORM.getProject());
@@ -211,8 +211,8 @@ public class SiteInformationFragment extends Fragment implements LocationListene
         txtAddress = (TextView) view.findViewById(R.id.txt_address);
         txtFormId = (TextView) view.findViewById(R.id.job_id);
         mapView = (MapView) view.findViewById(R.id.mapview);
-        edtDateTime = (EditText) view.findViewById(R.id.edt_date_time);
-        imgDatePicker = (ImageButton) view.findViewById(R.id.btn_date_picker);
+        //edtDateTime = (EditText) view.findViewById(R.id.edt_date_time);
+        //imgDatePicker = (ImageButton) view.findViewById(R.id.btn_date_picker);
         edtInspector = (EditText) view.findViewById(R.id.edt_inspector);
         txtClientName = (TextView) view.findViewById(R.id.txt_client_name);
         txtJob = (TextView) view.findViewById(R.id.txt_job);
@@ -290,8 +290,8 @@ public class SiteInformationFragment extends Fragment implements LocationListene
                                     public void onMapReady(GoogleMap map) {
                                         googleMap = map;
 
-                                        LatLng jobAddr = new LatLng(22.6112, 88.3998);
-                                        googleMap.addMarker(new MarkerOptions().position(jobAddr).title("Job Location"));
+//                                        LatLng jobAddr = new LatLng(22.6112, 88.3998);
+//                                        googleMap.addMarker(new MarkerOptions().position(jobAddr).title("Job Location"));
 
                                         LatLng loc = new LatLng(latitude, longitude);
                                         googleMap.addMarker(new MarkerOptions().position(loc).title("Current Location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
@@ -343,7 +343,7 @@ public class SiteInformationFragment extends Fragment implements LocationListene
         switch (view.getId()) {
             case R.id.btn_site_information_save:
                 DigitalFormActivity.SELECTEDFORM.setClientName(txtClientName.getText().toString());
-                DigitalFormActivity.SELECTEDFORM.setDateTime(edtDateTime.getText().toString());
+               // DigitalFormActivity.SELECTEDFORM.setDateTime(edtDateTime.getText().toString());
                 DigitalFormActivity.SELECTEDFORM.setInspector(edtInspector.getText().toString());
                 DigitalFormActivity.SELECTEDFORM.setProject(txtJob.getText().toString());
                 DigitalFormActivity.SELECTEDFORM.setJobDescription(edtDescription.getText().toString());
@@ -354,26 +354,26 @@ public class SiteInformationFragment extends Fragment implements LocationListene
                 Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
                 break;
 
-            case R.id.btn_date_picker:
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
-                        new DatePickerDialog.OnDateSetListener() {
-
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-
-                                edtDateTime.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
-                            }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.show();
-                break;
+//            case R.id.btn_date_picker:
+//                final Calendar c = Calendar.getInstance();
+//                mYear = c.get(Calendar.YEAR);
+//                mMonth = c.get(Calendar.MONTH);
+//                mDay = c.get(Calendar.DAY_OF_MONTH);
+//
+//
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+//                        new DatePickerDialog.OnDateSetListener() {
+//
+//                            @Override
+//                            public void onDateSet(DatePicker view, int year,
+//                                                  int monthOfYear, int dayOfMonth) {
+//
+//                               // edtDateTime.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+//
+//                            }
+//                        }, mYear, mMonth, mDay);
+//                datePickerDialog.show();
+//                break;
         }
 
     }

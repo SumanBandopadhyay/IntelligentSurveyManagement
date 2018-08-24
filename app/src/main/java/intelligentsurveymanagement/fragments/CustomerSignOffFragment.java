@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.suman.intelligentsurveymanagement.R;
@@ -50,6 +51,8 @@ public class CustomerSignOffFragment extends Fragment {
 
     //private OnFragmentInteractionListener mListener;
 
+    private TextView txtFormId;
+    private TextView txtClientName;
     private EditText edtCustomerName;
     private SignaturePad signaturePad;
     private RatingBar rbWellTrainedEngg;
@@ -187,7 +190,7 @@ public class CustomerSignOffFragment extends Fragment {
 
                 builder.show();
 
-                emailSend();
+                //emailSend();
 
                 //Toast.makeText(getActivity(),"Data submitted successfully !",Toast.LENGTH_LONG).show();
             }
@@ -219,6 +222,8 @@ public class CustomerSignOffFragment extends Fragment {
     }
 
     private void loadDBData() {
+        txtFormId.setText(Integer.toString(DigitalFormActivity.SELECTEDFORM.getFormid()));
+        txtClientName.setText(DigitalFormActivity.SELECTEDFORM.getClientName());
         edtCustomerName.setText(DigitalFormActivity.SELECTEDFORM.getCustomerName());
         if (DigitalFormActivity.SELECTEDFORM.getCustomerSignature() != null) {
             signaturePad.setSignatureBitmap(BitmapFactory.decodeByteArray(DigitalFormActivity.SELECTEDFORM.getCustomerSignature(), 0, DigitalFormActivity.SELECTEDFORM.getCustomerSignature().length));
@@ -231,6 +236,8 @@ public class CustomerSignOffFragment extends Fragment {
     }
 
     private void initializeViews(View view) {
+        txtFormId = (TextView) view.findViewById(R.id.job_id);
+        txtClientName = (TextView) view.findViewById(R.id.txt_client_name);
         edtCustomerName = (EditText) view.findViewById(R.id.edt_customer_name);
         signaturePad = (SignaturePad) view.findViewById(R.id.signature_pad);
         rbWellTrainedEngg = (RatingBar) view.findViewById(R.id.rb_well_trained_engineer);

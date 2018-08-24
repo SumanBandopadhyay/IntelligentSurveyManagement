@@ -18,27 +18,70 @@
             android:paddingLeft="16dp"
             android:paddingBottom="16dp">
 
-            <!-- TODO: Update blank fragment layout -->
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Customer Name"
-                android:textSize="16dp"
-                android:textStyle="bold"/>
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/edt_customer_name"
+                <TextView
+                    android:text="@string/job_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/job_id"
+                    android:text="Job Id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:paddingLeft="8dp"
+                    android:padding="8dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minLines="1"
-                android:textSize="16dp"
-                android:background="#dfdcdc"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:layout_marginTop="10dp"
-                android:scrollbars="vertical"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@string/client_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/txt_client_name"
+                    android:text="Xaviers Mathew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:paddingLeft="8dp"/>
+            </LinearLayout>
+
+            <!-- TODO: Update blank fragment layout -->
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Customer Name"-->
+                <!--android:textSize="16dp"-->
+                <!--android:textStyle="bold"/>-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/edt_customer_name"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:minLines="1"-->
+                <!--android:textSize="16dp"-->
+                <!--android:background="#dfdcdc"-->
+                <!--android:paddingLeft="16dp"-->
+                <!--android:paddingRight="16dp"-->
+                <!--android:paddingTop="16dp"-->
+                <!--android:paddingBottom="16dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:scrollbars="vertical"/>-->
 
             <View
                 android:id="@+id/view_seperator0"
@@ -163,7 +206,7 @@
                 android:text="Comment"
                 android:textSize="16dp"
                 android:textStyle="bold"
-                android:layout_marginTop="12dp"/>
+                android:layout_marginTop="16dp"/>
 
             <EditText
                 android:id="@+id/edt_customer_comment"
@@ -183,10 +226,32 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Customer Name"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/edt_customer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="1"
+                android:textSize="16dp"
+                android:background="#dfdcdc"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_marginTop="10dp"
+                android:scrollbars="vertical"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Customer Signature"
                 android:textSize="16dp"
                 android:textStyle="bold"
-                android:layout_marginTop="12dp"/>
+                android:layout_marginTop="16dp"/>
 
             <View
                 android:id="@+id/view_seperator2"
