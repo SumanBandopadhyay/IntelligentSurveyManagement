@@ -9,7 +9,7 @@ public class Form {
 
     @PrimaryKey (autoGenerate = true)
     @ColumnInfo (name = "form_id")
-    private Long formid;
+    private int formid;
 
     @ColumnInfo (name = "job_id")
     private Long jobid;
@@ -156,11 +156,11 @@ public class Form {
         this.formStatus = formStatus;
     }
 
-    public Long getFormid() {
+    public int getFormid() {
         return formid;
     }
 
-    public void setFormid(Long formid) {
+    public void setFormid(int formid) {
         this.formid = formid;
     }
 

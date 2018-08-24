@@ -206,7 +206,8 @@ public class CustomerSignOffFragment extends Fragment {
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_CC, CC);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Intelligent Survey Management");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Customer :");
+        String emailBody = "Customer :";
+        emailIntent.putExtra(Intent.EXTRA_TEXT, emailBody);
 
         try {
             startActivity(Intent.createChooser(emailIntent, "Send mail..."));
